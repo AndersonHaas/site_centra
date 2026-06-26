@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Centra Engenharia — Site institucional
 
-## Getting Started
+Site institucional premium da **Centra Engenharia e Empreendimentos**, inspirado na
+estética do terminal-industries.com e adaptado à marca navy/azul da Centra.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router) + **React 19** + **TypeScript**
+- **Tailwind CSS v4** (tokens em `app/globals.css`)
+- **framer-motion** (scroll, parallax, reveals, contadores, botões magnéticos)
+- **lenis** (scroll suave com momentum)
+- **three.js** (estrutura metálica 3D em wireframe, procedural)
+- **lucide-react** (ícones)
+
+## Experiência (FX cinematográfico)
+
+- **Hero** full-bleed com foto real, Ken Burns, parallax e HUD técnico (mono).
+- **Estrutura 3D**: galpão metálico em wireframe (three.js) — gira e responde ao mouse.
+- **Obras**: galeria de painéis full-bleed com as fotos reais e parallax no scroll.
+- Scroll suave (lenis), cursor custom, barra de progresso, botões magnéticos.
+- Tudo respeita `prefers-reduced-motion` (desliga animações/scroll suave/3D anima).
+
+## Como rodar
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev      # http://localhost:3000
+pnpm build    # build de produção (estático)
+pnpm start    # servir o build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Estrutura
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+app/
+  layout.tsx        # fontes, SEO, SmoothScroll + CustomCursor + ScrollProgress
+  globals.css       # design tokens, tipografia, utilitários, lenis/cursor/grain
+  page.tsx          # composição das seções
+components/
+  ui/               # Logo, Reveal, SectionHeader, Counter, CustomCursor,
+                    # ScrollProgress, Magnetic
+  providers/        # SmoothScroll (lenis)
+  three/            # SteelStructure (galpão 3D wireframe, three.js)
+  sections/         # Navbar, Hero, TrustBar, Stats, About, Solutions,
+                    # Estrutura, Obras, Equipe, Clientes, Contato, Footer
+lib/
+  content.ts        # TODO o conteúdo institucional (texto, equipe, clientes, WORKS…)
+  utils.ts          # helper cn()
+media/
+  works/            # fotos reais das obras (importadas estaticamente p/ blur-up)
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+> As fotos das obras ficam em `media/` (fora de `public/`) para que o Next gere
+> versões otimizadas + placeholder blur automaticamente. Para trocar, substitua os
+> arquivos em `media/works/` e ajuste os metadados em `WORKS` (`lib/content.ts`).
 
-## Learn More
+## O que editar
 
-To learn more about Next.js, take a look at the following resources:
+- **Textos, números, equipe, clientes, setores** → `lib/content.ts` (fonte única).
+- **Dados de contato** → `components/sections/Contato.tsx` (constante `CONTACTS`).
+  Os valores atuais (e-mail, telefone) são **placeholders** — substitua pelos reais.
+- **Cores da marca** → tokens `--color-brand-*` e `--color-ink-*` em `app/globals.css`.
+- **Formulário de contato**: hoje apenas exibe estado de sucesso no cliente. Para
+  receber mensagens, conectar a um endpoint/serviço (ex.: Resend, Formspree, route
+  handler em `app/api/`).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Notas de design
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Ritmo dark → claro → dark (hero/soluções/contato escuros; sobre/obras/equipe/clientes claros).
+- Eyebrows numeradas em fonte mono (detalhe técnico/editorial).
+- Respeita `prefers-reduced-motion` em todas as animações.
+- O logo é um SVG recriado a partir da identidade do briefing (`components/ui/Logo.tsx`).
+  Substitua pelo arquivo vetorial oficial quando disponível.

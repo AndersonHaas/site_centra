@@ -1,26 +1,301 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   CENTRA — Engenharia e Empreendimentos
+   Design tokens — navy cinematográfico + azul de marca
+   ============================================================ */
+
+@theme {
+  /* Navy / ink — fundos escuros (hero, footer) */
+  --color-ink-950: #050b14;
+  --color-ink-900: #08111d;
+  --color-ink-850: #0a1726;
+  --color-ink-800: #0e2032;
+  --color-ink-700: #16314a;
+  --color-ink-600: #1f4a72;
+
+  /* Azul de marca (gradiente do logo: aço -> ciano) */
+  --color-brand-50: #eef6fd;
+  --color-brand-100: #d6eafb;
+  --color-brand-200: #aed6f6;
+  --color-brand-300: #79bbef;
+  --color-brand-400: #4aa0e6;
+  --color-brand-500: #2484d6;
+  --color-brand-600: #1568b8;
+  --color-brand-700: #135495;
+  --color-brand-800: #14497b;
+  --color-brand-900: #153d66;
+
+  /* Superfícies claras */
+  --color-paper: #f4f7fb;
+  --color-paper-2: #eaf0f7;
+  --color-surface: #ffffff;
+
+  /* Texto */
+  --color-ink: #0a1726;
+  --color-ink-soft: #44586c;
+  --color-ink-faint: #76879a;
+
+  /* Linhas */
+  --color-hair: #e2e9f1;
+
+  /* Acento (segurança — uso mínimo, só destaques de dado) */
+  --color-signal: #f97316;
+
+  /* Tipografia */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-jb), ui-monospace, "SF Mono", monospace;
+
+  /* Easing premium */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  * {
+    border-color: var(--color-hair);
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv01", "cv11";
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--color-brand-500);
+    color: #fff;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-ink-950);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-ink-700);
+    border-radius: 99px;
+    border: 2px solid var(--color-ink-950);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .container-x {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .container-x {
+      padding-inline: 2.5rem;
+    }
+  }
+  @media (min-width: 1280px) {
+    .container-x {
+      padding-inline: 3rem;
+    }
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .display {
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 0.98;
+  }
+
+  .text-gradient-brand {
+    background: linear-gradient(
+      100deg,
+      #cfe6fa 0%,
+      #4aa0e6 48%,
+      #aed6f6 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    background: var(--color-brand-500);
+    color: #fff;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.85rem 1.4rem;
+    border-radius: 0.5rem;
+    transition:
+      background 0.25s var(--ease-out-expo),
+      transform 0.25s var(--ease-out-expo),
+      box-shadow 0.25s var(--ease-out-expo);
+  }
+  .btn-primary:hover {
+    background: var(--color-brand-400);
+    transform: translateY(-1px);
+    box-shadow: 0 12px 34px -12px rgba(36, 132, 214, 0.65);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: #fff;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.85rem 1.3rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: all 0.25s var(--ease-out-expo);
+  }
+  .btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+@layer utilities {
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 12%,
+      #000 88%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 12%,
+      #000 88%,
+      transparent
+    );
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+  }
+  .marquee-paused:hover .animate-marquee {
+    animation-play-state: paused;
+  }
+
+  /* Ken Burns — zoom lento cinematográfico em imagens de fundo */
+  @keyframes kenburns {
+    0% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1.16);
+    }
+  }
+  .animate-kenburns {
+    animation: kenburns 26s ease-out forwards;
+  }
+
+  /* Grão de filme — textura sutil sobre seções escuras */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.045;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.85'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Label técnica (HUD) em fonte mono */
+  .hud {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    line-height: 1;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+  }
+
+  .text-stroke-white {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.85);
+    color: transparent;
+  }
+}
+
+/* ============================================================
+   Lenis — scroll suave (momentum)
+   ============================================================ */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Cursor custom — apenas em dispositivos com ponteiro fino */
+@media (pointer: fine) {
+  html.cursor-none,
+  html.cursor-none * {
+    cursor: none !important;
+  }
+  html.cursor-none input,
+  html.cursor-none textarea,
+  html.cursor-none [contenteditable="true"] {
+    cursor: text !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-kenburns {
+    animation: none !important;
+    transform: scale(1.05);
+  }
 }
