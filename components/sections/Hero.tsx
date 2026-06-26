@@ -84,7 +84,7 @@ export function Hero() {
           </span>
         </motion.div>
 
-        <h1 className="display mt-7 max-w-[18ch] text-[2.3rem] text-white sm:text-6xl md:text-7xl lg:text-[5.4rem] xl:text-[6rem]">
+        <h1 className="display mt-6 max-w-[20ch] text-[1.4rem] text-white sm:text-4xl md:text-5xl lg:text-[3.5rem] xl:text-[4rem]">
           {headlineLines.map(([line, accent], i) => (
             <span key={i} className="block overflow-hidden">
               <motion.span
@@ -105,7 +105,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: EASE, delay: 0.7 }}
-          className="mt-8 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg"
+          className="mt-6 max-w-md text-sm leading-relaxed text-white/75 sm:text-base"
         >
           Mais de 550 mil m² construídos no Sul do Brasil. Da terraplanagem às
           estruturas metálicas, transformamos projetos complexos em obras de
@@ -116,7 +116,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: EASE, delay: 0.82 }}
-          className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center"
+          className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
         >
           <Magnetic>
             <a href="#contato" className="btn-primary">

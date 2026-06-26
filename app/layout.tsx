@@ -21,8 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://centraengenharia.com.br"),
   title: {
-    default:
-      "Centra Engenharia | Construção & Empreendimentos de Alto Desempenho",
+    default: "Centra Engenharia",
     template: "%s | Centra Engenharia",
   },
   description:
