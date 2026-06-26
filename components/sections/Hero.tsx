@@ -158,7 +158,7 @@ export function Hero() {
         <div className="container-x flex items-end justify-between">
           <div className="hidden flex-col gap-1 sm:flex">
             <span className="hud text-white/40">Lat −24.61° · Lon −53.30°</span>
-            <span className="hud text-white/55">Cafelândia · Paraná · BR</span>
+            <span className="hud text-white/55">Palotina · Paraná · BR</span>
           </div>
 
           <div className="hidden -translate-x-1/2 sm:absolute sm:left-1/2 sm:flex">

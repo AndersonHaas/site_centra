@@ -1,6 +1,5 @@
 import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
-import { CopacolFeature } from "@/components/sections/CopacolFeature";
 import { TrustBar } from "@/components/sections/TrustBar";
 import { Stats } from "@/components/sections/Stats";
 import { About } from "@/components/sections/About";
@@ -18,7 +17,6 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <CopacolFeature />
         <TrustBar />
         <Stats />
         <About />
