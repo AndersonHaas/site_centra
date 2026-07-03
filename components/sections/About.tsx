@@ -13,6 +13,7 @@ export function About() {
       <div className="container-x grid gap-14 lg:grid-cols-[0.85fr_1fr] lg:gap-20">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <SectionHeader
+            as="h1"
             index="01"
             eyebrow="Quem é a Centra"
             title={
@@ -49,8 +50,8 @@ export function About() {
             const Icon = ICONS[p.key as keyof typeof ICONS];
             return (
               <RevealItem key={p.key}>
-                <article className="group relative overflow-hidden rounded-2xl border border-hair bg-surface p-7 transition-all duration-300 hover:border-brand-200 hover:shadow-[0_24px_60px_-30px_rgba(21,104,184,0.35)] md:p-9">
-                  <span className="absolute right-7 top-7 font-mono text-xs text-ink-faint">
+                <article className="group relative overflow-hidden rounded-2xl border border-hair bg-surface p-7 transition-colors duration-300 hover:border-brand-200 hover:bg-brand-50/40 md:p-9">
+                  <span className="absolute right-7 top-7 font-mono text-xs text-ink-soft">
                     0{i + 1}
                   </span>
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-brand-100 transition-colors group-hover:bg-brand-500 group-hover:text-white">

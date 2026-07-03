@@ -20,7 +20,8 @@ export function Equipe() {
     <section id="equipe" className="relative bg-paper py-24 md:py-32">
       <div className="container-x">
         <SectionHeader
-          index="05"
+          as="h1"
+          index="01"
           eyebrow="Equipe técnica"
           title={
             <>
@@ -38,8 +39,8 @@ export function Equipe() {
         >
           {FOUNDERS.map((f) => (
             <RevealItem key={f.name}>
-              <article className="group flex items-center gap-5 rounded-2xl border border-hair bg-surface p-6 transition-all duration-300 hover:border-brand-200 hover:shadow-[0_24px_60px_-34px_rgba(21,104,184,0.4)] md:p-7">
-                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-400 to-brand-700 text-lg font-semibold text-white shadow-lg">
+              <article className="group flex items-center gap-5 rounded-2xl border border-hair bg-surface p-6 transition-colors duration-300 hover:border-brand-200 hover:bg-brand-50/40 md:p-7">
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-400 to-brand-700 text-lg font-semibold text-white">
                   {initials(f.name)}
                 </div>
                 <div className="min-w-0">
@@ -50,7 +51,7 @@ export function Equipe() {
                     <BadgeCheck className="h-4 w-4 shrink-0 text-brand-500" />
                   </div>
                   <p className="mt-0.5 text-sm text-ink-soft">{f.role}</p>
-                  <p className="mt-1 font-mono text-xs text-ink-faint">
+                  <p className="mt-1 font-mono text-xs text-ink-soft">
                     {f.crea}
                   </p>
                 </div>
@@ -61,7 +62,7 @@ export function Equipe() {
 
         {/* Time */}
         <Reveal className="mt-12">
-          <p className="eyebrow text-ink-faint">Time de engenharia</p>
+          <p className="eyebrow text-ink-soft">Time de engenharia</p>
         </Reveal>
         <RevealStagger
           className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6"
@@ -76,7 +77,7 @@ export function Equipe() {
                 <h4 className="mt-3 text-sm font-semibold leading-tight text-ink">
                   {m.name}
                 </h4>
-                <p className="mt-1 text-xs text-ink-faint">{m.role}</p>
+                <p className="mt-1 text-xs text-ink-soft">{m.role}</p>
               </div>
             </RevealItem>
           ))}

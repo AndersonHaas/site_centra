@@ -1,10 +1,11 @@
 import { Logo } from "@/components/ui/Logo";
+import { Reveal } from "@/components/ui/Reveal";
 import { NAV_LINKS, SECTORS } from "@/lib/content";
 
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="relative border-t border-white/10 bg-ink-950">
+    <footer className="relative overflow-clip border-t border-white/10 bg-ink-950">
       <div className="container-x py-16">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
@@ -22,7 +23,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white/40">
+            <h3 className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white/55">
               Navegação
             </h3>
             <ul className="mt-5 space-y-3">
@@ -40,7 +41,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white/40">
+            <h3 className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white/55">
               Setores
             </h3>
             <ul className="mt-5 space-y-3">
@@ -54,15 +55,25 @@ export function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-7 sm:flex-row sm:items-center">
-          <p className="text-xs text-white/40">
+          <p className="text-xs text-white/55">
             © {year} Centra Engenharia e Empreendimentos. Todos os direitos
             reservados.
           </p>
-          <p className="font-mono text-[0.6rem] uppercase tracking-[0.18em] text-white/30">
+          <p className="font-mono text-[0.6rem] uppercase tracking-[0.18em] text-white/55">
             Construindo o Sul do Brasil
           </p>
         </div>
       </div>
+
+      {/* Wordmark gigante em contorno — assinatura de rodapé */}
+      <Reveal y={60} className="pointer-events-none select-none">
+        <p
+          aria-hidden="true"
+          className="text-stroke-white -mb-[0.24em] text-center font-sans text-[17.5vw] font-bold leading-none tracking-tight opacity-25"
+        >
+          CENTRA
+        </p>
+      </Reveal>
     </footer>
   );
 }

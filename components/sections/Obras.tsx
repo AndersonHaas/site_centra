@@ -2,16 +2,28 @@
 
 import { useRef } from "react";
 import Image, { type StaticImageData } from "next/image";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useInView,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
+import { SplitText } from "@/components/ui/SplitText";
+import { StickyStack, useStickyPanel } from "@/components/ui/StickyStack";
 import { WORKS, STATES } from "@/lib/content";
+import { cn } from "@/lib/utils";
 
 import cvaleComplexo from "@/media/works/cvale-complexo.jpg";
 import cvaleFachada from "@/media/works/cvale-fachada.jpg";
 import copacolUnidade from "@/media/works/copacol-unidade.jpg";
 import silosGolden from "@/media/works/silos-goldenhour.jpg";
+
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 const IMAGES: Record<string, StaticImageData> = {
   "cvale-complexo": cvaleComplexo,
@@ -22,12 +34,13 @@ const IMAGES: Record<string, StaticImageData> = {
 
 export function Obras() {
   return (
-    <section id="obras" className="grain relative overflow-hidden bg-ink-950 py-24 md:py-32">
+    <section id="obras" className="grain relative overflow-clip bg-ink-950 py-24 md:py-32">
       <div className="container-x">
         <SectionHeader
-          index="04"
+          index="01"
           eyebrow="Obras realizadas"
           dark
+          split
           title={
             <>
               O que construímos para{" "}
@@ -38,10 +51,13 @@ export function Obras() {
         />
       </div>
 
-      <div className="mt-14 flex flex-col gap-5 md:mt-20 md:gap-7">
-        {WORKS.map((w, i) => (
-          <WorkPanel key={w.slug} work={w} index={i} total={WORKS.length} />
-        ))}
+      {/* Deck pinado: cada obra desliza por cima da anterior */}
+      <div className="mt-14 md:mt-20">
+        <StickyStack overlay={(p) => <DeckHud progress={p} total={WORKS.length} />}>
+          {WORKS.map((w, i) => (
+            <WorkPanel key={w.slug} work={w} index={i} total={WORKS.length} />
+          ))}
+        </StickyStack>
       </div>
 
       {/* Faixa de atuação — presença nos estados */}
@@ -74,6 +90,37 @@ export function Obras() {
   );
 }
 
+/* HUD fixo do deck: contador da obra atual + barra de progresso scrubada */
+function DeckHud({
+  progress,
+  total,
+}: {
+  progress: MotionValue<number>;
+  total: number;
+}) {
+  const current = useTransform(progress, (v) =>
+    String(
+      Math.min(total, Math.max(1, Math.round(v * (total - 1)) + 1)),
+    ).padStart(2, "0"),
+  );
+  return (
+    <div className="pointer-events-none absolute inset-x-0 top-24 z-30">
+      <div className="container-x flex items-center justify-between">
+        <span className="hud flex items-center gap-3 text-white/70">
+          <motion.span>{current}</motion.span>
+          <span>/ {String(total).padStart(2, "0")}</span>
+        </span>
+        <span className="relative h-px w-24 overflow-hidden bg-white/15 md:w-36">
+          <motion.span
+            style={{ scaleX: progress }}
+            className="absolute inset-0 origin-left bg-brand-300"
+          />
+        </span>
+      </div>
+    </div>
+  );
+}
+
 function WorkPanel({
   work,
   index,
@@ -85,43 +132,79 @@ function WorkPanel({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
+  const panel = useStickyPanel();
+  const inView = useInView(ref, { once: true, margin: "-5% 0px" });
+
+  /* Fluxo (mobile/reduced motion): pan pela posição do próprio painel.
+     Deck: pan pelo progresso local distribuído pelo StickyStack. */
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
+  const y = useTransform(
+    panel ? panel.local : scrollYProgress,
+    [0, 1],
+    ["-8%", "8%"],
+  );
+
+  const doClip = !reduce && (!panel || panel.first);
 
   return (
     <article
       ref={ref}
-      className="relative h-[78vh] min-h-[520px] w-full overflow-hidden"
+      className={cn(
+        "relative w-full overflow-hidden",
+        panel ? "h-full" : "h-[78vh] min-h-[520px]",
+      )}
     >
-      {/* Imagem com parallax */}
+      {/* Imagem: wipe de içamento na entrada + pan amarrado ao scroll.
+          No deck, só o 1º painel usa o wipe — nos demais o slide por
+          cima já é a entrada. O in-view é observado no <article> (não
+          clipado): clip-path inset(100%) zera a interseção do próprio
+          elemento no Chromium e nunca dispararia. */}
       <motion.div
-        style={{ y: reduce ? 0 : y }}
-        className="absolute inset-0 scale-[1.12]"
+        initial={doClip ? { clipPath: "inset(100% 0 0 0)" } : undefined}
+        animate={doClip && inView ? { clipPath: "inset(0% 0 0 0)" } : undefined}
+        transition={{ duration: 1.1, ease: EASE }}
+        className="absolute inset-0"
       >
-        <Image
-          src={IMAGES[work.slug]}
-          alt={`${work.client} — ${work.title}`}
-          fill
-          placeholder="blur"
-          sizes="100vw"
-          className="object-cover object-center"
-        />
+        <motion.div
+          style={{ y: reduce ? 0 : y }}
+          className="absolute inset-0 scale-[1.12]"
+        >
+          <Image
+            src={IMAGES[work.slug]}
+            alt={`${work.client} — ${work.title}`}
+            fill
+            placeholder="blur"
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+        </motion.div>
       </motion.div>
 
       {/* Gradientes */}
       <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/15 to-ink-950/55" />
       <div className="absolute inset-0 bg-gradient-to-r from-ink-950/70 via-transparent to-transparent" />
 
-      {/* HUD topo */}
-      <div className="container-x absolute inset-x-0 top-7 z-10">
+      {/* HUD topo: contador só no modo fluxo (no deck fica no DeckHud);
+          no deck, tudo desce para não ficar atrás da navbar fixa */}
+      <div
+        className={cn(
+          "container-x absolute inset-x-0 z-10",
+          panel ? "top-24" : "top-7",
+        )}
+      >
         <div className="flex items-center justify-between">
-          <span className="hud text-white/70">
+          <span className={cn("hud text-white/70", panel && "invisible")}>
             {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
           </span>
-          <span className="hud rounded-full border border-white/15 bg-ink-950/40 px-3 py-1.5 text-white/70 backdrop-blur-sm">
+          <span
+            className={cn(
+              "hud rounded-full border border-white/15 bg-ink-950/40 px-3 py-1.5 text-white/70 backdrop-blur-sm",
+              panel && "mt-10",
+            )}
+          >
             {work.sector}
           </span>
         </div>
@@ -131,9 +214,16 @@ function WorkPanel({
       <div className="container-x absolute inset-x-0 bottom-8 z-10 md:bottom-10">
         <Reveal>
           <p className="hud text-brand-300">{work.client}</p>
-          <h3 className="display mt-3 max-w-2xl text-3xl text-white sm:text-4xl md:text-5xl">
-            {work.title}
-          </h3>
+        </Reveal>
+        <SplitText
+          as="h3"
+          per="word"
+          delay={0.1}
+          className="display mt-3 max-w-2xl text-3xl text-white sm:text-4xl md:text-5xl"
+        >
+          {work.title}
+        </SplitText>
+        <Reveal delay={0.18}>
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/75 sm:text-base">
             {work.summary}
           </p>

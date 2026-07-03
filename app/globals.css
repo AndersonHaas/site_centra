@@ -25,6 +25,7 @@
   --color-brand-700: #135495;
   --color-brand-800: #14497b;
   --color-brand-900: #153d66;
+  --color-brand-500-rgb: 36, 132, 214;
 
   /* Superfícies claras */
   --color-paper: #f4f7fb;
@@ -72,6 +73,16 @@
   ::selection {
     background: var(--color-brand-500);
     color: #fff;
+  }
+
+  /* Foco por teclado — anel de marca, visível em qualquer fundo (claro ou navy) */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--color-brand-300);
+    outline-offset: 3px;
   }
 
   ::-webkit-scrollbar {
@@ -169,7 +180,7 @@
   .btn-primary:hover {
     background: var(--color-brand-400);
     transform: translateY(-1px);
-    box-shadow: 0 12px 34px -12px rgba(36, 132, 214, 0.65);
+    box-shadow: 0 12px 34px -12px rgba(var(--color-brand-500-rgb), 0.65);
   }
 
   .btn-ghost {

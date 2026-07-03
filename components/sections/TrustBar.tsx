@@ -1,5 +1,6 @@
 "use client";
 
+import { VelocityMarquee } from "@/components/ui/VelocityMarquee";
 import { CLIENTS } from "@/lib/content";
 
 const items = [
@@ -14,21 +15,21 @@ export function TrustBar() {
   return (
     <div className="relative border-y border-white/10 bg-ink-950 py-7">
       <div className="container-x mb-5">
-        <p className="eyebrow text-center text-white/35">
+        <p className="eyebrow text-center text-white/55">
           A confiança de quem constrói o Sul do Brasil
         </p>
       </div>
-      <div className="marquee-paused mask-fade-x overflow-hidden">
-        <div className="animate-marquee flex w-max items-center gap-14 pr-14">
-          {[...items, ...items].map((label, i) => (
+      <div className="mask-fade-x">
+        <VelocityMarquee>
+          {items.map((label) => (
             <span
-              key={i}
+              key={label}
               className="text-lg font-semibold tracking-tight text-white/45 transition-colors hover:text-white/80"
             >
               {label}
             </span>
           ))}
-        </div>
+        </VelocityMarquee>
       </div>
     </div>
   );

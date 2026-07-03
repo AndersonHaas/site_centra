@@ -11,7 +11,7 @@ const SteelStructure = dynamic(
     ssr: false,
     loading: () => (
       <div className="absolute inset-0 grid place-items-center">
-        <span className="hud text-white/30">Carregando modelo…</span>
+        <span className="hud text-white/55">Carregando modelo…</span>
       </div>
     ),
   },
@@ -34,13 +34,13 @@ export function Estrutura() {
         className="pointer-events-none absolute inset-0 opacity-60"
         style={{
           background:
-            "radial-gradient(70% 60% at 85% 30%, rgba(36,132,214,0.16), transparent 70%)",
+            "radial-gradient(70% 60% at 85% 30%, rgba(var(--color-brand-500-rgb), 0.16), transparent 70%)",
         }}
       />
       <div className="container-x relative grid items-center gap-14 lg:grid-cols-2 lg:gap-16">
         <div>
           <SectionHeader
-            index="03"
+            index="02"
             eyebrow="Engenharia estrutural"
             dark
             title={
@@ -85,12 +85,12 @@ export function Estrutura() {
             {/* HUD */}
             <div className="pointer-events-none absolute inset-0 p-5">
               <div className="flex items-start justify-between">
-                <span className="hud text-white/45">Modelo estrutural</span>
+                <span className="hud text-white/55">Modelo estrutural</span>
                 <span className="hud text-brand-300">Wireframe</span>
               </div>
               <div className="absolute inset-x-5 bottom-5 flex items-end justify-between">
-                <span className="hud text-white/40">Galpão · pórtico metálico</span>
-                <span className="hud text-white/35">Arraste o mouse</span>
+                <span className="hud text-white/55">Galpão · pórtico metálico</span>
+                <span className="hud text-white/55">Arraste o mouse</span>
               </div>
             </div>
           </div>

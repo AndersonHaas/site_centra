@@ -35,13 +35,15 @@ export function Solutions() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(80% 50% at 50% -10%, rgba(36,132,214,0.16), transparent 70%)",
+            "radial-gradient(80% 50% at 50% -10%, rgba(var(--color-brand-500-rgb), 0.16), transparent 70%)",
         }}
       />
       <div className="container-x relative">
         <SectionHeader
+          as="h1"
           dark
-          index="02"
+          split
+          index="01"
           eyebrow="O que entregamos"
           title={
             <>
@@ -76,7 +78,7 @@ export function Solutions() {
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-500/10 text-brand-300 ring-1 ring-brand-400/20 transition-colors group-hover:bg-brand-500 group-hover:text-white">
                       {Icon && <Icon className="h-5 w-5" strokeWidth={1.75} />}
                     </div>
-                    <span className="font-mono text-xs text-white/30">
+                    <span className="font-mono text-xs text-white/55">
                       0{i + 1}
                     </span>
                   </div>

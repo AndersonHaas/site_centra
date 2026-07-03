@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { Reveal } from "./Reveal";
+import { SplitText } from "./SplitText";
 
 type Props = {
   index: string;
@@ -11,6 +12,9 @@ type Props = {
   dark?: boolean;
   align?: "left" | "center";
   className?: string;
+  as?: "h1" | "h2";
+  /* Revela o título linha a linha (SplitText) em vez do Reveal padrão */
+  split?: boolean;
 };
 
 export function SectionHeader({
@@ -21,6 +25,8 @@ export function SectionHeader({
   dark = false,
   align = "left",
   className,
+  as: Heading = "h2",
+  split = false,
 }: Props) {
   return (
     <div
@@ -54,7 +60,7 @@ export function SectionHeader({
           <span
             className={cn(
               "eyebrow",
-              dark ? "text-white/55" : "text-ink-faint",
+              dark ? "text-white/55" : "text-ink-soft",
             )}
           >
             {eyebrow}
@@ -62,16 +68,30 @@ export function SectionHeader({
         </div>
       </Reveal>
 
-      <Reveal delay={0.06}>
-        <h2
+      {split ? (
+        <SplitText
+          as={Heading}
+          per="line"
+          delay={0.06}
           className={cn(
             "display mt-5 text-balance text-3xl sm:text-4xl md:text-[2.9rem]",
             dark ? "text-white" : "text-ink",
           )}
         >
           {title}
-        </h2>
-      </Reveal>
+        </SplitText>
+      ) : (
+        <Reveal delay={0.06}>
+          <Heading
+            className={cn(
+              "display mt-5 text-balance text-3xl sm:text-4xl md:text-[2.9rem]",
+              dark ? "text-white" : "text-ink",
+            )}
+          >
+            {title}
+          </Heading>
+        </Reveal>
+      )}
 
       {description && (
         <Reveal delay={0.12}>

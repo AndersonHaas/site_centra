@@ -17,16 +17,20 @@ export function Stats() {
     offset: ["start end", "end start"],
   });
   const y = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
+  /* Zoom scrubado: a foto "assenta" de 1.22 para 1.1 conforme a seção passa */
+  const scale = useTransform(scrollYProgress, [0, 1], [1.22, 1.1]);
+  /* Contadores scrubados: rolam junto com a entrada da seção */
+  const countProgress = useTransform(scrollYProgress, [0.12, 0.42], [0, 1]);
 
   return (
     <section
       ref={ref}
       className="grain relative overflow-hidden bg-ink-950 py-24 md:py-32"
     >
-      {/* Fundo: foto atmosférica com parallax */}
+      {/* Fundo: foto atmosférica com parallax + zoom scrubado */}
       <motion.div
-        style={{ y: reduce ? 0 : y }}
-        className="absolute inset-0 scale-110"
+        style={reduce ? undefined : { y, scale }}
+        className={reduce ? "absolute inset-0 scale-110" : "absolute inset-0"}
       >
         <Image
           src={silosBg}
@@ -42,7 +46,7 @@ export function Stats() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(80% 60% at 70% 20%, rgba(36,132,214,0.22), transparent 70%)",
+            "radial-gradient(80% 60% at 70% 20%, rgba(var(--color-brand-500-rgb), 0.22), transparent 70%)",
         }}
       />
 
@@ -61,11 +65,11 @@ export function Stats() {
               key={s.label}
               className="bg-ink-950/70 p-7 backdrop-blur-sm md:p-9"
             >
-              <div className="display flex items-baseline whitespace-nowrap text-5xl text-white md:text-6xl">
-                <Counter to={s.value} />
+              <div className="display flex items-baseline whitespace-nowrap text-6xl text-white md:text-7xl xl:text-8xl">
+                <Counter to={s.value} progress={countProgress} />
                 <span
                   className={cn(
-                    "text-gradient-brand text-xl font-semibold md:text-2xl",
+                    "text-2xl font-semibold text-brand-300 md:text-3xl",
                     /^[+%]/.test(s.suffix) ? "ml-0.5" : "ml-2",
                   )}
                 >

@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-30T00:00:00.000Z",
+  "title": "Design System: Centra Engenharia",
+  "extensions": {
+    "colorMeta": {
+      "brand-500": {
+        "role": "primary",
+        "displayName": "Brand Blue",
+        "canonical": "#2484d6",
+        "tonalRamp": ["#153d66", "#14497b", "#135495", "#1568b8", "#2484d6", "#4aa0e6", "#79bbef", "#aed6f6"]
+      },
+      "ink-950": {
+        "role": "neutral",
+        "displayName": "Deep Navy",
+        "canonical": "#050b14",
+        "tonalRamp": ["#050b14", "#08111d", "#0a1726", "#0e2032", "#16314a", "#1f4a72", "#2484d6", "#4aa0e6"]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Cool Paper",
+        "canonical": "#f4f7fb",
+        "tonalRamp": ["#0a1726", "#44586c", "#76879a", "#e2e9f1", "#eaf0f7", "#f4f7fb", "#ffffff", "#ffffff"]
+      },
+      "signal": {
+        "role": "accent",
+        "displayName": "Signal Orange",
+        "canonical": "#f97316",
+        "tonalRamp": ["#7c2d12", "#9a3412", "#c2410c", "#ea580c", "#f97316", "#fb923c", "#fdba74", "#fed7aa"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headlines e títulos de seção." },
+      "body": { "displayName": "Body", "purpose": "Texto corrido, descrições de seção." },
+      "eyebrow": { "displayName": "Eyebrow", "purpose": "Rótulo numerado/mono acima de cada título de seção." },
+      "hud": { "displayName": "HUD Label", "purpose": "Metadados ambientais: coordenadas, status, legendas técnicas." }
+    },
+    "shadows": [
+      { "name": "cta-hover-glow", "value": "0 12px 34px -12px rgba(36,132,214,0.65)", "purpose": "Único glow permitido: feedback de hover no botão primário, não elevação estrutural." }
+    ],
+    "motion": [
+      { "name": "ease-out-expo", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Easing padrão de toda transição e reveal do site." },
+      { "name": "kenburns", "value": "26s ease-out forwards, scale 1.05 -> 1.16", "purpose": "Zoom lento cinematográfico em fotografia de fundo do hero." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "CTA principal (\"Fale com a Centra\"), navbar e seções de contato.",
+      "html": "<button class=\"ds-btn-primary\">Fale com a Centra <svg class=\"ds-icon\" viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 0.55rem; background: #2484d6; color: #fff; font-weight: 500; font-size: 0.95rem; padding: 0.85rem 1.4rem; border-radius: 0.5rem; border: none; transition: background 0.25s cubic-bezier(0.16,1,0.3,1), transform 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-btn-primary:hover { background: #4aa0e6; transform: translateY(-1px); box-shadow: 0 12px 34px -12px rgba(36,132,214,0.65); } .ds-btn-primary:focus-visible { outline: 2px solid #79bbef; outline-offset: 2px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "CTA secundário sobre fundo navy (hero, navbar mobile).",
+      "html": "<button class=\"ds-btn-ghost\">Saiba mais</button>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; gap: 0.55rem; color: #fff; font-weight: 500; font-size: 0.95rem; padding: 0.85rem 1.3rem; border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.18); background: transparent; transition: all 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-btn-ghost:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.4); }"
+    },
+    {
+      "name": "Section Header",
+      "kind": "custom",
+      "refersTo": "section-header",
+      "description": "Cabeçalho padrão de seção: índice + eyebrow + título display + descrição.",
+      "html": "<div class=\"ds-section-header\"><div class=\"ds-sh-meta\"><span class=\"ds-sh-index\">02</span><span class=\"ds-sh-rule\"></span><span class=\"ds-sh-eyebrow\">Soluções</span></div><h2 class=\"ds-sh-title\">Estrutura completa, do projeto à entrega</h2><p class=\"ds-sh-desc\">Construção civil, terraplanagem, estruturas metálicas e pré-moldados sob uma única coordenação técnica.</p></div>",
+      "css": ".ds-section-header { max-width: 48rem; } .ds-sh-meta { display: flex; align-items: center; gap: 0.75rem; } .ds-sh-index, .ds-sh-eyebrow { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; color: #1568b8; } .ds-sh-eyebrow { color: #76879a; } .ds-sh-rule { height: 1px; width: 2rem; background: #e2e9f1; } .ds-sh-title { font-family: var(--font-inter), sans-serif; font-weight: 600; letter-spacing: -0.035em; line-height: 0.98; font-size: clamp(1.875rem, 4vw, 2.9rem); margin-top: 1.25rem; color: #0a1726; } .ds-sh-desc { margin-top: 1.25rem; font-size: 1.125rem; line-height: 1.6; color: #44586c; }"
+    },
+    {
+      "name": "Stat Card",
+      "kind": "card",
+      "refersTo": "stat-card",
+      "description": "Célula de métrica na grade de números (seção Stats).",
+      "html": "<div class=\"ds-stat-card\"><div class=\"ds-stat-value\">550<span class=\"ds-stat-suffix\">mil m²</span></div><p class=\"ds-stat-label\">Construídos no Sul do Brasil</p></div>",
+      "css": ".ds-stat-card { background: rgba(5,11,20,0.7); backdrop-filter: blur(4px); padding: 1.75rem 2.25rem; } .ds-stat-value { font-family: var(--font-inter), sans-serif; font-weight: 600; letter-spacing: -0.035em; display: flex; align-items: baseline; white-space: nowrap; font-size: 3rem; color: #fff; } .ds-stat-suffix { background: linear-gradient(100deg, #cfe6fa 0%, #4aa0e6 48%, #aed6f6 100%); -webkit-background-clip: text; background-clip: text; color: transparent; font-size: 1.25rem; font-weight: 600; margin-left: 0.5rem; } .ds-stat-label { margin-top: 1rem; font-size: 0.95rem; line-height: 1.4; color: rgba(255,255,255,0.6); }"
+    },
+    {
+      "name": "Navbar",
+      "kind": "nav",
+      "refersTo": "navbar",
+      "description": "Navegação fixa com transição transparente -> sólida ao rolar.",
+      "html": "<header class=\"ds-navbar\"><nav class=\"ds-nav-inner\"><span class=\"ds-nav-logo\">CENTRA</span><ul class=\"ds-nav-links\"><li><a href=\"#\" class=\"ds-nav-link\">Soluções</a></li><li><a href=\"#\" class=\"ds-nav-link\">Obras</a></li><li><a href=\"#\" class=\"ds-nav-link\">Equipe</a></li></ul><button class=\"ds-btn-primary\">Fale com a Centra</button></nav></header>",
+      "css": ".ds-navbar { position: fixed; inset-inline: 0; top: 0; z-index: 50; border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(5,11,20,0.8); backdrop-filter: blur(20px); } .ds-nav-inner { display: flex; align-items: center; justify-content: space-between; height: 70px; max-width: 80rem; margin-inline: auto; padding-inline: 1.5rem; } .ds-nav-logo { font-weight: 700; color: #fff; letter-spacing: -0.02em; } .ds-nav-links { display: flex; gap: 2.25rem; list-style: none; } .ds-nav-link { position: relative; font-size: 0.875rem; font-weight: 500; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; } .ds-nav-link:hover { color: #fff; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Industrial HUD",
+    "overview": "O sistema visual da Centra trata o site como um overlay técnico de central de comando sobre obras reais: navy profundo nas seções de impacto (hero, números, contato), labels em mono com coordenadas geográficas e marcadores de canto que lembram a moldura de uma câmera de monitoramento de obra. A fotografia é sempre real — galpões, silos, equipe em campo — nunca ilustração genérica; o grain sutil sobre o escuro e o Ken Burns lento no hero reforçam a sensação de 'estamos olhando para uma obra em andamento, agora'. O sistema rejeita explicitamente o institucional-genérico (gradiente azul-corporativo raso, ícone em card, stock photo descontextualizada) em favor de prova concreta: números reais, fotos reais, nomes de clientes reais. Ritmo de página alterna dark → claro → dark (hero/soluções/contato escuros; sobre/obras/equipe/clientes claros), o que dá variação sem perder a espinha navy que ancora a marca.",
+    "keyCharacteristics": [
+      "Navy profundo como base de impacto, branco/paper como base de prova e leitura longa",
+      "HUD técnico (coordenadas, labels mono, marcadores de canto) como assinatura visual",
+      "Fotografia documental real com Ken Burns/parallax, nunca stock genérico",
+      "Gradiente de marca (aço → ciano) usado com extrema parcimônia",
+      "Componentes precisos e confiantes: bordas retas, transições rápidas e deliberadas"
+    ],
+    "rules": [
+      { "name": "The One Gradient Rule", "body": "O gradiente de marca aparece no máximo uma vez por seção, sempre em texto curto, nunca como fundo decorativo nem em mais de um elemento simultâneo na viewport.", "section": "colors" },
+      { "name": "The Real-Photo Rule", "body": "Toda imagem de fundo é fotografia real de obra; nenhuma ilustração, ícone grande ou stock genérico assume o papel de imagem principal.", "section": "colors" },
+      { "name": "The Mono-Is-Metadata Rule", "body": "JetBrains Mono é reservado para informação técnica/ambiental (coordenadas, status, eyebrow). Nunca aparece em headline, body ou CTA.", "section": "typography" },
+      { "name": "The No-Synthetic-Shadow Rule", "body": "Profundidade é tonal (overlay, gradiente, blur, borda translúcida), nunca box-shadow estrutural. Exceção única: glow de hover no CTA primário, tratado como feedback de interação.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do usar fotografia real de obra como imagem de fundo em qualquer seção de impacto; nunca ilustração ou stock genérico.",
+      "Do reservar o gradiente de marca para uma palavra/número de ênfase por seção.",
+      "Do manter profundidade via overlay/blur/borda translúcida, nunca box-shadow estrutural (exceção única: glow de hover em CTA primário).",
+      "Do usar JetBrains Mono só para metadados técnicos (eyebrow, HUD, coordenadas).",
+      "Do alternar dark→claro→dark entre seções para dar ritmo sem perder a espinha navy.",
+      "Do respeitar prefers-reduced-motion em toda animação."
+    ],
+    "donts": [
+      "Don't usar gradiente azul-corporativo genérico como fundo decorativo de seção inteira.",
+      "Don't introduzir ícone-em-card-redondo acima de heading como padrão repetido.",
+      "Don't adicionar box-shadow tradicional em cards ou painéis.",
+      "Don't usar cinza neutro puro para texto secundário sobre fundo claro.",
+      "Don't replicar o HUD de cantos em mais de uma seção por página.",
+      "Don't usar stock photo ou ilustração genérica de engenharia."
+    ]
+  }
+}

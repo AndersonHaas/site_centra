@@ -1,11 +1,11 @@
 /* Conteúdo institucional da Centra — extraído do briefing oficial */
 
 export const NAV_LINKS = [
-  { label: "A Centra", href: "#sobre" },
-  { label: "Soluções", href: "#solucoes" },
-  { label: "Obras", href: "#obras" },
-  { label: "Equipe", href: "#equipe" },
-  { label: "Clientes", href: "#clientes" },
+  { label: "Obras", href: "/#obras" },
+  { label: "Clientes", href: "/#clientes" },
+  { label: "Soluções", href: "/solucoes" },
+  { label: "A Centra", href: "/sobre" },
+  { label: "Equipe", href: "/equipe" },
 ];
 
 export const STATS = [

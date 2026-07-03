@@ -11,6 +11,7 @@ import {
 import { ArrowUpRight, ArrowDown } from "lucide-react";
 import { SECTORS } from "@/lib/content";
 import { Magnetic } from "@/components/ui/Magnetic";
+import { SplitText } from "@/components/ui/SplitText";
 import heroImg from "@/media/works/cvale-complexo.jpg";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -86,58 +87,30 @@ export function Hero() {
 
         <h1 className="display mt-6 max-w-[20ch] text-[1.4rem] text-white sm:text-4xl md:text-5xl lg:text-[3.5rem] xl:text-[4rem]">
           {headlineLines.map(([line, accent], i) => (
-            <span key={i} className="block overflow-hidden">
-              <motion.span
-                initial={{ y: "115%" }}
-                animate={{ y: 0 }}
-                transition={{ duration: 1, ease: EASE, delay: 0.25 + i * 0.12 }}
-                className="block"
-              >
-                <span className={accent ? "text-gradient-brand" : undefined}>
-                  {line}
-                </span>
-              </motion.span>
-            </span>
+            <SplitText
+              key={i}
+              as="span"
+              mode="mount"
+              delay={0.25 + i * 0.14}
+              stagger={0.05}
+              className="block"
+            >
+              {accent ? (
+                <span className="text-gradient-brand">{line}</span>
+              ) : (
+                line
+              )}
+            </SplitText>
           ))}
         </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: EASE, delay: 0.7 }}
-          className="mt-6 max-w-md text-sm leading-relaxed text-white/75 sm:text-base"
-        >
-          Mais de 550 mil m² construídos no Sul do Brasil. Da terraplanagem às
-          estruturas metálicas, transformamos projetos complexos em obras de
-          excelência técnica.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: EASE, delay: 0.82 }}
-          className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
-        >
-          <Magnetic>
-            <a href="#contato" className="btn-primary">
-              Fale com a Centra
-              <ArrowUpRight className="h-4 w-4" />
-            </a>
-          </Magnetic>
-          <Magnetic>
-            <a href="#obras" className="btn-ghost">
-              Ver obras realizadas
-            </a>
-          </Magnetic>
-        </motion.div>
-
-        <motion.div
+<motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, ease: EASE, delay: 1 }}
           className="mt-16 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-white/10 pt-6"
         >
-          <span className="eyebrow text-white/45">Setores de atuação</span>
+          <span className="eyebrow text-white/55">Setores de atuação</span>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             {SECTORS.map((s) => (
               <span key={s} className="text-sm font-medium text-white/75">
@@ -157,7 +130,7 @@ export function Hero() {
       >
         <div className="container-x flex items-end justify-between">
           <div className="hidden flex-col gap-1 sm:flex">
-            <span className="hud text-white/40">Lat −24.61° · Lon −53.30°</span>
+            <span className="hud text-white/55">Lat −24.61° · Lon −53.30°</span>
             <span className="hud text-white/55">Palotina · Paraná · BR</span>
           </div>
 
@@ -165,7 +138,7 @@ export function Hero() {
             <motion.div
               animate={reduce ? {} : { y: [0, 7, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="flex flex-col items-center gap-2 text-white/45"
+              className="flex flex-col items-center gap-2 text-white/55"
             >
               <span className="hud">Role</span>
               <ArrowDown className="h-4 w-4" />
