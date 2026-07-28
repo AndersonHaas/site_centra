@@ -12,11 +12,11 @@ Fotos novas foram encontradas em `Fotos Marketing/` (na raiz do projeto,
 irmã de `site/`), organizadas em uma pasta por obra:
 
 - 9 pastas com prefixo `CVale -` / `CVale ` (cliente C.Vale)
-- 7 pastas com prefixo `Copacol -` (cliente Copacol)
+- 8 pastas com prefixo `Copacol -` (cliente Copacol)
 - 1 pasta `Imagens Geral Centra` — fotos institucionais soltas, **não** é uma
   obra e fica de fora do portfólio.
 
-Total: **16 obras**. Fotos são originais de drone/celular (até 76MB por pasta,
+Total: **17 obras**. Fotos são originais de drone/celular (até 76MB por pasta,
 resolução ~4000px+), precisam de otimização antes de ir pro site — mesmo
 processo (`sips`) já usado nas fotos atuais.
 
@@ -42,9 +42,13 @@ export const PROJECTS = [
     slug: "cvale-upd",       // kebab-case, cliente + pasta
     client: "C.Vale",        // "C.Vale" | "Copacol"
     title: "UPD",            // nome da pasta sem o prefixo do cliente
-    images: ["cvale-upd-1", "cvale-upd-2", "cvale-upd-3"], // 1 a 3 chaves
+    images: [
+      "/images/portfolio/cvale-upd-1.jpg",
+      "/images/portfolio/cvale-upd-2.jpg",
+      "/images/portfolio/cvale-upd-3.jpg",
+    ], // 1 a 3 caminhos públicos
   },
-  // ... 16 entradas
+  // ... 17 entradas
 ] as const;
 ```
 
@@ -60,7 +64,7 @@ export const PROJECTS = [
 
 Script/processo único (rodado uma vez, não em build):
 
-1. Para cada uma das 16 pastas em `Fotos Marketing/`, selecionar até 3 fotos:
+1. Para cada uma das 17 pastas em `Fotos Marketing/`, selecionar até 3 fotos:
    - Priorizar arquivos que comecem com `DJI_` (fotos aéreas — mais
      profissionais);
    - Se não houver 3 `DJI_*`, completar com as demais fotos da pasta em ordem
@@ -68,14 +72,20 @@ Script/processo único (rodado uma vez, não em build):
    - Pastas com 1 ou 2 fotos ficam com 1 ou 2 mesmo (não duplicar).
 2. Redimensionar cada foto selecionada para no máximo 2000px no lado maior,
    reexportar como JPEG qualidade ~80 via `sips`.
-3. Salvar em `site/media/works/portfolio/<slug>-<n>.jpg` (n = 1..3).
-4. Essas imagens são importadas estaticamente no componente da seção (mesmo
-   padrão do `Obras.tsx` atual: `import foo from "@/media/works/..."`, dict
-   `slug -> StaticImageData[]`, `placeholder="blur"`).
+3. Salvar em `site/public/images/portfolio/<slug>-<n>.jpg` (n = 1..3).
+4. **Diferente do padrão de import estático usado no `Obras.tsx` da home**
+   (adequado para 4 fotos): com 45 fotos no total, essas imagens ficam em
+   `public/` e são referenciadas por **caminho de string simples**
+   (`"/images/portfolio/<slug>-<n>.jpg"`) no `next/image`, sem import
+   individual por arquivo. É o padrão recomendado do Next.js para galerias
+   deste tamanho — evita ~45 linhas de import e um dicionário gigante só
+   pra mapear chave→imagem. Sem `placeholder="blur"` (que exige
+   `StaticImageData` de import estático); o `next/image` ainda otimiza e
+   redimensiona a imagem em runtime a partir de `public/`.
 
 Nota: os arquivos originais em `Fotos Marketing/` ficam fora do repo do site
 (pasta irmã, não versionada); só as versões otimizadas entram em
-`site/media/works/portfolio/`.
+`site/public/images/portfolio/`.
 
 ## Rota e página
 
