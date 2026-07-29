@@ -76,7 +76,7 @@ export function Lightbox({
           type="button"
           onClick={onClose}
           aria-label="Fechar"
-          className="rounded-full border border-white/15 p-2 text-white/80 transition-colors hover:border-white/40 hover:text-white"
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/80 transition-colors hover:border-white/40 hover:text-white"
         >
           <X className="h-4 w-4" />
         </button>
@@ -98,7 +98,7 @@ export function Lightbox({
               type="button"
               onClick={goPrev}
               aria-label="Foto anterior"
-              className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full border border-white/15 bg-ink-950/50 p-2.5 text-white/80 transition-colors hover:border-white/40 hover:text-white md:left-6"
+              className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-ink-950/50 text-white/80 transition-colors hover:border-white/40 hover:text-white md:left-6"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -106,7 +106,7 @@ export function Lightbox({
               type="button"
               onClick={goNext}
               aria-label="Próxima foto"
-              className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full border border-white/15 bg-ink-950/50 p-2.5 text-white/80 transition-colors hover:border-white/40 hover:text-white md:right-6"
+              className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-ink-950/50 text-white/80 transition-colors hover:border-white/40 hover:text-white md:right-6"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
