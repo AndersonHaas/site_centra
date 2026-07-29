@@ -161,6 +161,16 @@ export const PROJECTS = [
     images: ["/images/portfolio/cvale-bairro-catarinense-1.jpg"],
   },
   {
+    slug: "cvale-obra-285-cd",
+    client: "C.Vale",
+    title: "CD",
+    images: [
+      "/images/portfolio/cvale-obra-285-cd-1.jpg",
+      "/images/portfolio/cvale-obra-285-cd-2.jpg",
+      "/images/portfolio/cvale-obra-285-cd-3.jpg",
+    ],
+  },
+  {
     slug: "cvale-encantado",
     client: "C.Vale",
     title: "Encantado",
@@ -177,16 +187,6 @@ export const PROJECTS = [
       "/images/portfolio/cvale-insumos-alto-piquiri-1.jpg",
       "/images/portfolio/cvale-insumos-alto-piquiri-2.jpg",
       "/images/portfolio/cvale-insumos-alto-piquiri-3.jpg",
-    ],
-  },
-  {
-    slug: "cvale-obra-285-cd",
-    client: "C.Vale",
-    title: "Obra 285 - CD",
-    images: [
-      "/images/portfolio/cvale-obra-285-cd-1.jpg",
-      "/images/portfolio/cvale-obra-285-cd-2.jpg",
-      "/images/portfolio/cvale-obra-285-cd-3.jpg",
     ],
   },
   {
@@ -235,6 +235,16 @@ export const PROJECTS = [
     ],
   },
   {
+    slug: "copacol-obra-271-amidonaria",
+    client: "Copacol",
+    title: "Amidonaria",
+    images: [
+      "/images/portfolio/copacol-obra-271-amidonaria-1.jpg",
+      "/images/portfolio/copacol-obra-271-amidonaria-2.jpg",
+      "/images/portfolio/copacol-obra-271-amidonaria-3.jpg",
+    ],
+  },
+  {
     slug: "copacol-cpa",
     client: "Copacol",
     title: "CPA",
@@ -255,46 +265,6 @@ export const PROJECTS = [
     ],
   },
   {
-    slug: "copacol-obra-225-unidade-nova-aurora",
-    client: "Copacol",
-    title: "Obra 225 - Unidade Nova Aurora",
-    images: [
-      "/images/portfolio/copacol-obra-225-unidade-nova-aurora-1.jpg",
-      "/images/portfolio/copacol-obra-225-unidade-nova-aurora-2.jpg",
-      "/images/portfolio/copacol-obra-225-unidade-nova-aurora-3.jpg",
-    ],
-  },
-  {
-    slug: "copacol-obra-229-unidade-penha",
-    client: "Copacol",
-    title: "Obra 229 - Unidade Penha",
-    images: [
-      "/images/portfolio/copacol-obra-229-unidade-penha-1.jpg",
-      "/images/portfolio/copacol-obra-229-unidade-penha-2.jpg",
-      "/images/portfolio/copacol-obra-229-unidade-penha-3.jpg",
-    ],
-  },
-  {
-    slug: "copacol-obra-271-amidonaria",
-    client: "Copacol",
-    title: "Obra 271 - Amidonaria",
-    images: [
-      "/images/portfolio/copacol-obra-271-amidonaria-1.jpg",
-      "/images/portfolio/copacol-obra-271-amidonaria-2.jpg",
-      "/images/portfolio/copacol-obra-271-amidonaria-3.jpg",
-    ],
-  },
-  {
-    slug: "copacol-obra-307-urs",
-    client: "Copacol",
-    title: "Obra 307 - URS",
-    images: [
-      "/images/portfolio/copacol-obra-307-urs-1.jpg",
-      "/images/portfolio/copacol-obra-307-urs-2.jpg",
-      "/images/portfolio/copacol-obra-307-urs-3.jpg",
-    ],
-  },
-  {
     slug: "copacol-silo-jesuitas",
     client: "Copacol",
     title: "Silo Jesuítas",
@@ -305,6 +275,26 @@ export const PROJECTS = [
     ],
   },
   {
+    slug: "copacol-obra-225-unidade-nova-aurora",
+    client: "Copacol",
+    title: "Unidade Nova Aurora",
+    images: [
+      "/images/portfolio/copacol-obra-225-unidade-nova-aurora-1.jpg",
+      "/images/portfolio/copacol-obra-225-unidade-nova-aurora-2.jpg",
+      "/images/portfolio/copacol-obra-225-unidade-nova-aurora-3.jpg",
+    ],
+  },
+  {
+    slug: "copacol-obra-229-unidade-penha",
+    client: "Copacol",
+    title: "Unidade Penha",
+    images: [
+      "/images/portfolio/copacol-obra-229-unidade-penha-1.jpg",
+      "/images/portfolio/copacol-obra-229-unidade-penha-2.jpg",
+      "/images/portfolio/copacol-obra-229-unidade-penha-3.jpg",
+    ],
+  },
+  {
     slug: "copacol-upd",
     client: "Copacol",
     title: "UPD",
@@ -312,6 +302,16 @@ export const PROJECTS = [
       "/images/portfolio/copacol-upd-1.jpg",
       "/images/portfolio/copacol-upd-2.jpg",
       "/images/portfolio/copacol-upd-3.jpg",
+    ],
+  },
+  {
+    slug: "copacol-obra-307-urs",
+    client: "Copacol",
+    title: "URS",
+    images: [
+      "/images/portfolio/copacol-obra-307-urs-1.jpg",
+      "/images/portfolio/copacol-obra-307-urs-2.jpg",
+      "/images/portfolio/copacol-obra-307-urs-3.jpg",
     ],
   },
 ] as const;

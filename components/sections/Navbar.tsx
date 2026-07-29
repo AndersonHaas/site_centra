@@ -7,20 +7,11 @@ import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { NAV_LINKS } from "@/lib/content";
-import { cn } from "@/lib/utils";
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -43,14 +34,7 @@ export function Navbar() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <div
-        className={cn(
-          "transition-all duration-500",
-          scrolled
-            ? "border-b border-white/10 bg-ink-950/80 backdrop-blur-xl"
-            : "border-b border-transparent bg-transparent",
-        )}
-      >
+      <div className="border-b border-white/10 bg-ink-950/95 backdrop-blur-xl">
         <nav className="container-x flex h-[70px] items-center justify-between">
           <Link href="/" aria-label="Centra — início">
             <Logo priority />
