@@ -61,6 +61,18 @@ export function Obras() {
         </StickyStack>
       </div>
 
+      {/* CTA — portfólio completo (logo após a seção da última obra) */}
+      <div className="container-x mt-14 md:mt-16">
+        <Reveal>
+          <div className="flex justify-center">
+            <Link href="/obras" className="btn-ghost">
+              Ver mais obras
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </Reveal>
+      </div>
+
       {/* Faixa de atuação — presença nos estados */}
       <div className="container-x mt-16 md:mt-20">
         <Reveal>
@@ -84,18 +96,6 @@ export function Obras() {
                 </span>
               ))}
             </div>
-          </div>
-        </Reveal>
-      </div>
-
-      {/* CTA — portfólio completo */}
-      <div className="container-x mt-14 md:mt-16">
-        <Reveal>
-          <div className="flex justify-center">
-            <Link href="/obras" className="btn-ghost">
-              Ver todas as obras
-              <ArrowUpRight className="h-4 w-4" />
-            </Link>
           </div>
         </Reveal>
       </div>
