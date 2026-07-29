@@ -2,8 +2,8 @@
 
 import { BadgeCheck } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { Reveal, RevealStagger, RevealItem } from "@/components/ui/Reveal";
-import { FOUNDERS, TEAM } from "@/lib/content";
+import { RevealStagger, RevealItem } from "@/components/ui/Reveal";
+import { FOUNDERS } from "@/lib/content";
 
 function initials(name: string) {
   return name
@@ -56,29 +56,6 @@ export function Equipe() {
                   </p>
                 </div>
               </article>
-            </RevealItem>
-          ))}
-        </RevealStagger>
-
-        {/* Time */}
-        <Reveal className="mt-12">
-          <p className="eyebrow text-ink-soft">Time de engenharia</p>
-        </Reveal>
-        <RevealStagger
-          className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6"
-          gap={0.06}
-        >
-          {TEAM.map((m) => (
-            <RevealItem key={m.name}>
-              <div className="group flex h-full flex-col items-center rounded-xl border border-hair bg-surface p-5 text-center transition-all duration-300 hover:border-brand-200 hover:bg-brand-50/40">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-paper-2 font-mono text-sm font-medium text-brand-700 ring-1 ring-hair transition-colors group-hover:bg-brand-500 group-hover:text-white group-hover:ring-brand-500">
-                  {initials(m.name)}
-                </div>
-                <h4 className="mt-3 text-sm font-semibold leading-tight text-ink">
-                  {m.name}
-                </h4>
-                <p className="mt-1 text-xs text-ink-soft">{m.role}</p>
-              </div>
             </RevealItem>
           ))}
         </RevealStagger>

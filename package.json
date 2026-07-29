@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "fotos": "python3 scripts/sync-portfolio.py"
   },
   "dependencies": {
     "clsx": "^2.1.1",
