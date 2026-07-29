@@ -31,14 +31,19 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
 
     const onClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
-      const anchor = target?.closest<HTMLAnchorElement>('a[href^="#"]');
+      const anchor = target?.closest<HTMLAnchorElement>('a[href*="#"]');
       if (!anchor) return;
-      const id = anchor.getAttribute("href");
-      if (!id || id === "#") return;
-      const el = document.querySelector(id);
+      const href = anchor.getAttribute("href");
+      if (!href) return;
+      const [path, id] = href.split("#");
+      if (!id) return;
+      // Só intercepta âncoras da própria página atual — links do tipo
+      // "/#secao" em outras rotas (ex: /equipe) devem navegar normalmente.
+      if (path && path !== "/" && path !== window.location.pathname) return;
+      const el = document.getElementById(id);
       if (!el) return;
       e.preventDefault();
-      lenis.scrollTo(el as HTMLElement, { offset: -72, duration: 1.3 });
+      lenis.scrollTo(el, { offset: -72, duration: 1.3 });
     };
     document.addEventListener("click", onClick);
 
