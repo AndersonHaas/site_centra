@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { ImageIcon } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -19,6 +19,7 @@ export function Portfolio() {
   const [filter, setFilter] = useState<ProjectClient | "Todas">("Todas");
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
 
   const projects =
     filter === "Todas" ? PROJECTS : PROJECTS.filter((p) => p.client === filter);
@@ -41,8 +42,12 @@ export function Portfolio() {
           description="Projetos entregues para cooperativas agroindustriais e o setor público no Sul do Brasil — cada um com seu registro fotográfico."
         />
 
-        <Reveal className="mt-10">
-          <div className="-mx-6 flex gap-2 overflow-x-auto px-6 pb-1 md:mx-0 md:px-0">
+        {/* Sticky wrapper must NOT be nested inside the Reveal motion.div:
+            framer-motion leaves an inline transform on its element after
+            animating (even translateY(0)), which creates a new containing
+            block and silently breaks `position: sticky` on descendants. */}
+        <div className="sticky top-[70px] z-20 -mx-6 mt-10 overflow-x-auto bg-paper px-6 pb-1 md:mx-0 md:px-0">
+          <Reveal className="flex gap-2">
             {FILTERS.map((f) => (
               <button
                 key={f.value}
@@ -58,28 +63,32 @@ export function Portfolio() {
                 {f.label}
               </button>
             ))}
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
 
         <RevealStagger
+          key={filter}
           className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
           gap={0.05}
         >
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <RevealItem key={project.slug}>
               <button
                 type="button"
-                onClick={() => {
+                onClick={(e) => {
+                  triggerRef.current = e.currentTarget;
                   setActiveSlug(project.slug);
                   setActiveIndex(0);
                 }}
-                className="group relative block aspect-[4/3] w-full overflow-hidden rounded-2xl border border-hair text-left"
+                className="group relative block aspect-[4/3] w-full overflow-hidden rounded-2xl border border-hair bg-paper-2 text-left"
               >
+                {/* Sem placeholder="blur": imagens vêm de public/ por caminho de string (não import estático) — ver docs/superpowers/specs/2026-07-28-portfolio-obras-design.md */}
                 <Image
                   src={project.images[0]}
                   alt={`${project.client} — ${project.title}`}
                   fill
                   sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  priority={index === 0}
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink-950/85 via-ink-950/10 to-transparent" />
@@ -105,10 +114,13 @@ export function Portfolio() {
 
       {activeProject && (
         <Lightbox
-          images={[...activeProject.images]}
+          images={activeProject.images}
           title={`${activeProject.client} — ${activeProject.title}`}
           index={activeIndex}
-          onClose={() => setActiveSlug(null)}
+          onClose={() => {
+            setActiveSlug(null);
+            triggerRef.current?.focus();
+          }}
           onIndexChange={setActiveIndex}
         />
       )}

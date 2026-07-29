@@ -148,8 +148,6 @@ export const WORKS = [
   },
 ] as const;
 
-export type ProjectClient = "C.Vale" | "Copacol";
-
 /* Portfólio completo — página /obras. Fotos otimizadas em
    public/images/portfolio/, geradas por scripts/process-portfolio-photos.sh
    a partir de Fotos Marketing/ (fora do repo). Sem descrição textual por
@@ -218,6 +216,15 @@ export const PROJECTS = [
     ],
   },
   {
+    slug: "cvale-universidade",
+    client: "C.Vale",
+    title: "Universidade",
+    images: [
+      "/images/portfolio/cvale-universidade-1.jpg",
+      "/images/portfolio/cvale-universidade-2.jpg",
+    ],
+  },
+  {
     slug: "cvale-upd",
     client: "C.Vale",
     title: "UPD",
@@ -225,15 +232,6 @@ export const PROJECTS = [
       "/images/portfolio/cvale-upd-1.jpg",
       "/images/portfolio/cvale-upd-2.jpg",
       "/images/portfolio/cvale-upd-3.jpg",
-    ],
-  },
-  {
-    slug: "cvale-universidade",
-    client: "C.Vale",
-    title: "Universidade",
-    images: [
-      "/images/portfolio/cvale-universidade-1.jpg",
-      "/images/portfolio/cvale-universidade-2.jpg",
     ],
   },
   {
@@ -317,6 +315,8 @@ export const PROJECTS = [
     ],
   },
 ] as const;
+
+export type ProjectClient = (typeof PROJECTS)[number]["client"];
 
 export const SECTORS = [
   "Industrial",
