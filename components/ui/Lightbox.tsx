@@ -102,12 +102,10 @@ export function Lightbox({
         </button>
       </div>
 
-      <div
-        className="relative flex-1"
-        onClick={(e) => {
-          if (e.target === e.currentTarget) onClose();
-        }}
-      >
+      <div className="relative flex-1">
+        {/* onClick aqui (não no container): a Image com `fill` cobre toda
+            a área, inclusive o letterboxing, então é ela quem recebe o
+            tap tanto "na foto" quanto "fora" dela. */}
         <Image
           key={images[index]}
           src={images[index]}
