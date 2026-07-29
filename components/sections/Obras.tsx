@@ -11,6 +11,7 @@ import {
   type MotionValue,
 } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { SplitText } from "@/components/ui/SplitText";
@@ -83,6 +84,18 @@ export function Obras() {
                 </span>
               ))}
             </div>
+          </div>
+        </Reveal>
+      </div>
+
+      {/* CTA — portfólio completo */}
+      <div className="container-x mt-14 md:mt-16">
+        <Reveal>
+          <div className="flex justify-center">
+            <Link href="/obras" className="btn-ghost">
+              Ver todas as obras
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
           </div>
         </Reveal>
       </div>
