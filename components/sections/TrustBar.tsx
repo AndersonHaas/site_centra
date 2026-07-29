@@ -8,7 +8,6 @@ const items = [
   "Setor industrial",
   "Agroindústria",
   "Cooperativas",
-  "Obras públicas",
 ];
 
 export function TrustBar() {

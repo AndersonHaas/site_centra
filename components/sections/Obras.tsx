@@ -48,7 +48,7 @@ export function Obras() {
               <span className="text-gradient-brand">grandes operações</span>.
             </>
           }
-          description="Cada empreendimento entregue carrega excelência técnica, prazo cumprido e segurança — para cooperativas, indústrias e o setor público do Sul do Brasil."
+          description="Cada empreendimento entregue carrega excelência técnica, prazo cumprido e segurança — para cooperativas e indústrias do Sul do Brasil."
         />
       </div>
 

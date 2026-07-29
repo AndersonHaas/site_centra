@@ -24,7 +24,7 @@ export const PILLARS = [
   {
     key: "visao",
     title: "Visão",
-    body: "Ser reconhecida como uma das principais referências em engenharia e construção da região Sul do Brasil, destacando-se pela qualidade das entregas, solidez das relações, capacidade técnica e contribuição para o desenvolvimento dos setores industrial, agroindustrial, comercial e público.",
+    body: "Ser reconhecida como uma das principais referências em engenharia e construção da região Sul do Brasil, destacando-se pela qualidade das entregas, solidez das relações, capacidade técnica e contribuição para o desenvolvimento dos setores industrial, agroindustrial e comercial.",
   },
   {
     key: "valores",
@@ -36,7 +36,7 @@ export const PILLARS = [
 export const SOLUTIONS = [
   {
     title: "Construção civil",
-    desc: "Execução completa de obras industriais, agroindustriais, comerciais e públicas, do projeto à entrega final.",
+    desc: "Execução completa de obras industriais, agroindustriais e comerciais, do projeto à entrega final.",
     icon: "Building2",
   },
   {
@@ -98,7 +98,6 @@ export const TEAM = [
 export const CLIENTS = [
   { name: "Copacol", note: "Cooperativa Agroindustrial" },
   { name: "C.Vale", note: "Cooperativa Agroindustrial" },
-  { name: "Prefeitura de Cafelândia", note: "Setor público" },
 ];
 
 /* Obras realizadas — fotos reais em media/works.
@@ -318,9 +317,4 @@ export const PROJECTS = [
 
 export type ProjectClient = (typeof PROJECTS)[number]["client"];
 
-export const SECTORS = [
-  "Industrial",
-  "Agroindustrial",
-  "Comercial",
-  "Público",
-];
+export const SECTORS = ["Industrial", "Agroindustrial", "Comercial"];

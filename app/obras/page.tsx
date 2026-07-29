@@ -6,7 +6,7 @@ import { Footer } from "@/components/sections/Footer";
 export const metadata: Metadata = {
   title: "Obras",
   description:
-    "Portfólio completo de obras da Centra Engenharia — projetos entregues para cooperativas agroindustriais e o setor público no Sul do Brasil.",
+    "Portfólio completo de obras da Centra Engenharia — projetos entregues para cooperativas agroindustriais no Sul do Brasil.",
 };
 
 export default function ObrasPage() {

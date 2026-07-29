@@ -39,7 +39,7 @@ export function Portfolio() {
               <span className="text-brand-600">nossa escala</span>.
             </>
           }
-          description="Projetos entregues para cooperativas agroindustriais e o setor público no Sul do Brasil — cada um com seu registro fotográfico."
+          description="Projetos entregues para cooperativas agroindustriais no Sul do Brasil — cada um com seu registro fotográfico."
         />
 
         {/* Sticky wrapper must NOT be nested inside the Reveal motion.div:

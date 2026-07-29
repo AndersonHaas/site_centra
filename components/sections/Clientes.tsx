@@ -31,7 +31,7 @@ export function Clientes() {
               <span className="text-brand-600">grandes operações</span>.
             </>
           }
-          description="Cooperativas agroindustriais, indústrias e o setor público confiam à Centra obras de alta complexidade e impacto regional."
+          description="Cooperativas agroindustriais e indústrias confiam à Centra obras de alta complexidade e impacto regional."
         />
 
         <Reveal delay={0.05}>

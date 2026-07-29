@@ -12,7 +12,7 @@ export function Footer() {
             <Logo />
             <p className="mt-6 max-w-xs text-sm leading-relaxed text-white/55">
               Engenharia e construção de alto desempenho para os setores
-              industrial, agroindustrial, comercial e público.
+              industrial, agroindustrial e comercial.
             </p>
             <a
               href="#contato"

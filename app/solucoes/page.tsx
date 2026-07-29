@@ -7,7 +7,7 @@ import { Footer } from "@/components/sections/Footer";
 export const metadata: Metadata = {
   title: "Soluções",
   description:
-    "Construção civil, terraplanagem, estruturas metálicas e pré-moldados. Soluções completas de engenharia da Centra para os setores industrial, agroindustrial e público.",
+    "Construção civil, terraplanagem, estruturas metálicas e pré-moldados. Soluções completas de engenharia da Centra para os setores industrial e agroindustrial.",
 };
 
 export default function SolucoesPage() {

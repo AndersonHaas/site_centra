@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     title:
       "Centra Engenharia | Construção & Empreendimentos de Alto Desempenho",
     description:
-      "Mais de 550 mil m² construídos. Engenharia e construção com excelência técnica para os setores industrial, agroindustrial, comercial e público.",
+      "Mais de 550 mil m² construídos. Engenharia e construção com excelência técnica para os setores industrial, agroindustrial e comercial.",
     type: "website",
     locale: "pt_BR",
     siteName: "Centra Engenharia",
