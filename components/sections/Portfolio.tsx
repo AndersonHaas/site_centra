@@ -79,7 +79,7 @@ export function Portfolio() {
                   src={project.images[0]}
                   alt={`${project.client} — ${project.title}`}
                   fill
-                  sizes="(max-width: 767px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink-950/85 via-ink-950/10 to-transparent" />
