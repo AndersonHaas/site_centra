@@ -16,7 +16,7 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { SplitText } from "@/components/ui/SplitText";
 import { StickyStack, useStickyPanel } from "@/components/ui/StickyStack";
-import { WORKS, STATES } from "@/lib/content";
+import { WORKS, PRESENCE } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 import cvaleComplexo from "@/media/works/cvale-complexo.jpg";
@@ -80,11 +80,11 @@ export function Obras() {
             <div className="flex items-center gap-4">
               <span className="hud text-brand-300">Atuação</span>
               <span className="text-lg font-medium text-white">
-                Presença em 4 estados
+                Presença em 4 estados e no Paraguai
               </span>
             </div>
             <div className="flex flex-wrap gap-2.5">
-              {STATES.map((s) => (
+              {PRESENCE.map((s) => (
                 <span
                   key={s.uf}
                   className="flex items-center gap-2 rounded-xl border border-white/10 bg-ink-900 px-3.5 py-2"

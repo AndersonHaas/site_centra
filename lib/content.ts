@@ -70,11 +70,12 @@ export const SOLUTIONS = [
   },
 ];
 
-export const STATES = [
+export const PRESENCE = [
   { uf: "PR", name: "Paraná" },
   { uf: "SC", name: "Santa Catarina" },
   { uf: "RS", name: "Rio Grande do Sul" },
   { uf: "MS", name: "Mato Grosso do Sul" },
+  { uf: "PY", name: "Paraguai" },
 ];
 
 export const FOUNDERS = [
