@@ -1,6 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import "./globals.css";
+import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { getMessages, setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+import "../globals.css";
+import { routing } from "@/i18n/routing";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { CustomCursor } from "@/components/ui/CustomCursor";
@@ -17,6 +21,10 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400", "500"],
   display: "swap",
 });
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://centraengenharia.com.br"),
@@ -54,20 +62,30 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+type Props = {
   children: React.ReactNode;
-}>) {
+  params: Promise<{ locale: string }>;
+};
+
+export default async function LocaleLayout({ children, params }: Props) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+  setRequestLocale(locale);
+  const messages = await getMessages();
+
   return (
     <html
-      lang="pt-BR"
+      lang={locale === "es" ? "es-419" : "pt-BR"}
       className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
     >
       <body>
-        <ScrollProgress />
-        <CustomCursor />
-        <SmoothScroll>{children}</SmoothScroll>
+        <NextIntlClientProvider messages={messages}>
+          <ScrollProgress />
+          <CustomCursor />
+          <SmoothScroll>{children}</SmoothScroll>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
