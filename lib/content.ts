@@ -29,39 +29,6 @@ export const PILLARS = [
   },
 ];
 
-export const SOLUTIONS = [
-  {
-    title: "Construção civil",
-    desc: "Execução completa de obras industriais, agroindustriais e comerciais, do projeto à entrega final.",
-    icon: "Building2",
-  },
-  {
-    title: "Terraplanagem",
-    desc: "Preparação e movimentação de terra com frota própria, garantindo base sólida para cada empreendimento.",
-    icon: "Mountain",
-  },
-  {
-    title: "Estruturas metálicas",
-    desc: "Fabricação e montagem de estruturas metálicas de alto desempenho, com precisão e segurança.",
-    icon: "Frame",
-  },
-  {
-    title: "Pré-moldados & pré-fabricados",
-    desc: "Produção de elementos pré-moldados e pré-fabricados que aceleram prazos sem abrir mão da qualidade.",
-    icon: "Boxes",
-  },
-  {
-    title: "Frota de guindastes",
-    desc: "Moderna frota de guindastes e equipamentos para movimentação de cargas em obras de grande porte.",
-    icon: "Construction",
-  },
-  {
-    title: "Gestão de projetos",
-    desc: "Equipe técnica integrada que atua em todas as etapas, do planejamento à entrega de resultados consistentes.",
-    icon: "ClipboardCheck",
-  },
-];
-
 export const PRESENCE = [
   { uf: "PR", name: "Paraná" },
   { uf: "SC", name: "Santa Catarina" },

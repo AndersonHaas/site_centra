@@ -6,6 +6,16 @@ import { MARKETS } from "@/lib/group/markets";
 import { BUSINESS_UNITS } from "@/lib/group/units";
 import type { Market } from "@/lib/group/market";
 
+/* Tailwind exige classes literais (não interpoladas) para funcionar no build,
+   então o número de colunas é escolhido a partir de um mapa estático em vez
+   de montar a string dinamicamente. */
+const GRID_COLS: Record<number, string> = {
+  1: "sm:grid-cols-1 max-w-md mx-auto",
+  2: "sm:grid-cols-2 max-w-2xl mx-auto",
+  3: "sm:grid-cols-2 lg:grid-cols-3",
+  4: "sm:grid-cols-2 lg:grid-cols-4",
+};
+
 const COPY: Record<Market, { eyebrow: string; title: string; description: string; cta: string }> = {
   br: {
     eyebrow: "Grupo Centra",
@@ -42,7 +52,11 @@ export default async function GroupLandingPage({ params }: Props) {
           <h1 className="display mt-4 text-4xl md:text-6xl">{copy.title}</h1>
           <p className="mx-auto mt-6 max-w-xl text-white/70">{copy.description}</p>
         </section>
-        <section className="container-x grid gap-4 py-16 sm:grid-cols-2 lg:grid-cols-4">
+        <section
+          className={`container-x grid gap-4 py-16 ${
+            GRID_COLS[units.length] ?? GRID_COLS[4]
+          }`}
+        >
           {units.map((unit) => (
             <Link
               key={unit}

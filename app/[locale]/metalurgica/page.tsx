@@ -1,7 +1,14 @@
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { BUSINESS_UNITS } from "@/lib/group/units";
+import { MARKETS } from "@/lib/group/markets";
 import type { Market } from "@/lib/group/market";
+
+/* Reduz um telefone formatado (ex.: "+55 (45) 0000-0000") a um URI tel: válido,
+   mantendo apenas dígitos e o "+" inicial. */
+function toTelHref(phone: string) {
+  return `tel:${phone.replace(/[^\d+]/g, "")}`;
+}
 
 const COPY: Record<Market, { eyebrow: string; description: string; catalogNote: string; contactCta: string }> = {
   br: {
@@ -41,7 +48,10 @@ export default async function MetalurgicaPage({ params }: Props) {
           <p className="mt-6 max-w-2xl text-ink-soft">{copy.description}</p>
           <div className="mt-10 rounded-2xl border border-hair bg-surface p-6">
             <p className="text-sm text-ink-soft">{copy.catalogNote}</p>
-            <a href="#contato" className="btn-primary mt-6 inline-flex">
+            <a
+              href={toTelHref(MARKETS[market].contact.phone)}
+              className="btn-primary mt-6 inline-flex"
+            >
               {copy.contactCta}
             </a>
           </div>
