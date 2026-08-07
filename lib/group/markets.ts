@@ -4,11 +4,11 @@ export const MARKETS: Record<"br" | "py", MarketConfig> = {
   br: {
     market: "br",
     legalEntity: {
-      name: "Centra Engenharia e Empreendimentos Ltda.",
+      name: "Centra Engenharia e Empreendimentos Ltda.", // razão social real, confirmada
       taxIdLabel: "CNPJ",
       taxId: null, // CNPJ real ainda não informado
-      address: "Endereço a confirmar — Paraná, Brasil", // placeholder
-      phone: "+55 (45) 0000-0000", // placeholder, mesmo valor já usado em Contato.tsx
+      address: null, // endereço registral ainda não informado
+      phone: null, // telefone registral ainda não informado (contact.phone abaixo é o comercial)
     },
     activeUnits: ["construcao", "pre-moldados", "metalurgica", "guindastes"],
     contact: {
@@ -19,11 +19,11 @@ export const MARKETS: Record<"br" | "py", MarketConfig> = {
   py: {
     market: "py",
     legalEntity: {
-      name: "Centra Paraguay S.A.", // placeholder — razão social real ainda não informada
+      name: null, // razão social real ainda não informada — não presumir a existência/nome da entidade PY
       taxIdLabel: "RUC",
       taxId: null, // RUC real ainda não informado
-      address: "Dirección a confirmar — Paraguay", // placeholder
-      phone: "+595 (00) 000-0000", // placeholder
+      address: null, // endereço registral ainda não informado
+      phone: null, // telefone registral ainda não informado (contact.phone abaixo é o comercial)
     },
     activeUnits: ["construcao"],
     contact: {

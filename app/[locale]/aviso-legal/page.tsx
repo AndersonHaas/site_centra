@@ -10,7 +10,8 @@ const COPY: Record<
     eyebrow: string;
     title: string;
     entityLabel: string;
-    taxIdPlaceholder: string;
+    pendingLabel: string;
+    pendingNote: string;
     addressLabel: string;
     phoneLabel: string;
   }
@@ -19,7 +20,8 @@ const COPY: Record<
     eyebrow: "Informações legais",
     title: "Aviso legal",
     entityLabel: "Razão social",
-    taxIdPlaceholder: "a confirmar",
+    pendingLabel: "a confirmar",
+    pendingNote: "Dados registrais em processo de confirmação.",
     addressLabel: "Endereço",
     phoneLabel: "Telefone",
   },
@@ -27,7 +29,8 @@ const COPY: Record<
     eyebrow: "Información legal",
     title: "Aviso legal",
     entityLabel: "Razón social",
-    taxIdPlaceholder: "a confirmar",
+    pendingLabel: "a confirmar",
+    pendingNote: "Datos registrales en proceso de confirmación.",
     addressLabel: "Dirección",
     phoneLabel: "Teléfono",
   },
@@ -46,6 +49,11 @@ export default async function AvisoLegalPage({ params }: Props) {
   const market = locale as Market;
   const copy = COPY[market];
   const entity = MARKETS[market].legalEntity;
+  const hasPendingData =
+    entity.name === null ||
+    entity.taxId === null ||
+    entity.address === null ||
+    entity.phone === null;
 
   return (
     <>
@@ -60,27 +68,31 @@ export default async function AvisoLegalPage({ params }: Props) {
               <dt className="text-xs uppercase tracking-wide text-ink-soft">
                 {copy.entityLabel}
               </dt>
-              <dd className="text-ink">{entity.name}</dd>
+              <dd className="text-ink">{entity.name ?? copy.pendingLabel}</dd>
             </div>
             <div className="flex flex-col gap-1 p-6">
               <dt className="text-xs uppercase tracking-wide text-ink-soft">
                 {entity.taxIdLabel}
               </dt>
-              <dd className="text-ink">{entity.taxId ?? copy.taxIdPlaceholder}</dd>
+              <dd className="text-ink">{entity.taxId ?? copy.pendingLabel}</dd>
             </div>
             <div className="flex flex-col gap-1 p-6">
               <dt className="text-xs uppercase tracking-wide text-ink-soft">
                 {copy.addressLabel}
               </dt>
-              <dd className="text-ink">{entity.address}</dd>
+              <dd className="text-ink">{entity.address ?? copy.pendingLabel}</dd>
             </div>
             <div className="flex flex-col gap-1 p-6">
               <dt className="text-xs uppercase tracking-wide text-ink-soft">
                 {copy.phoneLabel}
               </dt>
-              <dd className="text-ink">{entity.phone}</dd>
+              <dd className="text-ink">{entity.phone ?? copy.pendingLabel}</dd>
             </div>
           </dl>
+
+          {hasPendingData ? (
+            <p className="mt-4 text-sm text-ink-soft">{copy.pendingNote}</p>
+          ) : null}
         </section>
       </main>
       <Footer market={market} />
