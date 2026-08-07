@@ -5,7 +5,8 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import "../globals.css";
 import { routing } from "@/i18n/routing";
-import { HTML_LANG } from "@/lib/group/market";
+import { HTML_LANG, OG_LOCALE, type Market } from "@/lib/group/market";
+import { SITE_URL } from "@/lib/seo";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { CustomCursor } from "@/components/ui/CustomCursor";
@@ -37,35 +38,84 @@ export function generateStaticParams() {
 // before any page/layout body code runs.
 export const dynamicParams = false;
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://site-centra-ultimo.vercel.app"),
-  title: {
-    default: "Centra Engenharia",
-    template: "%s | Centra Engenharia",
-  },
-  description:
-    "Soluções completas de engenharia e construção: civil, terraplanagem, estruturas metálicas e pré-moldados. Mais de 550 mil m² construídos no Sul do Brasil.",
-  keywords: [
-    "construtora",
-    "engenharia civil",
-    "estruturas metálicas",
-    "obras industriais",
-    "agroindustrial",
-    "terraplanagem",
-    "pré-moldados",
-    "Paraná",
-  ],
-  authors: [{ name: "Centra Engenharia e Empreendimentos" }],
-  openGraph: {
-    title:
-      "Centra Engenharia | Construção & Empreendimentos de Alto Desempenho",
+const SITE_COPY: Record<
+  Market,
+  {
+    titleDefault: string;
+    titleTemplate: string;
+    description: string;
+    keywords: string[];
+    ogTitle: string;
+    ogDescription: string;
+    siteName: string;
+  }
+> = {
+  br: {
+    titleDefault: "Centra Engenharia",
+    titleTemplate: "%s | Centra Engenharia",
     description:
-      "Mais de 550 mil m² construídos. Engenharia e construção com excelência técnica para os setores industrial, agroindustrial e comercial.",
-    type: "website",
-    locale: "pt_BR",
+      "Soluções de engenharia e construção: construção civil, terraplanagem, pré-moldados e artefatos de cimento, estruturas metálicas e locação de guindastes. Mais de 550 mil m² construídos no Sul do Brasil, com atuação também no Paraguai.",
+    keywords: [
+      "construtora",
+      "engenharia civil",
+      "estruturas metálicas",
+      "obras industriais",
+      "agroindustrial",
+      "terraplanagem",
+      "pré-moldados",
+      "guindastes",
+      "Paraná",
+    ],
+    ogTitle:
+      "Centra Engenharia | Construção & Empreendimentos de Alto Desempenho",
+    ogDescription:
+      "Mais de 550 mil m² construídos. Engenharia e construção com excelência técnica para os setores industrial, agroindustrial e comercial, no Brasil e no Paraguai.",
     siteName: "Centra Engenharia",
   },
+  py: {
+    titleDefault: "Grupo Centra",
+    titleTemplate: "%s | Grupo Centra",
+    description:
+      "Construcción civil del Grupo Centra en Paraguay, con el respaldo de la experiencia del grupo en Brasil: más de 550 mil m² construidos en Brasil para los sectores industrial, agroindustrial y comercial.",
+    keywords: [
+      "constructora",
+      "ingeniería civil",
+      "obras industriales",
+      "agroindustrial",
+      "construcción",
+      "Paraguay",
+    ],
+    ogTitle: "Grupo Centra | Ingeniería y Construcción de Alto Desempeño",
+    ogDescription:
+      "Construcción civil en Paraguay, con el respaldo de la experiencia del Grupo Centra en Brasil.",
+    siteName: "Grupo Centra",
+  },
 };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const market = locale as Market;
+  const copy = SITE_COPY[market];
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: { default: copy.titleDefault, template: copy.titleTemplate },
+    description: copy.description,
+    keywords: copy.keywords,
+    authors: [{ name: "Grupo Centra" }],
+    openGraph: {
+      title: copy.ogTitle,
+      description: copy.ogDescription,
+      type: "website",
+      locale: OG_LOCALE[market],
+      siteName: copy.siteName,
+    },
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: "#050b14",

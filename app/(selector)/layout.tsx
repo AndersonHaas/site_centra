@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "../globals.css";
+import { SITE_URL } from "@/lib/seo";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -16,8 +17,16 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://site-centra-ultimo.vercel.app"),
+  metadataBase: new URL(SITE_URL),
   title: "Centra — Brasil e Paraguai",
+  alternates: {
+    canonical: "/",
+    languages: {
+      "pt-BR": "/br",
+      "es-PY": "/py",
+      "x-default": "/",
+    },
+  },
   description:
     "Grupo Centra: construção civil, pré-moldados, estruturas metálicas e locação de guindastes no Brasil, com a expansão da construtora para o Paraguai.",
   openGraph: {
