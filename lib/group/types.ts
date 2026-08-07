@@ -6,6 +6,9 @@ export type BusinessUnitId =
   | "metalurgica"
   | "guindastes";
 
+export type ProjectCountry = "BR" | "PY";
+export type ProjectExecutingEntity = "centra-br" | "centra-py";
+
 export interface LegalEntity {
   name: string;
   taxIdLabel: "CNPJ" | "RUC";

@@ -124,6 +124,10 @@ def main():
         override = overrides.get(slug, {})
         country = override.get("country", "BR")
         executing_entity = override.get("executingEntity", "centra-br")
+        if country not in ("BR", "PY"):
+            raise SystemExit(f"ERRO: {slug}: country inválido em portfolio-overrides.json: {country!r} (use \"BR\" ou \"PY\")")
+        if executing_entity not in ("centra-br", "centra-py"):
+            raise SystemExit(f"ERRO: {slug}: executingEntity inválido em portfolio-overrides.json: {executing_entity!r} (use \"centra-br\" ou \"centra-py\")")
         location = override.get("location")
         year = override.get("year")
         description = override.get("description")
@@ -139,6 +143,11 @@ def main():
         })
 
     obras.sort(key=lambda o: (CLIENT_ORDER.index(o["client"]), o["title"].casefold()))
+
+    known_slugs = {o["slug"] for o in obras}
+    unused_overrides = set(overrides.keys()) - known_slugs
+    if unused_overrides:
+        print(f"AVISO: overrides sem obra correspondente (slug incorreto?): {sorted(unused_overrides)}")
 
     lines = [
         "/* ARQUIVO GERADO AUTOMATICAMENTE por scripts/sync-portfolio.py — não edite à mão.",
@@ -167,7 +176,7 @@ def main():
         if obra["location"] is not None:
             lines.append(f"    location: {json.dumps(obra['location'], ensure_ascii=False)},")
         if obra["year"] is not None:
-            lines.append(f"    year: {obra['year']},")
+            lines.append(f"    year: {json.dumps(obra['year'])},")
         if obra["description"] is not None:
             lines.append(f"    description: {json.dumps(obra['description'], ensure_ascii=False)},")
         lines.append("  },")

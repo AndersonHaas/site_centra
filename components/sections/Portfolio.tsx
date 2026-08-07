@@ -9,14 +9,7 @@ import { Lightbox } from "@/components/ui/Lightbox";
 import { PROJECTS, type ProjectClient } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import type { Market } from "@/lib/group/market";
-
-// Widened with `| "PY"`: today every real obra in lib/portfolio-data.ts is
-// "BR" (no Paraguay obra exists yet), so TS would otherwise infer this type
-// as the single literal "BR" and reject the "PY" branches below. Once a real
-// PY obra is added via scripts/portfolio-overrides.json, `(typeof
-// PROJECTS)[number]["country"]` will include "PY" natively and this union
-// becomes redundant (harmless to leave).
-type ProjectCountry = (typeof PROJECTS)[number]["country"] | "PY";
+import type { ProjectCountry } from "@/lib/group/types";
 
 const CLIENT_FILTERS: Array<{ label: string; value: ProjectClient | "Todas" }> = [
   { label: "Todas", value: "Todas" },
@@ -46,7 +39,7 @@ const COPY: Record<
       </>
     ),
     description:
-      "Projetos entregues pelo Grupo Centra no Brasil e no Paraguai — cada um com seu registro fotográfico.",
+      "Projetos entregues pelo Grupo Centra — cada um com seu registro fotográfico.",
     countryFilters: [
       { label: "Todos os países", value: "Todos" },
       { label: "Brasil", value: "BR" },
@@ -64,7 +57,7 @@ const COPY: Record<
       </>
     ),
     description:
-      "Proyectos entregados por el Grupo Centra en Brasil y Paraguay — cada uno con su registro fotográfico.",
+      "Proyectos entregados por el Grupo Centra — cada uno con su registro fotográfico.",
     countryFilters: [
       { label: "Todos los países", value: "Todos" },
       { label: "Brasil", value: "BR" },
@@ -107,7 +100,7 @@ export function Portfolio({ market, showAttributionNote = false }: PortfolioProp
           description={copy.description}
         />
 
-        {showAttributionNote && (
+        {showAttributionNote && projects.some((p) => p.country === "BR") && (
           <Reveal className="mt-6">
             <p className="rounded-xl border border-hair bg-paper-2 px-4 py-3 text-sm text-ink-soft">
               {copy.attributionNote}

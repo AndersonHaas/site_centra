@@ -11,12 +11,12 @@ export const metadata: Metadata = {
 };
 
 type Props = {
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale: Market }>;
 };
 
 export default async function ObrasPage({ params }: Props) {
   const { locale } = await params;
-  const market = locale as Market;
+  const market = locale;
 
   return (
     <>
