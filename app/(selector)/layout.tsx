@@ -18,6 +18,15 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://site-centra-ultimo.vercel.app"),
   title: "Centra — Brasil e Paraguai",
+  description:
+    "Grupo Centra: construção civil, pré-moldados, estruturas metálicas e locação de guindastes no Brasil, com a expansão da construtora para o Paraguai.",
+  openGraph: {
+    title: "Centra — Brasil e Paraguai",
+    description:
+      "Grupo Centra: construção civil, pré-moldados, estruturas metálicas e locação de guindastes no Brasil, com a expansão da construtora para o Paraguai.",
+    type: "website",
+    siteName: "Centra",
+  },
 };
 
 export const viewport: Viewport = {
