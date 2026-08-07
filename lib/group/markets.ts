@@ -6,7 +6,7 @@ export const MARKETS: Record<"br" | "py", MarketConfig> = {
     legalEntity: {
       name: "Centra Engenharia e Empreendimentos Ltda.",
       taxIdLabel: "CNPJ",
-      taxId: "00.000.000/0001-00", // placeholder — CNPJ real ainda não informado
+      taxId: null, // CNPJ real ainda não informado
       address: "Endereço a confirmar — Paraná, Brasil", // placeholder
       phone: "+55 (45) 0000-0000", // placeholder, mesmo valor já usado em Contato.tsx
     },
@@ -21,7 +21,7 @@ export const MARKETS: Record<"br" | "py", MarketConfig> = {
     legalEntity: {
       name: "Centra Paraguay S.A.", // placeholder — razão social real ainda não informada
       taxIdLabel: "RUC",
-      taxId: "00000000-0", // placeholder — RUC real ainda não informado
+      taxId: null, // RUC real ainda não informado
       address: "Dirección a confirmar — Paraguay", // placeholder
       phone: "+595 (00) 000-0000", // placeholder
     },

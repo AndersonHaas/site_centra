@@ -9,7 +9,7 @@ export type BusinessUnitId =
 export interface LegalEntity {
   name: string;
   taxIdLabel: "CNPJ" | "RUC";
-  taxId: string;
+  taxId: string | null;
   address: string;
   phone: string;
 }
