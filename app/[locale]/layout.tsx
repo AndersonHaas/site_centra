@@ -5,7 +5,7 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import "../globals.css";
 import { routing } from "@/i18n/routing";
-import { HTML_LANG, type Market } from "@/lib/group/market";
+import { HTML_LANG } from "@/lib/group/market";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { CustomCursor } from "@/components/ui/CustomCursor";
@@ -78,7 +78,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html
-      lang={HTML_LANG[locale as Market]}
+      lang={HTML_LANG[locale]}
       className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
     >
       <body>
