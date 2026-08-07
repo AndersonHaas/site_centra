@@ -20,11 +20,11 @@ export default async function ObrasPage({ params }: Props) {
 
   return (
     <>
-      <Navbar />
+      <Navbar market={market} />
       <main className="pt-[70px]">
         <Portfolio market={market} showAttributionNote={market === "py"} />
       </main>
-      <Footer />
+      <Footer market={market} />
     </>
   );
 }

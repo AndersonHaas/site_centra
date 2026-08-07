@@ -1,10 +1,46 @@
 import { Logo } from "@/components/ui/Logo";
 import { Reveal } from "@/components/ui/Reveal";
 import { Link } from "@/i18n/navigation";
-import { NAV_LINKS, SECTORS } from "@/lib/content";
+import { SECTORS } from "@/lib/content";
+import { getNavLinks } from "@/lib/group/nav";
+import type { Market } from "@/lib/group/market";
 
-export function Footer() {
+const COPY: Record<
+  Market,
+  {
+    description: string;
+    navTitle: string;
+    sectorsTitle: string;
+    cta: string;
+    tagline: string;
+    rightsReserved: string;
+  }
+> = {
+  br: {
+    description:
+      "Engenharia e construção de alto desempenho para os setores industrial, agroindustrial e comercial.",
+    navTitle: "Navegação",
+    sectorsTitle: "Setores",
+    cta: "Fale com a Centra →",
+    tagline: "Grupo Centra — Brasil e Paraguai",
+    rightsReserved: "Todos os direitos reservados.",
+  },
+  py: {
+    description:
+      "Ingeniería y construcción de alto desempeño para los sectores industrial, agroindustrial y comercial.",
+    navTitle: "Navegación",
+    sectorsTitle: "Sectores",
+    cta: "Hable con Centra →",
+    tagline: "Grupo Centra — Brasil y Paraguay",
+    rightsReserved: "Todos los derechos reservados.",
+  },
+};
+
+export function Footer({ market }: { market: Market }) {
   const year = new Date().getFullYear();
+  const copy = COPY[market];
+  const navLinks = getNavLinks(market);
+
   return (
     <footer className="relative overflow-clip border-t border-white/10 bg-ink-950">
       <div className="container-x py-16">
@@ -12,23 +48,22 @@ export function Footer() {
           <div>
             <Logo />
             <p className="mt-6 max-w-xs text-sm leading-relaxed text-white/55">
-              Engenharia e construção de alto desempenho para os setores
-              industrial, agroindustrial e comercial.
+              {copy.description}
             </p>
-            <a
-              href="#contato"
+            <Link
+              href="/construcao#contato"
               className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-brand-300 transition-colors hover:text-brand-200"
             >
-              Fale com a Centra →
-            </a>
+              {copy.cta}
+            </Link>
           </div>
 
           <div>
             <h3 className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white/55">
-              Navegação
+              {copy.navTitle}
             </h3>
             <ul className="mt-5 space-y-3">
-              {NAV_LINKS.map((l) => (
+              {navLinks.map((l) => (
                 <li key={l.href}>
                   <Link
                     href={l.href}
@@ -43,7 +78,7 @@ export function Footer() {
 
           <div>
             <h3 className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white/55">
-              Setores
+              {copy.sectorsTitle}
             </h3>
             <ul className="mt-5 space-y-3">
               {SECTORS.map((s) => (
@@ -57,11 +92,10 @@ export function Footer() {
 
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-7 sm:flex-row sm:items-center">
           <p className="text-xs text-white/55">
-            © {year} Centra Engenharia e Empreendimentos. Todos os direitos
-            reservados.
+            © {year} Grupo Centra. {copy.rightsReserved}
           </p>
           <p className="font-mono text-[0.6rem] uppercase tracking-[0.18em] text-white/55">
-            Construindo o Sul do Brasil
+            {copy.tagline}
           </p>
         </div>
       </div>

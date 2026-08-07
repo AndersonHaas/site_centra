@@ -1,24 +1,10 @@
-import type { Metadata } from "next";
-import { Navbar } from "@/components/sections/Navbar";
-import { Solutions } from "@/components/sections/Solutions";
-import { Estrutura } from "@/components/sections/Estrutura";
-import { Footer } from "@/components/sections/Footer";
+import { redirect } from "@/i18n/navigation";
 
-export const metadata: Metadata = {
-  title: "Soluções",
-  description:
-    "Construção civil, terraplanagem, estruturas metálicas e pré-moldados. Soluções completas de engenharia da Centra para os setores industrial e agroindustrial.",
+type Props = {
+  params: Promise<{ locale: string }>;
 };
 
-export default function SolucoesPage() {
-  return (
-    <>
-      <Navbar />
-      <main className="pt-[70px]">
-        <Solutions />
-        <Estrutura />
-      </main>
-      <Footer />
-    </>
-  );
+export default async function SolucoesRedirect({ params }: Props) {
+  const { locale } = await params;
+  redirect({ href: "/construcao", locale: locale as "br" | "py" });
 }

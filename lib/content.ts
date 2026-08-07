@@ -4,14 +4,6 @@ import { PROJECTS } from "./portfolio-data";
 
 export { PROJECTS };
 
-export const NAV_LINKS = [
-  { label: "Obras", href: "/#obras" },
-  { label: "Clientes", href: "/#clientes" },
-  { label: "Soluções", href: "/solucoes" },
-  { label: "A Centra", href: "/sobre" },
-  { label: "Equipe", href: "/equipe" },
-];
-
 export const STATS = [
   { value: 550, suffix: "mil m²", label: "Área construída" },
   { value: 4, suffix: "estados", label: "Presença no Sul + MS" },
