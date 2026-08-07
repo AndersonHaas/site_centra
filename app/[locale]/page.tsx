@@ -1,4 +1,3 @@
-import { notFound } from "next/navigation";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { Link } from "@/i18n/navigation";
@@ -31,13 +30,6 @@ type Props = {
 export default async function GroupLandingPage({ params }: Props) {
   const { locale } = await params;
   const market = locale as Market;
-  // Guards against non-locale single-segment requests (e.g. a browser's
-  // automatic /favicon.ico fetch) matching this dynamic route with an
-  // invalid `locale`/`market` value — the [locale] layout's hasLocale()
-  // check doesn't reliably run before this page component in every case.
-  if (!(market in MARKETS)) {
-    notFound();
-  }
   const copy = COPY[market];
   const units = MARKETS[market].activeUnits;
 

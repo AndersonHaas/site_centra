@@ -27,6 +27,16 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+// generateStaticParams above enumerates the only two real locales (br, py).
+// Without this, Next.js still renders the page component for ANY other
+// single-segment value (favicon.ico, x.y, robots.txt, ...) with a garbage
+// `locale`, which either crashes pages that index Market-keyed records or
+// falls through to notFound() too late for global-not-found to catch
+// cleanly. Setting this to false makes Next.js 404 (via the proper
+// not-found mechanism) for any [locale] value outside the static list,
+// before any page/layout body code runs.
+export const dynamicParams = false;
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://site-centra-ultimo.vercel.app"),
   title: {

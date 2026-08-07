@@ -7,6 +7,7 @@
 // 404 instead of a branded page. Bypasses normal rendering entirely, so it
 // must import its own global styles/fonts and provide the full document.
 import "./globals.css";
+import Link from "next/link";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import type { Metadata } from "next";
 
@@ -39,9 +40,9 @@ export default function GlobalNotFound() {
           <h1 className="display text-2xl md:text-3xl">
             Página não encontrada / Página no encontrada
           </h1>
-          <a href="/" className="btn-ghost">
+          <Link href="/" className="btn-ghost">
             Voltar / Volver
-          </a>
+          </Link>
         </main>
       </body>
     </html>
