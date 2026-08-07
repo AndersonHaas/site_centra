@@ -91,9 +91,17 @@ export function Footer({ market }: { market: Market }) {
         </div>
 
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-7 sm:flex-row sm:items-center">
-          <p className="text-xs text-white/55">
-            © {year} Grupo Centra. {copy.rightsReserved}
-          </p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <p className="text-xs text-white/55">
+              © {year} Grupo Centra. {copy.rightsReserved}
+            </p>
+            <Link
+              href="/aviso-legal"
+              className="text-xs text-white/55 underline-offset-2 transition-colors hover:text-white hover:underline"
+            >
+              Aviso legal
+            </Link>
+          </div>
           <p className="font-mono text-[0.6rem] uppercase tracking-[0.18em] text-white/55">
             {copy.tagline}
           </p>
