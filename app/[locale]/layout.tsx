@@ -5,6 +5,7 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import "../globals.css";
 import { routing } from "@/i18n/routing";
+import { HTML_LANG, type Market } from "@/lib/group/market";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { CustomCursor } from "@/components/ui/CustomCursor";
@@ -27,7 +28,7 @@ export function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://centraengenharia.com.br"),
+  metadataBase: new URL("https://site-centra-ultimo.vercel.app"),
   title: {
     default: "Centra Engenharia",
     template: "%s | Centra Engenharia",
@@ -77,7 +78,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html
-      lang={locale === "es" ? "es-419" : "pt-BR"}
+      lang={HTML_LANG[locale as Market]}
       className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
     >
       <body>
