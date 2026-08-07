@@ -1,5 +1,6 @@
 import { Logo } from "@/components/ui/Logo";
 import { Reveal } from "@/components/ui/Reveal";
+import { Link } from "@/i18n/navigation";
 import { NAV_LINKS, SECTORS } from "@/lib/content";
 
 export function Footer() {
@@ -29,12 +30,12 @@ export function Footer() {
             <ul className="mt-5 space-y-3">
               {NAV_LINKS.map((l) => (
                 <li key={l.href}>
-                  <a
+                  <Link
                     href={l.href}
                     className="text-sm text-white/65 transition-colors hover:text-white"
                   >
                     {l.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
