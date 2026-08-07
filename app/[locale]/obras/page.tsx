@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/sections/Navbar";
 import { Portfolio } from "@/components/sections/Portfolio";
 import { Footer } from "@/components/sections/Footer";
+import type { Market } from "@/lib/group/market";
 
 export const metadata: Metadata = {
   title: "Obras",
@@ -9,12 +10,19 @@ export const metadata: Metadata = {
     "Portfólio completo de obras da Centra Engenharia — projetos entregues para cooperativas agroindustriais no Sul do Brasil.",
 };
 
-export default function ObrasPage() {
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export default async function ObrasPage({ params }: Props) {
+  const { locale } = await params;
+  const market = locale as Market;
+
   return (
     <>
       <Navbar />
       <main className="pt-[70px]">
-        <Portfolio />
+        <Portfolio market={market} showAttributionNote={market === "py"} />
       </main>
       <Footer />
     </>

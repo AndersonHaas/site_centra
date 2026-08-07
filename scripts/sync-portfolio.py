@@ -30,6 +30,7 @@ SITE_DIR = Path(__file__).resolve().parent.parent
 SRC_ROOT = SITE_DIR.parent / "Fotos Marketing"
 DEST_DIR = SITE_DIR / "public" / "images" / "portfolio"
 OUTPUT_TS = SITE_DIR / "lib" / "portfolio-data.ts"
+OVERRIDES_PATH = SITE_DIR / "scripts" / "portfolio-overrides.json"
 
 MAX_PHOTOS = 3
 IMAGE_EXTS = {".jpg", ".jpeg"}
@@ -93,6 +94,10 @@ def main():
 
     DEST_DIR.mkdir(parents=True, exist_ok=True)
 
+    overrides = {}
+    if OVERRIDES_PATH.is_file():
+        overrides = json.loads(OVERRIDES_PATH.read_text(encoding="utf-8"))
+
     obras = []
     for folder in sorted(SRC_ROOT.iterdir()):
         if not folder.is_dir():
@@ -116,14 +121,31 @@ def main():
         cover_flag = " (capa manual)" if "capa" in photos[0].name.lower() else ""
         print(f"  {slug}: {len(images)} foto(s), capa = {photos[0].name}{cover_flag}")
 
-        obras.append({"slug": slug, "client": client, "title": title, "images": images})
+        override = overrides.get(slug, {})
+        country = override.get("country", "BR")
+        executing_entity = override.get("executingEntity", "centra-br")
+        location = override.get("location")
+        year = override.get("year")
+        description = override.get("description")
+
+        missing = [f for f, v in (("year", year), ("description", description)) if v is None]
+        if missing:
+            print(f"    aviso: {slug} sem {', '.join(missing)} (adicione em scripts/portfolio-overrides.json)")
+
+        obras.append({
+            "slug": slug, "client": client, "title": title, "images": images,
+            "country": country, "executingEntity": executing_entity,
+            "location": location, "year": year, "description": description,
+        })
 
     obras.sort(key=lambda o: (CLIENT_ORDER.index(o["client"]), o["title"].casefold()))
 
     lines = [
         "/* ARQUIVO GERADO AUTOMATICAMENTE por scripts/sync-portfolio.py — não edite à mão.",
         "   Para atualizar: organize as fotos em \"Fotos Marketing/<Cliente> - <Obra>\"",
-        "   e rode `pnpm run fotos`. Para escolher a capa, inclua \"capa\" no nome do arquivo. */",
+        "   e rode `pnpm run fotos`. Para escolher a capa, inclua \"capa\" no nome do arquivo.",
+        "   Campos editoriais (country/executingEntity/location/year/description) vêm de",
+        "   scripts/portfolio-overrides.json — edite lá, nunca aqui. */",
         "",
         "export const PROJECTS = [",
     ]
@@ -140,6 +162,14 @@ def main():
             for img in obra["images"]:
                 lines.append(f"      {json.dumps(img, ensure_ascii=False)},")
             lines.append("    ],")
+        lines.append(f"    country: {json.dumps(obra['country'], ensure_ascii=False)},")
+        lines.append(f"    executingEntity: {json.dumps(obra['executingEntity'], ensure_ascii=False)},")
+        if obra["location"] is not None:
+            lines.append(f"    location: {json.dumps(obra['location'], ensure_ascii=False)},")
+        if obra["year"] is not None:
+            lines.append(f"    year: {obra['year']},")
+        if obra["description"] is not None:
+            lines.append(f"    description: {json.dumps(obra['description'], ensure_ascii=False)},")
         lines.append("  },")
     lines.append("] as const;")
     lines.append("")

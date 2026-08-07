@@ -1,6 +1,8 @@
 /* ARQUIVO GERADO AUTOMATICAMENTE por scripts/sync-portfolio.py — não edite à mão.
    Para atualizar: organize as fotos em "Fotos Marketing/<Cliente> - <Obra>"
-   e rode `pnpm run fotos`. Para escolher a capa, inclua "capa" no nome do arquivo. */
+   e rode `pnpm run fotos`. Para escolher a capa, inclua "capa" no nome do arquivo.
+   Campos editoriais (country/executingEntity/location/year/description) vêm de
+   scripts/portfolio-overrides.json — edite lá, nunca aqui. */
 
 export const PROJECTS = [
   {
@@ -8,6 +10,8 @@ export const PROJECTS = [
     client: "C.Vale",
     title: "Bairro Catarinense",
     images: ["/images/portfolio/cvale-bairro-catarinense-1.jpg"],
+    country: "BR",
+    executingEntity: "centra-br",
   },
   {
     slug: "cvale-obra-285-cd",
@@ -18,6 +22,8 @@ export const PROJECTS = [
       "/images/portfolio/cvale-obra-285-cd-2.jpg",
       "/images/portfolio/cvale-obra-285-cd-3.jpg",
     ],
+    country: "BR",
+    executingEntity: "centra-br",
   },
   {
     slug: "cvale-encantado",
@@ -27,6 +33,8 @@ export const PROJECTS = [
       "/images/portfolio/cvale-encantado-1.jpg",
       "/images/portfolio/cvale-encantado-2.jpg",
     ],
+    country: "BR",
+    executingEntity: "centra-br",
   },
   {
     slug: "cvale-insumos-alto-piquiri",
@@ -37,12 +45,16 @@ export const PROJECTS = [
       "/images/portfolio/cvale-insumos-alto-piquiri-2.jpg",
       "/images/portfolio/cvale-insumos-alto-piquiri-3.jpg",
     ],
+    country: "BR",
+    executingEntity: "centra-br",
   },
   {
     slug: "cvale-sao-francisco",
     client: "C.Vale",
     title: "São Francisco",
     images: ["/images/portfolio/cvale-sao-francisco-1.jpg"],
+    country: "BR",
+    executingEntity: "centra-br",
   },
   {
     slug: "cvale-sede-administrativa",
@@ -53,6 +65,8 @@ export const PROJECTS = [
       "/images/portfolio/cvale-sede-administrativa-2.jpg",
       "/images/portfolio/cvale-sede-administrativa-3.jpg",
     ],
+    country: "BR",
+    executingEntity: "centra-br",
   },
   {
     slug: "cvale-supermercado-maripa",
@@ -63,6 +77,8 @@ export const PROJECTS = [
       "/images/portfolio/cvale-supermercado-maripa-2.jpg",
       "/images/portfolio/cvale-supermercado-maripa-3.jpg",
     ],
+    country: "BR",
+    executingEntity: "centra-br",
   },
   {
     slug: "cvale-universidade",
@@ -72,6 +88,8 @@ export const PROJECTS = [
       "/images/portfolio/cvale-universidade-1.jpg",
       "/images/portfolio/cvale-universidade-2.jpg",
     ],
+    country: "BR",
+    executingEntity: "centra-br",
   },
   {
     slug: "cvale-upd",
@@ -82,6 +100,8 @@ export const PROJECTS = [
       "/images/portfolio/cvale-upd-2.jpg",
       "/images/portfolio/cvale-upd-3.jpg",
     ],
+    country: "BR",
+    executingEntity: "centra-br",
   },
   {
     slug: "copacol-obra-271-amidonaria",
@@ -92,6 +112,8 @@ export const PROJECTS = [
       "/images/portfolio/copacol-obra-271-amidonaria-2.jpg",
       "/images/portfolio/copacol-obra-271-amidonaria-3.jpg",
     ],
+    country: "BR",
+    executingEntity: "centra-br",
   },
   {
     slug: "copacol-cpa",
@@ -102,6 +124,8 @@ export const PROJECTS = [
       "/images/portfolio/copacol-cpa-2.jpg",
       "/images/portfolio/copacol-cpa-3.jpg",
     ],
+    country: "BR",
+    executingEntity: "centra-br",
   },
   {
     slug: "copacol-matrizeiros",
@@ -112,6 +136,8 @@ export const PROJECTS = [
       "/images/portfolio/copacol-matrizeiros-2.jpg",
       "/images/portfolio/copacol-matrizeiros-3.jpg",
     ],
+    country: "BR",
+    executingEntity: "centra-br",
   },
   {
     slug: "copacol-silo-jesuitas",
@@ -122,6 +148,8 @@ export const PROJECTS = [
       "/images/portfolio/copacol-silo-jesuitas-2.jpg",
       "/images/portfolio/copacol-silo-jesuitas-3.jpg",
     ],
+    country: "BR",
+    executingEntity: "centra-br",
   },
   {
     slug: "copacol-obra-225-unidade-nova-aurora",
@@ -132,6 +160,8 @@ export const PROJECTS = [
       "/images/portfolio/copacol-obra-225-unidade-nova-aurora-2.jpg",
       "/images/portfolio/copacol-obra-225-unidade-nova-aurora-3.jpg",
     ],
+    country: "BR",
+    executingEntity: "centra-br",
   },
   {
     slug: "copacol-obra-229-unidade-penha",
@@ -142,6 +172,8 @@ export const PROJECTS = [
       "/images/portfolio/copacol-obra-229-unidade-penha-2.jpg",
       "/images/portfolio/copacol-obra-229-unidade-penha-3.jpg",
     ],
+    country: "BR",
+    executingEntity: "centra-br",
   },
   {
     slug: "copacol-upd",
@@ -152,6 +184,8 @@ export const PROJECTS = [
       "/images/portfolio/copacol-upd-2.jpg",
       "/images/portfolio/copacol-upd-3.jpg",
     ],
+    country: "BR",
+    executingEntity: "centra-br",
   },
   {
     slug: "copacol-obra-307-urs",
@@ -162,5 +196,7 @@ export const PROJECTS = [
       "/images/portfolio/copacol-obra-307-urs-2.jpg",
       "/images/portfolio/copacol-obra-307-urs-3.jpg",
     ],
+    country: "BR",
+    executingEntity: "centra-br",
   },
 ] as const;
