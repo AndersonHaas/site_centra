@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "../globals.css";
+import { HREFLANG } from "@/lib/group/market";
 import { SITE_URL } from "@/lib/seo";
 
 const inter = Inter({
@@ -22,8 +23,8 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
     languages: {
-      "pt-BR": "/br",
-      "es-PY": "/py",
+      [HREFLANG.br]: "/br",
+      [HREFLANG.py]: "/py",
       "x-default": "/",
     },
   },

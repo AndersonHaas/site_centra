@@ -18,7 +18,7 @@ const META: Record<Market, { title: string; description: string }> = {
   py: {
     title: "Nosotros",
     description:
-      "Conozca al Grupo Centra — misión, visión, valores y el equipo que transforma proyectos en emprendimientos de alto desempeño. Operamos en Brasil y en Paraguay.",
+      "Conozca al Grupo Centra — misión, visión, valores y el equipo que transforma proyectos en emprendimientos de alto desempeño. Operamos en Brasil y, con la construcción civil, también en Paraguay.",
   },
 };
 

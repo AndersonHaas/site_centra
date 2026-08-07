@@ -45,12 +45,12 @@ const META: Record<Market, { title: string; description: string }> = {
   br: {
     title: "Aviso legal",
     description:
-      "Informações legais da entidade brasileira do Grupo Centra: razão social, CNPJ, endereço e telefone.",
+      "Informações legais da Centra Engenharia e Empreendimentos Ltda. Dados registrais em processo de confirmação.",
   },
   py: {
     title: "Aviso legal",
     description:
-      "Información legal de la entidad paraguaya del Grupo Centra: razón social, RUC, dirección y teléfono.",
+      "Información legal del Grupo Centra en Paraguay. Datos registrales en proceso de confirmación.",
   },
 };
 

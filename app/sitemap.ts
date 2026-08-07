@@ -7,7 +7,18 @@ import { SITE_URL } from "@/lib/seo";
 export default function sitemap(): MetadataRoute.Sitemap {
   /* A raiz é o seletor de país — é ela que o x-default aponta. */
   const entries: MetadataRoute.Sitemap = [
-    { url: `${SITE_URL}/`, changeFrequency: "yearly", priority: 1 },
+    {
+      url: `${SITE_URL}/`,
+      changeFrequency: "yearly",
+      priority: 1,
+      alternates: {
+        languages: {
+          [HREFLANG.br]: `${SITE_URL}/br`,
+          [HREFLANG.py]: `${SITE_URL}/py`,
+          "x-default": `${SITE_URL}/`,
+        },
+      },
+    },
   ];
 
   for (const market of routing.locales) {
