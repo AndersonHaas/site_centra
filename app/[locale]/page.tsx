@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { Link } from "@/i18n/navigation";
@@ -5,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { MARKETS } from "@/lib/group/markets";
 import { BUSINESS_UNITS } from "@/lib/group/units";
 import type { Market } from "@/lib/group/market";
+import { buildAlternates } from "@/lib/seo";
 
 /* Tailwind exige classes literais (não interpoladas) para funcionar no build,
    então o número de colunas é escolhido a partir de um mapa estático em vez
@@ -36,6 +38,29 @@ const COPY: Record<Market, { eyebrow: string; title: string; description: string
 type Props = {
   params: Promise<{ locale: string }>;
 };
+
+const META: Record<Market, { title: string; description: string }> = {
+  br: {
+    title: "Grupo Centra — engenharia e indústria",
+    description:
+      "Construção civil, pré-moldados e artefatos de cimento, estruturas metálicas e locação de guindastes. Conheça as unidades de negócio do Grupo Centra.",
+  },
+  py: {
+    title: "Grupo Centra — ingeniería y construcción",
+    description:
+      "Construcción civil del Grupo Centra en Paraguay, con el respaldo de la experiencia del grupo en Brasil.",
+  },
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const market = locale as Market;
+  return {
+    title: META[market].title,
+    description: META[market].description,
+    alternates: buildAlternates(market, ""),
+  };
+}
 
 export default async function GroupLandingPage({ params }: Props) {
   const { locale } = await params;

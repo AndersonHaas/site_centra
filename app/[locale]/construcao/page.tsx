@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { TrustBar } from "@/components/sections/TrustBar";
@@ -9,10 +10,34 @@ import { Clientes } from "@/components/sections/Clientes";
 import { Contato } from "@/components/sections/Contato";
 import { Footer } from "@/components/sections/Footer";
 import type { Market } from "@/lib/group/market";
+import { buildAlternates } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
+
+const META: Record<Market, { title: string; description: string }> = {
+  br: {
+    title: "Construção civil",
+    description:
+      "Execução completa de obras industriais, agroindustriais e comerciais — do projeto à entrega final, com terraplanagem e gestão de projetos integradas.",
+  },
+  py: {
+    title: "Construcción civil",
+    description:
+      "Ejecución completa de obras industriales, agroindustriales y comerciales — del proyecto a la entrega final.",
+  },
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const market = locale as Market;
+  return {
+    title: META[market].title,
+    description: META[market].description,
+    alternates: buildAlternates(market, "/construcao"),
+  };
+}
 
 /* Diferenciais que antes eram "unidades" no antigo array de soluções
    (removido de lib/content.ts, agora sem consumidores) e agora vivem como

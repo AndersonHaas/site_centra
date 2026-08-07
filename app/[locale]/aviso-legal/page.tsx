@@ -3,6 +3,7 @@ import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { MARKETS } from "@/lib/group/markets";
 import type { Market } from "@/lib/group/market";
+import { buildAlternates } from "@/lib/seo";
 
 const COPY: Record<
   Market,
@@ -36,13 +37,32 @@ const COPY: Record<
   },
 };
 
-export const metadata: Metadata = {
-  title: "Aviso legal",
-};
-
 type Props = {
   params: Promise<{ locale: string }>;
 };
+
+const META: Record<Market, { title: string; description: string }> = {
+  br: {
+    title: "Aviso legal",
+    description:
+      "Informações legais da entidade brasileira do Grupo Centra: razão social, CNPJ, endereço e telefone.",
+  },
+  py: {
+    title: "Aviso legal",
+    description:
+      "Información legal de la entidad paraguaya del Grupo Centra: razón social, RUC, dirección y teléfono.",
+  },
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const market = locale as Market;
+  return {
+    title: META[market].title,
+    description: META[market].description,
+    alternates: buildAlternates(market, "/aviso-legal"),
+  };
+}
 
 export default async function AvisoLegalPage({ params }: Props) {
   const { locale } = await params;

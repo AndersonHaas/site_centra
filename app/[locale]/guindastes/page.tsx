@@ -1,8 +1,10 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { BUSINESS_UNITS } from "@/lib/group/units";
 import { MARKETS } from "@/lib/group/markets";
 import type { Market } from "@/lib/group/market";
+import { buildAlternates } from "@/lib/seo";
 
 /* Reduz um telefone formatado (ex.: "+55 (45) 0000-0000") a um URI tel: válido,
    mantendo apenas dígitos e o "+" inicial. */
@@ -30,6 +32,29 @@ const COPY: Record<Market, { eyebrow: string; description: string; catalogNote: 
 type Props = {
   params: Promise<{ locale: string }>;
 };
+
+const META: Record<Market, { title: string; description: string }> = {
+  br: {
+    title: "Locação de guindastes",
+    description:
+      "Frota de guindastes e equipamentos para movimentação de cargas em obras de grande porte.",
+  },
+  py: {
+    title: "Locación de grúas",
+    description:
+      "Flota de grúas y equipos para movimiento de cargas en obras de gran porte.",
+  },
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const market = locale as Market;
+  return {
+    title: META[market].title,
+    description: META[market].description,
+    alternates: buildAlternates(market, "/guindastes"),
+  };
+}
 
 export default async function GuindastesPage({ params }: Props) {
   const { locale } = await params;

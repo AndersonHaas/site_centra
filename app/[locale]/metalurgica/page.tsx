@@ -1,8 +1,10 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { BUSINESS_UNITS } from "@/lib/group/units";
 import { MARKETS } from "@/lib/group/markets";
 import type { Market } from "@/lib/group/market";
+import { buildAlternates } from "@/lib/seo";
 
 /* Reduz um telefone formatado (ex.: "+55 (45) 0000-0000") a um URI tel: válido,
    mantendo apenas dígitos e o "+" inicial. */
@@ -30,6 +32,29 @@ const COPY: Record<Market, { eyebrow: string; description: string; catalogNote: 
 type Props = {
   params: Promise<{ locale: string }>;
 };
+
+const META: Record<Market, { title: string; description: string }> = {
+  br: {
+    title: "Metalúrgica",
+    description:
+      "Fabricação e montagem de estruturas metálicas de alto desempenho, com precisão e segurança.",
+  },
+  py: {
+    title: "Metalúrgica",
+    description:
+      "Fabricación y montaje de estructuras metálicas de alto desempeño.",
+  },
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const market = locale as Market;
+  return {
+    title: META[market].title,
+    description: META[market].description,
+    alternates: buildAlternates(market, "/metalurgica"),
+  };
+}
 
 export default async function MetalurgicaPage({ params }: Props) {
   const { locale } = await params;
