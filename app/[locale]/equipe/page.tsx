@@ -22,7 +22,7 @@ export default async function EquipePage({ params }: Props) {
     <>
       <Navbar market={market} />
       <main className="pt-[70px]">
-        <Equipe />
+        <Equipe market={market} />
       </main>
       <Footer market={market} />
     </>

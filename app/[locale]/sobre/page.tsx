@@ -22,7 +22,7 @@ export default async function SobrePage({ params }: Props) {
     <>
       <Navbar market={market} />
       <main className="pt-[70px]">
-        <About />
+        <About market={market} />
       </main>
       <Footer market={market} />
     </>

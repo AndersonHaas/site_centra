@@ -11,24 +11,6 @@ export const STATS = [
   { value: 100, suffix: "%", label: "Compromisso com prazo e segurança" },
 ];
 
-export const PILLARS = [
-  {
-    key: "missao",
-    title: "Missão",
-    body: "Entregar soluções de engenharia e construção com excelência técnica, inovação e eficiência operacional, transformando projetos em empreendimentos de alto desempenho — com compromisso, segurança e responsabilidade, gerando valor sustentável para clientes, parceiros e comunidades.",
-  },
-  {
-    key: "visao",
-    title: "Visão",
-    body: "Ser reconhecida como uma das principais referências em engenharia e construção da região Sul do Brasil, destacando-se pela qualidade das entregas, solidez das relações, capacidade técnica e contribuição para o desenvolvimento dos setores industrial, agroindustrial e comercial.",
-  },
-  {
-    key: "valores",
-    title: "Valores",
-    body: "Atuamos com ética, transparência e comprometimento em todas as relações e projetos. Valorizamos a excelência técnica, a segurança, a inovação e o desenvolvimento contínuo, buscando soluções de alta qualidade que gerem resultados duradouros.",
-  },
-];
-
 export const PRESENCE = [
   { uf: "PR", name: "Paraná" },
   { uf: "SC", name: "Santa Catarina" },

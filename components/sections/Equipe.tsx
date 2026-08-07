@@ -4,6 +4,7 @@ import { BadgeCheck } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { RevealStagger, RevealItem } from "@/components/ui/Reveal";
 import { FOUNDERS } from "@/lib/content";
+import type { Market } from "@/lib/group/market";
 
 function initials(name: string) {
   return name
@@ -15,28 +16,51 @@ function initials(name: string) {
     .toUpperCase();
 }
 
-export function Equipe() {
+const ROLE_LABEL: Record<Market, string> = {
+  br: "Sócio-fundador · Engenheiro Civil",
+  py: "Socio fundador · Ingeniero Civil",
+};
+
+const SECTION_COPY: Record<Market, { eyebrow: string; description: string }> = {
+  br: {
+    eyebrow: "Equipe técnica",
+    description:
+      "Profissionais experientes, integrados em todas as etapas dos projetos — do planejamento à entrega final.",
+  },
+  py: {
+    eyebrow: "Equipo técnico",
+    description:
+      "Profesionales experimentados, integrados en todas las etapas de los proyectos — desde la planificación hasta la entrega final. El mismo equipo fundador, con sede en Brasil, conduce también la expansión del Grupo Centra en Paraguay.",
+  },
+};
+
+const TITLE: Record<Market, { pre: string; highlight: string }> = {
+  br: { pre: "Engenheiros e gestores que", highlight: "assinam cada obra" },
+  py: { pre: "Ingenieros y gestores que", highlight: "firman cada obra" },
+};
+
+export function Equipe({ market }: { market: Market }) {
+  const copy = SECTION_COPY[market];
+  const roleLabel = ROLE_LABEL[market];
+  const title = TITLE[market];
+
   return (
     <section id="equipe" className="relative bg-paper py-24 md:py-32">
       <div className="container-x">
         <SectionHeader
           as="h1"
           index="01"
-          eyebrow="Equipe técnica"
+          eyebrow={copy.eyebrow}
           title={
             <>
-              Engenheiros e gestores que{" "}
-              <span className="text-brand-600">assinam cada obra</span>.
+              {title.pre}{" "}
+              <span className="text-brand-600">{title.highlight}</span>.
             </>
           }
-          description="Profissionais experientes, integrados em todas as etapas dos projetos — do planejamento à entrega final."
+          description={copy.description}
         />
 
-        {/* Sócios fundadores */}
-        <RevealStagger
-          className="mt-14 grid gap-4 md:grid-cols-2"
-          gap={0.1}
-        >
+        <RevealStagger className="mt-14 grid gap-4 md:grid-cols-2" gap={0.1}>
           {FOUNDERS.map((f) => (
             <RevealItem key={f.name}>
               <article className="group flex items-center gap-5 rounded-2xl border border-hair bg-surface p-6 transition-colors duration-300 hover:border-brand-200 hover:bg-brand-50/40 md:p-7">
@@ -50,7 +74,7 @@ export function Equipe() {
                     </h3>
                     <BadgeCheck className="h-4 w-4 shrink-0 text-brand-500" />
                   </div>
-                  <p className="mt-0.5 text-sm text-ink-soft">{f.role}</p>
+                  <p className="mt-0.5 text-sm text-ink-soft">{roleLabel}</p>
                   <p className="mt-1 font-mono text-xs text-ink-soft">
                     {f.crea}
                   </p>
