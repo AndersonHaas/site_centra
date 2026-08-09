@@ -152,8 +152,8 @@ export default async function LocaleLayout({ children, params }: Props) {
         </NextIntlClientProvider>
         {GA_ID && (
           <>
-            <GoogleAnalytics gaId={GA_ID} />
             <MarketUserProperty market={locale} />
+            <GoogleAnalytics gaId={GA_ID} />
           </>
         )}
       </body>

@@ -6,6 +6,9 @@
 // next.config.ts, unmatched URLs fell through to Next's built-in default
 // 404 instead of a branded page. Bypasses normal rendering entirely, so it
 // must import its own global styles/fonts and provide the full document.
+// Deliberadamente fora do analytics: este root layout não renderiza o GA4,
+// então 404s sem mercado (ex.: /rota-inexistente) não viram pageview — só
+// os 404s dentro de [locale] (ex.: /br/rota-inexistente) são contabilizados.
 import "./globals.css";
 import Link from "next/link";
 import { Inter, JetBrains_Mono } from "next/font/google";
