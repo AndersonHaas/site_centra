@@ -10,6 +10,9 @@ import { SITE_URL } from "@/lib/seo";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { CustomCursor } from "@/components/ui/CustomCursor";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { GA_ID } from "@/lib/analytics";
+import { MarketUserProperty } from "@/components/analytics/MarketUserProperty";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -147,6 +150,12 @@ export default async function LocaleLayout({ children, params }: Props) {
           <CustomCursor />
           <SmoothScroll>{children}</SmoothScroll>
         </NextIntlClientProvider>
+        {GA_ID && (
+          <>
+            <GoogleAnalytics gaId={GA_ID} />
+            <MarketUserProperty market={locale} />
+          </>
+        )}
       </body>
     </html>
   );

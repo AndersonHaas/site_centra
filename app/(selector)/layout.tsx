@@ -3,6 +3,8 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "../globals.css";
 import { HREFLANG } from "@/lib/group/market";
 import { SITE_URL } from "@/lib/seo";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { GA_ID } from "@/lib/analytics";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -55,7 +57,10 @@ export default function SelectorLayout({
       lang="pt"
       className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
     >
-      <body>{children}</body>
+      <body>
+        {children}
+        {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
+      </body>
     </html>
   );
 }
