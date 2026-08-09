@@ -16,6 +16,20 @@ const nextConfig: NextConfig = {
     // node_modules/next/dist/docs/01-app/03-api-reference/03-file-conventions/not-found.md.
     globalNotFound: true,
   },
+  /* Os prefixos de locale deixaram de ser idioma (pt/es) e passaram a ser
+     mercado (br/py). Sem estes redirects, toda URL antiga já compartilhada
+     do site termina em 404: o proxy do next-intl prefixa /pt com o locale
+     padrão, gerando /br/pt, que não existe. 308 (o equivalente permanente
+     no Next, que preserva o método) para que buscadores transfiram o sinal
+     em vez de apenas seguirem o desvio. */
+  async redirects() {
+    return [
+      { source: "/pt", destination: "/br", permanent: true },
+      { source: "/pt/:path*", destination: "/br/:path*", permanent: true },
+      { source: "/es", destination: "/py", permanent: true },
+      { source: "/es/:path*", destination: "/py/:path*", permanent: true },
+    ];
+  },
 };
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
