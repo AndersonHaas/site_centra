@@ -27,6 +27,15 @@ import type { Market } from "@/lib/group/market";
    push não depende de o <GoogleAnalytics> já ter renderizado, também
    desaparece a fragilidade de ordem silenciosa da versão anterior. */
 export function MarketUserProperty({ market }: { market: Market }) {
+  /* JSON.stringify escapa para JSON, não para HTML: sozinho ele não
+     neutralizaria "</script>" nem U+2028/2029 dentro de um <script> inline.
+     Hoje `market` é a união fechada "br" | "py", vinda do segmento [locale]
+     já validado por hasLocale() + dynamicParams=false — então não é
+     controlável por terceiros. Escapamos "<" mesmo assim para que a
+     garantia fique aqui, e não dependendo de invariantes definidas em
+     outros arquivos, caso este componente seja reusado com valor livre. */
+  const value = JSON.stringify(market).replace(/</g, "\\u003c");
+
   return (
     <script
       id="ga-market-user-property"
@@ -34,7 +43,7 @@ export function MarketUserProperty({ market }: { market: Market }) {
         __html:
           `window.dataLayer=window.dataLayer||[];` +
           `function gtag(){window.dataLayer.push(arguments)}` +
-          `gtag('set','user_properties',{market:${JSON.stringify(market)}});`,
+          `gtag('set','user_properties',{market:${value}});`,
       }}
     />
   );
