@@ -39,6 +39,51 @@ em inglês (os modelos de vídeo respondem melhor); as notas de uso estão em po
 
 ---
 
+## Higgsfield (via MCP no Claude) — partindo das FOTOS REAIS da obra
+
+> O usuário tem 2 fotos reais: `fundacao-canteiro.jpg` (duas bases circulares —
+> uma com formas/armadura em execução, outra com laje concluída, silo ao fundo)
+> e `silos-prontos.jpg` (aérea do complexo entregue). A Centra faz a PARTE CIVIL
+> (fundação), não a montagem das chapas — a câmera nunca foca na montagem.
+
+**Clipe 1 — principal (image-to-video de `fundacao-canteiro.jpg`, 8–10 s,
+preset crane down + slow orbit):**
+
+```
+Cinematic aerial drone shot over a real construction site, camera slowly
+descending and orbiting clockwise above a large circular silo foundation
+under construction — wooden formwork, exposed rebar and fresh concrete ring
+beams, distant workers in hard hats continuing their tasks naturally. The
+camera glides from the foundation under construction toward the second,
+finished circular concrete base, skimming low over its smooth slab and
+anchor ring. Red earth site, bright daylight, photorealistic documentary
+look, steady gimbal motion, no cuts.
+```
+
+**Clipe 2 — detalhe da laje (mesma foto, 5 s, dolly-in baixo):**
+
+```
+Slow low-altitude dolly-in across the finished circular concrete foundation
+slab, grazing the surface toward the ring of anchor points, subtle heat
+shimmer, workers blurred in the background, photorealistic, continuous
+smooth motion.
+```
+
+**Clipe 3 — fechamento (frame inicial `fundacao-canteiro.jpg` + frame final
+`silos-prontos.jpg`, se o modo aceitar; senão pull-back de `silos-prontos.jpg`):**
+
+```
+Seamless aerial transition from a silo foundation construction site to the
+same industrial complex completed and in operation — four steel silos with
+yellow stair towers beside a large warehouse, green fields around, bright
+day. One continuous rising drone movement, photorealistic.
+```
+
+Regras: fotorrealista fiel às fotos (não distorcer concreto/formas), movimento
+contínuo sem cortes, sem texto queimado, operários sempre distantes, 16:9.
+
+---
+
 ## PROMPT MASTER — Seedance 2.0 (15 s, um take, para o scroll-scrub)
 
 > Faça upload de `silos-goldenhour.jpg` (@Image1), `cvale-complexo.jpg` (@Image2)
