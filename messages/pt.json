@@ -184,7 +184,7 @@
     "eyebrow": "Em números",
     "title": "A escala de quem entrega <accent>alto desempenho</accent>.",
     "items": {
-      "states": { "suffix": "estados", "label": "No Sul do Brasil e em MS, além do Paraguai" },
+      "countries": { "suffix": "países", "label": "Brasil e Paraguai, em quatro estados brasileiros" },
       "commitment": { "suffix": "%", "label": "Compromisso com prazo e segurança" }
     }
   },

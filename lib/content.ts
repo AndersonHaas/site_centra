@@ -24,15 +24,15 @@ export const PRESENCE = [
   { code: "PY", states: [] },
 ] as const;
 
-/* Contado a partir da lista acima para o "4 estados" da seção de números não
-   descolar da faixa de atuação — as duas coisas aparecem na mesma página. */
-const BR_STATE_COUNT = PRESENCE.flatMap((p) => p.states).length;
+/* Contado a partir da lista acima para o número da seção não descolar da
+   faixa de atuação — as duas coisas aparecem na mesma página. */
+const COUNTRY_COUNT = PRESENCE.length;
 
 /* Rótulo e sufixo em `stats.items.<key>`. A grade da seção se adapta à
    quantidade de itens (ver GRID_COLS em Stats.tsx), então acrescentar ou
    remover uma métrica aqui não exige mexer no layout. */
 export const STATS = [
-  { key: "states", value: BR_STATE_COUNT },
+  { key: "countries", value: COUNTRY_COUNT },
   { key: "commitment", value: 100 },
 ] as const;
 
