@@ -8,6 +8,10 @@ import { STATS } from "@/lib/content";
 import { Counter } from "@/components/ui/Counter";
 import { Reveal, RevealStagger, RevealItem } from "@/components/ui/Reveal";
 import { cn } from "@/lib/utils";
+/* Chapa de atmosfera, não obra do portfólio: entra 85% escurecida e com zoom
+   scrubado, só para dar textura atrás dos números. É a única consumidora deste
+   arquivo desde que o painel de silos passou a usar silos-base-civil.jpg —
+   não apague por parecer órfão. */
 import silosBg from "@/media/works/silos-goldenhour.jpg";
 
 /* Tailwind exige classes literais (não interpoladas) para funcionar no build,

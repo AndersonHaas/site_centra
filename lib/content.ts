@@ -60,7 +60,7 @@ export const WORKS = [
   "cvale-complexo",
   "cvale-fachada",
   "copacol-unidade",
-  "silos-goldenhour",
+  "silos-base-civil",
 ] as const;
 
 export type ProjectClient = (typeof PROJECTS)[number]["client"];
@@ -73,5 +73,8 @@ export const SECTORS = ["industrial", "agroindustrial", "comercial"] as const;
 export const FOUNDATION_STAGES = [
   { key: "estacas", range: [0.04, 0.34] },
   { key: "anel", range: [0.36, 0.64] },
-  { key: "costado", range: [0.66, 0.96] },
+  /* Terceira etapa não é mais o costado do silo: aquilo é montagem do
+     fabricante, não escopo da construtora. Fechar no silo em operação mantém
+     a subida da câmera e diz o que a fundação sustenta. */
+  { key: "operacao", range: [0.66, 0.96] },
 ] as const;

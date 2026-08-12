@@ -25,7 +25,7 @@ import { cn } from "@/lib/utils";
 import cvaleComplexo from "@/media/works/cvale-complexo.jpg";
 import cvaleFachada from "@/media/works/cvale-fachada.jpg";
 import copacolUnidade from "@/media/works/copacol-unidade.jpg";
-import silosGolden from "@/media/works/silos-goldenhour.jpg";
+import silosBaseCivil from "@/media/works/silos-base-civil.jpg";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -33,7 +33,7 @@ const IMAGES: Record<string, StaticImageData> = {
   "cvale-complexo": cvaleComplexo,
   "cvale-fachada": cvaleFachada,
   "copacol-unidade": copacolUnidade,
-  "silos-goldenhour": silosGolden,
+  "silos-base-civil": silosBaseCivil,
 };
 
 export function Obras() {

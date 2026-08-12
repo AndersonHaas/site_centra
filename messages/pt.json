@@ -128,7 +128,7 @@
       "sector": "Industrial",
       "location": "Paraná · BR"
     },
-    "silos-goldenhour": {
+    "silos-base-civil": {
       "client": "Armazenagem",
       "title": "Parte civil de conjunto de silos",
       "summary": "Execução da obra civil que recebe os silos de armazenagem: estacas profundas, blocos de coroamento e anel de fundação — a montagem das estruturas metálicas é do fabricante.",
@@ -160,8 +160,8 @@
 
   "fundacao": {
     "eyebrow": "Engenharia",
-    "kicker": "Como construímos",
-    "title": "Da <accent>fundação</accent> ao topo do silo.",
+    "kicker": "O que fica enterrado",
+    "title": "Ninguém vê a base. <accent>Tudo</accent> depende dela.",
     "depthLabel": "Cota",
     "stageLabel": "Etapa",
     "stages": {
@@ -173,9 +173,9 @@
         "title": "Anel de fundação",
         "spec": "Bloco circular armado · armadura contínua · chumbadores"
       },
-      "costado": {
-        "title": "Costado do silo",
-        "spec": "Chapas onduladas · montantes de aço galvanizado"
+      "operacao": {
+        "title": "Silo carregado",
+        "spec": "Milhares de toneladas de grão apoiadas no que ficou embaixo da terra"
       }
     }
   },

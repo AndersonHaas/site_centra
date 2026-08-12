@@ -128,7 +128,7 @@
       "sector": "Industrial",
       "location": "Paraná · Brasil"
     },
-    "silos-goldenhour": {
+    "silos-base-civil": {
       "client": "Almacenaje",
       "title": "Parte civil de conjunto de silos",
       "summary": "Ejecución de la obra civil que recibe los silos de almacenaje: pilotes profundos, cabezales y anillo de cimentación — el montaje de las estructuras metálicas es del fabricante.",
@@ -160,8 +160,8 @@
 
   "fundacao": {
     "eyebrow": "Ingeniería",
-    "kicker": "Cómo construimos",
-    "title": "De la <accent>cimentación</accent> a la cima del silo.",
+    "kicker": "Lo que queda enterrado",
+    "title": "Nadie ve la base. <accent>Todo</accent> depende de ella.",
     "depthLabel": "Cota",
     "stageLabel": "Etapa",
     "stages": {
@@ -173,9 +173,9 @@
         "title": "Anillo de cimentación",
         "spec": "Bloque circular armado · armadura continua · pernos de anclaje"
       },
-      "costado": {
-        "title": "Fuste del silo",
-        "spec": "Chapas onduladas · montantes de acero galvanizado"
+      "operacao": {
+        "title": "Silo cargado",
+        "spec": "Miles de toneladas de grano apoyadas en lo que quedó bajo tierra"
       }
     }
   },
