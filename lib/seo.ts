@@ -3,10 +3,16 @@ import type { Market } from "./group/market";
 import { HREFLANG } from "./group/market";
 import { marketsForPath } from "./group/routes";
 
-/* URL base do site. Ainda é o domínio de preview da Vercel — a troca para o
-   .com definitivo é a Fase 8 (cutover de domínio). Definido uma única vez
-   aqui justamente para que essa troca seja uma linha só. */
-export const SITE_URL = "https://site-centra-ultimo.vercel.app";
+/* URL base do site: alimenta canonical, hreflang e sitemap. Ainda é o
+   domínio da Vercel — a troca para o .com definitivo é a Fase 8 (cutover de
+   domínio), e está numa constante só justamente para ser uma linha.
+
+   Precisa ser um domínio que RESPONDA. O valor anterior
+   (site-centra-ultimo.vercel.app) era o nome do repositório, não um domínio
+   do projeto, e retornava 404 — ou seja, todo canonical e todo hreflang
+   apontavam para uma URL morta, que é o bastante para o buscador descartar
+   o par BR × PY inteiro. */
+export const SITE_URL = "https://centraengenharia.vercel.app";
 
 /* Canonical + hreflang de uma rota.
 
