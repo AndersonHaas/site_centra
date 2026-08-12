@@ -1,1 +1,367 @@
-{}
+{
+  "nav": {
+    "logoLabel": "Centra — início",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu",
+    "cta": "Fale com a Centra",
+    "obras": "Obras",
+    "sobre": "A Centra",
+    "equipe": "Equipe",
+    "market": {
+      "switchLabel": "Trocar de mercado",
+      "br": "Brasil",
+      "py": "Paraguai"
+    }
+  },
+
+  "sectors": {
+    "industrial": "Industrial",
+    "agroindustrial": "Agroindustrial",
+    "comercial": "Comercial"
+  },
+
+  "units": {
+    "backLabel": "Todas as unidades",
+    "construcao": {
+      "label": "Construção",
+      "eyebrow": "Unidade de negócio",
+      "short": "Obras industriais, agroindustriais e comerciais — do projeto à entrega final."
+    },
+    "pre-moldados": {
+      "label": "Pré-moldados",
+      "eyebrow": "Unidade de negócio",
+      "short": "Elementos pré-moldados e artefatos de cimento que aceleram o prazo da obra.",
+      "description": "Indústria de pré-moldados e artefatos de cimento do Grupo Centra: produção de elementos que aceleram prazos de obra sem abrir mão da qualidade.",
+      "catalogNote": "Catálogo técnico, fichas técnicas em PDF e arquivos para projeto (DWG/BIM) por produto — em atualização. Fale com nosso time comercial para especificações e prazos.",
+      "contactCta": "Falar com o time comercial"
+    },
+    "metalurgica": {
+      "label": "Metalúrgica",
+      "eyebrow": "Unidade de negócio",
+      "short": "Fabricação e montagem de estruturas metálicas de grande vão.",
+      "description": "Fabricação e montagem de estruturas metálicas de alto desempenho, com precisão e segurança.",
+      "catalogNote": "Catálogo técnico e capacidade de fabricação por tipo de estrutura — em atualização. Fale com nosso time comercial para especificações e prazos.",
+      "contactCta": "Falar com o time comercial"
+    },
+    "guindastes": {
+      "label": "Guindastes",
+      "eyebrow": "Unidade de negócio",
+      "short": "Frota própria para movimentação de cargas em obras de grande porte.",
+      "description": "Frota de guindastes e equipamentos para movimentação de cargas em obras de grande porte.",
+      "catalogNote": "Ficha de cada equipamento, capacidades de içamento e disponibilidade — em atualização. Fale com nosso time comercial para especificações e prazos.",
+      "contactCta": "Falar com o time comercial"
+    }
+  },
+
+  "home": {
+    "eyebrow": "Grupo Centra",
+    "title": "Engenharia e indústria de <accent>alto desempenho</accent>.",
+    "description": "Construção civil, pré-moldados e artefatos de cimento, estruturas metálicas e locação de guindastes — quatro unidades que se completam dentro da mesma obra.",
+    "imageAlt": "Complexo agroindustrial construído pela Centra Engenharia",
+    "unitsEyebrow": "Unidades de negócio",
+    "unitsTitle": "Quatro frentes, uma só engenharia.",
+    "cta": "Conhecer",
+    "contactCta": "Fale com a Centra"
+  },
+
+  "hero": {
+    "eyebrow": "Engenharia · Construção · Empreendimentos",
+    "headline": {
+      "line1": "Projetos que se tornam",
+      "line2": "empreendimentos",
+      "line3": "de alto desempenho."
+    },
+    "lead": "Construção civil, terraplanagem e gestão de projetos para os setores industrial, agroindustrial e comercial.",
+    "sectorsLabel": "Setores de atuação",
+    "hudLine1": "Lat −24.61° · Lon −53.30°",
+    "hudLine2": "Palotina · Paraná · BR",
+    "scroll": "Role",
+    "workIndex": "Obra 01",
+    "workLabel": "C.Vale · Unidade industrial",
+    "imageAlt": "Complexo agroindustrial construído pela Centra Engenharia"
+  },
+
+  "trustBar": {
+    "title": "A confiança de quem constrói o Sul do Brasil",
+    "industrial": "Setor industrial",
+    "agroindustria": "Agroindústria",
+    "cooperativas": "Cooperativas"
+  },
+
+  "obras": {
+    "eyebrow": "Obras realizadas",
+    "title": "O que construímos para <accent>grandes operações</accent>.",
+    "description": "Cada empreendimento entregue carrega excelência técnica, prazo cumprido e segurança — para cooperativas e indústrias do Sul do Brasil.",
+    "cta": "Ver mais obras",
+    "presenceLabel": "Atuação",
+    "presenceTitle": "Presença em 4 estados e no Paraguai",
+    "states": {
+      "PR": "Paraná",
+      "SC": "Santa Catarina",
+      "RS": "Rio Grande do Sul",
+      "MS": "Mato Grosso do Sul",
+      "PY": "Paraguai"
+    }
+  },
+
+  "works": {
+    "cvale-complexo": {
+      "client": "C.Vale",
+      "title": "Complexo agroindustrial",
+      "summary": "Unidade industrial de grande porte integrando silos, armazéns e edificações administrativas.",
+      "scope": "Obra civil · Estrutura metálica",
+      "sector": "Agroindustrial",
+      "location": "Paraná · BR"
+    },
+    "cvale-fachada": {
+      "client": "C.Vale",
+      "title": "Edifício corporativo",
+      "summary": "Edificação comercial com fachada em pele de vidro e acabamento de alto padrão.",
+      "scope": "Obra civil · Acabamento",
+      "sector": "Comercial",
+      "location": "Paraná · BR"
+    },
+    "copacol-unidade": {
+      "client": "Copacol",
+      "title": "Unidade industrial",
+      "summary": "Galpão industrial de grande vão com cobertura metálica e identidade visual aplicada à fachada.",
+      "scope": "Estrutura metálica · Cobertura",
+      "sector": "Industrial",
+      "location": "Paraná · BR"
+    },
+    "silos-goldenhour": {
+      "client": "Armazenagem",
+      "title": "Conjunto de silos",
+      "summary": "Estruturas de armazenagem de grãos com passarelas e sistemas de transporte de carga.",
+      "scope": "Estrutura metálica · Montagem",
+      "sector": "Agroindustrial",
+      "location": "Sul do Brasil"
+    }
+  },
+
+  "credenciais": {
+    "eyebrow": "Quem assina",
+    "title": "Cada obra tem um <accent>engenheiro responsável</accent>.",
+    "description": "A Centra é conduzida por sócios-fundadores engenheiros civis, com registro ativo no CREA-PR, à frente de uma equipe técnica que acompanha cada etapa do projeto — do planejamento à entrega.",
+    "cta": "Conheça toda a equipe técnica",
+    "founderRole": "Sócio-fundador · Engenheiro Civil"
+  },
+
+  "diferenciais": {
+    "eyebrow": "Diferenciais",
+    "title": "Mais do que construção civil.",
+    "terraplanagem": {
+      "title": "Terraplanagem",
+      "description": "Preparação e movimentação de terra com frota própria, garantindo base sólida para cada empreendimento."
+    },
+    "gestao": {
+      "title": "Gestão de projetos",
+      "description": "Equipe técnica integrada que atua em todas as etapas, do planejamento à entrega de resultados consistentes."
+    }
+  },
+
+  "fundacao": {
+    "eyebrow": "Engenharia",
+    "kicker": "Como construímos",
+    "title": "Da <accent>fundação</accent> ao topo do silo.",
+    "depthLabel": "Cota",
+    "stageLabel": "Etapa",
+    "stages": {
+      "estacas": {
+        "title": "Estacas profundas",
+        "spec": "Transferência de carga ao solo firme · blocos de coroamento"
+      },
+      "anel": {
+        "title": "Anel de fundação",
+        "spec": "Bloco circular armado · armadura contínua · chumbadores"
+      },
+      "costado": {
+        "title": "Costado do silo",
+        "spec": "Chapas onduladas · montantes de aço galvanizado"
+      }
+    }
+  },
+
+  "stats": {
+    "eyebrow": "Em números",
+    "title": "A escala de quem entrega <accent>alto desempenho</accent>.",
+    "items": {
+      "states": { "suffix": "estados", "label": "No Sul do Brasil e em MS, além do Paraguai" },
+      "commitment": { "suffix": "%", "label": "Compromisso com prazo e segurança" }
+    }
+  },
+
+  "clientes": {
+    "eyebrow": "Quem confia na Centra",
+    "title": "Parcerias que sustentam <accent>grandes operações</accent>.",
+    "description": "Cooperativas agroindustriais e indústrias confiam à Centra obras de alta complexidade e impacto regional.",
+    "listLabel": "Alguns dos nossos principais clientes",
+    "imageAlt": "Obra realizada para {client}",
+    "quote": "“Cada obra representa nosso compromisso com a excelência, a inovação e a entrega de resultados consistentes.”",
+    "quoteAuthor": "Centra Engenharia e Empreendimentos",
+    "notes": {
+      "copacol": "Cooperativa Agroindustrial",
+      "cvale": "Cooperativa Agroindustrial"
+    }
+  },
+
+  "contato": {
+    "eyebrow": "Vamos construir",
+    "title": "Seu próximo empreendimento começa aqui.",
+    "description": "Conte para a nossa equipe sobre o seu projeto. Retornamos com uma proposta técnica feita para o seu desafio.",
+    "emailLabel": "E-mail",
+    "phoneLabel": "Telefone",
+    "baseLabel": "Base",
+    "baseValue": "Paraná · Brasil",
+    "form": {
+      "nome": "Nome",
+      "empresa": "Empresa",
+      "email": "E-mail",
+      "telefone": "Telefone",
+      "telefonePlaceholder": "(45) 0000-0000",
+      "mensagem": "Sobre o projeto",
+      "mensagemPlaceholder": "Tipo de obra, localização, prazo estimado…",
+      "submit": "Enviar mensagem",
+      "submitting": "Enviando…",
+      "sendingStatus": "Enviando mensagem…",
+      "replyNote": "Resposta em até 1 dia útil."
+    },
+    "success": {
+      "title": "Mensagem recebida!",
+      "body": "Obrigado pelo contato. Nossa equipe técnica retornará em breve."
+    },
+    "errors": {
+      "nome_required": "Informe seu nome.",
+      "nome_too_long": "Nome muito longo (máx. 120 caracteres).",
+      "email_required": "Informe seu e-mail.",
+      "email_invalid": "E-mail inválido.",
+      "empresa_too_long": "Nome da empresa muito longo.",
+      "telefone_too_long": "Telefone muito longo.",
+      "mensagem_too_long": "Mensagem muito longa (máx. 2000 caracteres).",
+      "invalid_request": "Requisição inválida.",
+      "send_failed": "Não foi possível enviar sua mensagem agora. Tente novamente em breve ou fale com a gente por telefone/e-mail.",
+      "network": "Falha de conexão. Verifique sua internet e tente novamente."
+    }
+  },
+
+  "about": {
+    "eyebrow": "Quem é a Centra",
+    "title": "A força da Centra<br></br>está nas <accent>pessoas</accent>.",
+    "description": "Uma equipe técnica especializada — engenheiros, gestores e profissionais experientes — que atua de forma integrada em todas as etapas, transformando projetos em empreendimentos de alto desempenho. Atuamos no Brasil, com a unidade de construção civil presente também no Paraguai.",
+    "statesValue": "4 estados",
+    "statesLabel": "de presença consolidada",
+    "pillars": {
+      "missao": {
+        "title": "Missão",
+        "body": "Entregar soluções de engenharia e construção com excelência técnica, inovação e eficiência operacional, transformando projetos em empreendimentos de alto desempenho — com compromisso, segurança e responsabilidade, gerando valor sustentável para clientes, parceiros e comunidades."
+      },
+      "visao": {
+        "title": "Visão",
+        "body": "Ser reconhecida como uma das principais referências em engenharia e construção da região Sul do Brasil, destacando-se pela qualidade das entregas, solidez das relações, capacidade técnica e contribuição para o desenvolvimento dos setores industrial, agroindustrial e comercial."
+      },
+      "valores": {
+        "title": "Valores",
+        "body": "Atuamos com ética, transparência e comprometimento em todas as relações e projetos. Valorizamos a excelência técnica, a segurança, a inovação e o desenvolvimento contínuo, buscando soluções de alta qualidade que gerem resultados duradouros."
+      }
+    }
+  },
+
+  "equipe": {
+    "eyebrow": "Equipe técnica",
+    "title": "Engenheiros e gestores que <accent>assinam cada obra</accent>.",
+    "description": "Profissionais experientes, integrados em todas as etapas dos projetos — do planejamento à entrega final.",
+    "founderRole": "Sócio-fundador · Engenheiro Civil"
+  },
+
+  "portfolio": {
+    "eyebrow": "Portfólio",
+    "title": "Obras que mostram <accent>nossa escala</accent>.",
+    "description": "Projetos entregues pelo Grupo Centra — cada um com seu registro fotográfico.",
+    "allClients": "Todas",
+    "allCountries": "Todos os países",
+    "brazil": "Brasil",
+    "paraguay": "Paraguai",
+    "attributionNote": "Obras executadas pelo Grupo Centra no Brasil.",
+    "badgeBR": "Executado no Brasil",
+    "badgePY": "Executado no Paraguai"
+  },
+
+  "avisoLegal": {
+    "eyebrow": "Informações legais",
+    "title": "Aviso legal",
+    "entityLabel": "Razão social",
+    "pendingLabel": "a confirmar",
+    "pendingNote": "Dados registrais em processo de confirmação.",
+    "addressLabel": "Endereço",
+    "phoneLabel": "Telefone",
+    "linkLabel": "Aviso legal"
+  },
+
+  "footer": {
+    "description": "Engenharia e construção de alto desempenho para os setores industrial, agroindustrial e comercial.",
+    "navTitle": "Navegação",
+    "sectorsTitle": "Setores",
+    "cta": "Fale com a Centra →",
+    "tagline": "Grupo Centra — Brasil e Paraguai",
+    "rightsReserved": "Todos os direitos reservados."
+  },
+
+
+  "meta": {
+    "site": {
+      "titleDefault": "Centra Engenharia",
+      "titleTemplate": "%s | Centra Engenharia",
+      "description": "Soluções de engenharia e construção: construção civil, terraplanagem, pré-moldados e artefatos de cimento, estruturas metálicas e locação de guindastes. Obras industriais, agroindustriais e comerciais no Sul do Brasil, com atuação também no Paraguai.",
+      "ogTitle": "Centra Engenharia | Construção & Empreendimentos de Alto Desempenho",
+      "ogDescription": "Engenharia e construção com excelência técnica para os setores industrial, agroindustrial e comercial, no Brasil e no Paraguai.",
+      "siteName": "Centra Engenharia",
+      "keywords": [
+        "construtora",
+        "engenharia civil",
+        "estruturas metálicas",
+        "obras industriais",
+        "agroindustrial",
+        "terraplanagem",
+        "pré-moldados",
+        "guindastes",
+        "Paraná"
+      ]
+    },
+    "home": {
+      "title": "Grupo Centra — engenharia e indústria",
+      "description": "Construção civil, pré-moldados e artefatos de cimento, estruturas metálicas e locação de guindastes. Conheça as unidades de negócio do Grupo Centra."
+    },
+    "construcao": {
+      "title": "Construção civil",
+      "description": "Execução completa de obras industriais, agroindustriais e comerciais — do projeto à entrega final, com terraplanagem e gestão de projetos integradas."
+    },
+    "pre-moldados": {
+      "title": "Pré-moldados e artefatos de cimento",
+      "description": "Indústria de pré-moldados e artefatos de cimento do Grupo Centra: elementos que aceleram prazos de obra sem abrir mão da qualidade."
+    },
+    "metalurgica": {
+      "title": "Metalúrgica",
+      "description": "Fabricação e montagem de estruturas metálicas de alto desempenho, com precisão e segurança."
+    },
+    "guindastes": {
+      "title": "Locação de guindastes",
+      "description": "Frota de guindastes e equipamentos para movimentação de cargas em obras de grande porte."
+    },
+    "obras": {
+      "title": "Obras",
+      "description": "Portfólio de obras do Grupo Centra — projetos entregues para cooperativas agroindustriais e clientes industriais no Sul do Brasil."
+    },
+    "sobre": {
+      "title": "A Centra",
+      "description": "Conheça a Centra — missão, visão, valores e a equipe que transforma projetos em empreendimentos de alto desempenho. Atuação no Brasil e, na construção civil, também no Paraguai."
+    },
+    "equipe": {
+      "title": "Equipe",
+      "description": "Conheça os engenheiros e profissionais da Centra que entregam obras de alto desempenho no Sul do Brasil."
+    },
+    "avisoLegal": {
+      "title": "Aviso legal",
+      "description": "Informações legais da Centra Engenharia e Empreendimentos Ltda. Dados registrais em processo de confirmação."
+    }
+  }
+}

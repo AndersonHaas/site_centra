@@ -11,66 +11,41 @@ import {
   Phone,
   MapPin,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Reveal } from "@/components/ui/Reveal";
 import { SplitText } from "@/components/ui/SplitText";
+import { MARKETS } from "@/lib/group/markets";
+import type { Market } from "@/lib/group/market";
 
 const FIELDS = [
-  {
-    name: "nome",
-    label: "Nome",
-    type: "text",
-    autoComplete: "name",
-    required: true,
-    maxLength: 120,
-  },
-  {
-    name: "empresa",
-    label: "Empresa",
-    type: "text",
-    autoComplete: "organization",
-    required: false,
-    maxLength: 120,
-  },
-  {
-    name: "email",
-    label: "E-mail",
-    type: "email",
-    autoComplete: "email",
-    required: true,
-    maxLength: 160,
-  },
-  {
-    name: "telefone",
-    label: "Telefone",
-    type: "tel",
-    autoComplete: "tel",
-    required: false,
-    maxLength: 30,
-    placeholder: "(45) 0000-0000",
-  },
+  { name: "nome", type: "text", autoComplete: "name", required: true, maxLength: 120 },
+  { name: "empresa", type: "text", autoComplete: "organization", required: false, maxLength: 120 },
+  { name: "email", type: "email", autoComplete: "email", required: true, maxLength: 160 },
+  { name: "telefone", type: "tel", autoComplete: "tel", required: false, maxLength: 30 },
 ] as const;
 
 type FieldName = (typeof FIELDS)[number]["name"] | "mensagem";
-
-const CONTACTS = [
-  { icon: Mail, label: "E-mail", value: "contato@centraengenharia.com.br" },
-  { icon: Phone, label: "Telefone", value: "+55 (45) 0000-0000" },
-  { icon: MapPin, label: "Base", value: "Paraná · Brasil" },
-];
 
 type Status = "idle" | "submitting" | "success" | "error";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+/* A validação do cliente devolve CÓDIGOS, não frases — os mesmos que a rota
+   /api/contato devolve. É o que permite as duas origens de erro (cliente e
+   servidor) caírem no mesmo catálogo de tradução em vez de o servidor
+   mandar português para uma página em espanhol. */
 function validateClient(values: Record<FieldName, string>) {
   const errors: Partial<Record<FieldName, string>> = {};
-  if (!values.nome.trim()) errors.nome = "Informe seu nome.";
-  if (!values.email.trim()) errors.email = "Informe seu e-mail.";
-  else if (!EMAIL_RE.test(values.email.trim())) errors.email = "E-mail inválido.";
+  if (!values.nome.trim()) errors.nome = "nome_required";
+  if (!values.email.trim()) errors.email = "email_required";
+  else if (!EMAIL_RE.test(values.email.trim())) errors.email = "email_invalid";
   return errors;
 }
 
-export function Contato() {
+export function Contato({ market }: { market: Market }) {
+  const t = useTranslations("contato");
+  const tf = useTranslations("contato.form");
+  const tErrors = useTranslations("contato.errors");
   const [status, setStatus] = useState<Status>("idle");
   const [values, setValues] = useState<Record<FieldName, string>>({
     nome: "",
@@ -81,6 +56,28 @@ export function Contato() {
   });
   const [fieldErrors, setFieldErrors] = useState<Partial<Record<FieldName, string>>>({});
   const [formError, setFormError] = useState<string | null>(null);
+
+  /* Fonte única dos dados comerciais por mercado — antes esta seção tinha um
+     array fixo com o telefone +55 e o e-mail .com.br, servido também no
+     Paraguai. */
+  const contact = MARKETS[market].contact;
+  const address = MARKETS[market].legalEntity.address;
+
+  const contactRows = [
+    { icon: Mail, label: t("emailLabel"), value: contact.email },
+    { icon: Phone, label: t("phoneLabel"), value: contact.phone },
+    { icon: MapPin, label: t("baseLabel"), value: t("baseValue") },
+  ];
+
+  /* Um endereço registral confirmado é mais específico que a base declarada
+     na copy — quando existir, ele manda. */
+  if (address) contactRows[2].value = address;
+
+  /* Código desconhecido (versão do servidor à frente da do cliente) nunca
+     deve renderizar a chave crua na tela. */
+  function translateError(code: string) {
+    return tErrors.has(code) ? tErrors(code) : tErrors("send_failed");
+  }
 
   function update(name: FieldName, value: string) {
     setValues((v) => ({ ...v, [name]: value }));
@@ -120,15 +117,10 @@ export function Contato() {
         return;
       }
 
-      setFormError(
-        data?.error ??
-          "Não foi possível enviar sua mensagem agora. Tente novamente em breve.",
-      );
+      setFormError(translateError(data?.error ?? "send_failed"));
       setStatus("error");
     } catch {
-      setFormError(
-        "Falha de conexão. Verifique sua internet e tente novamente.",
-      );
+      setFormError(tErrors("network"));
       setStatus("error");
     }
   }
@@ -151,7 +143,7 @@ export function Contato() {
       <div className="container-x relative grid gap-14 lg:grid-cols-[1fr_0.9fr] lg:gap-20">
         <div>
           <Reveal>
-            <span className="eyebrow text-brand-300">04 — Vamos construir</span>
+            <span className="eyebrow text-brand-300">04 — {t("eyebrow")}</span>
           </Reveal>
           <SplitText
             as="h2"
@@ -159,18 +151,17 @@ export function Contato() {
             delay={0.06}
             className="display mt-5 max-w-[14ch] text-4xl text-white sm:text-5xl md:text-6xl"
           >
-            Seu próximo empreendimento começa aqui.
+            {t("title")}
           </SplitText>
           <Reveal delay={0.12}>
             <p className="mt-6 max-w-md text-base leading-relaxed text-white/60 sm:text-lg">
-              Conte para a nossa equipe sobre o seu projeto. Retornamos com uma
-              proposta técnica feita para o seu desafio.
+              {t("description")}
             </p>
           </Reveal>
 
           <Reveal delay={0.18} className="mt-10">
             <ul className="space-y-4">
-              {CONTACTS.map((c) => (
+              {contactRows.map((c) => (
                 <li key={c.label} className="flex items-center gap-4">
                   <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 text-brand-300 ring-1 ring-white/10">
                     <c.icon className="h-4 w-4" />
@@ -203,11 +194,10 @@ export function Contato() {
                 >
                   <CheckCircle2 className="h-14 w-14 text-brand-400" />
                   <h3 className="mt-5 text-2xl font-semibold text-white">
-                    Mensagem recebida!
+                    {t("success.title")}
                   </h3>
                   <p className="mt-3 max-w-xs text-sm text-white/60">
-                    Obrigado pelo contato. Nossa equipe técnica retornará em
-                    breve.
+                    {t("success.body")}
                   </p>
                 </motion.div>
               ) : (
@@ -220,7 +210,7 @@ export function Contato() {
                   className="space-y-5"
                 >
                   <div role="status" aria-live="polite" className="sr-only">
-                    {submitting ? "Enviando mensagem…" : ""}
+                    {submitting ? tf("sendingStatus") : ""}
                   </div>
 
                   {formError && (
@@ -235,14 +225,14 @@ export function Contato() {
 
                   <div className="grid gap-5 sm:grid-cols-2">
                     {FIELDS.map((f) => {
-                      const error = fieldErrors[f.name];
+                      const errorCode = fieldErrors[f.name];
                       return (
                         <div key={f.name} className="flex flex-col gap-2">
                           <label
                             htmlFor={f.name}
                             className="text-sm font-medium text-white/70"
                           >
-                            {f.label}
+                            {tf(f.name)}
                             {f.required && (
                               <span className="ml-1 text-brand-400">*</span>
                             )}
@@ -254,24 +244,30 @@ export function Contato() {
                             required={f.required}
                             autoComplete={f.autoComplete}
                             maxLength={f.maxLength}
-                            placeholder={"placeholder" in f ? f.placeholder : undefined}
+                            placeholder={
+                              f.name === "telefone"
+                                ? tf("telefonePlaceholder")
+                                : undefined
+                            }
                             value={values[f.name]}
                             onChange={(e) => update(f.name, e.target.value)}
                             disabled={submitting}
-                            aria-invalid={Boolean(error)}
-                            aria-describedby={error ? `${f.name}-error` : undefined}
+                            aria-invalid={Boolean(errorCode)}
+                            aria-describedby={
+                              errorCode ? `${f.name}-error` : undefined
+                            }
                             className={`h-12 rounded-lg border bg-ink-900/60 px-4 text-sm text-white outline-none transition-colors placeholder:text-white/50 focus:ring-2 disabled:opacity-50 ${
-                              error
+                              errorCode
                                 ? "border-red-400/60 focus:border-red-400 focus:ring-red-500/30"
                                 : "border-white/12 focus:border-brand-400 focus:ring-brand-500/30"
                             }`}
                           />
-                          {error && (
+                          {errorCode && (
                             <span
                               id={`${f.name}-error`}
                               className="font-mono text-[0.68rem] uppercase tracking-[0.1em] text-red-300"
                             >
-                              {error}
+                              {translateError(errorCode)}
                             </span>
                           )}
                         </div>
@@ -283,14 +279,14 @@ export function Contato() {
                       htmlFor="mensagem"
                       className="text-sm font-medium text-white/70"
                     >
-                      Sobre o projeto
+                      {tf("mensagem")}
                     </label>
                     <textarea
                       id="mensagem"
                       name="mensagem"
                       rows={4}
                       maxLength={2000}
-                      placeholder="Tipo de obra, localização, prazo estimado…"
+                      placeholder={tf("mensagemPlaceholder")}
                       value={values.mensagem}
                       onChange={(e) => update("mensagem", e.target.value)}
                       disabled={submitting}
@@ -305,17 +301,17 @@ export function Contato() {
                     {submitting ? (
                       <>
                         <Loader2 className="h-4 w-4 animate-spin" />
-                        Enviando…
+                        {tf("submitting")}
                       </>
                     ) : (
                       <>
-                        Enviar mensagem
+                        {tf("submit")}
                         <ArrowUpRight className="h-4 w-4" />
                       </>
                     )}
                   </button>
                   <p className="text-center text-xs text-white/55">
-                    Resposta em até 1 dia útil.
+                    {tf("replyNote")}
                   </p>
                 </motion.form>
               )}

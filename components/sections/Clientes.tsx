@@ -2,6 +2,7 @@
 
 import { type StaticImageData } from "next/image";
 import { Quote, Landmark } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { ParallaxImage } from "@/components/ui/ParallaxImage";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal, RevealStagger, RevealItem } from "@/components/ui/Reveal";
@@ -9,7 +10,6 @@ import { ScrubText } from "@/components/ui/ScrubText";
 import { CLIENTS } from "@/lib/content";
 
 import copacolImg from "@/media/works/copacol-unidade.jpg";
-import copacolAerea from "@/media/works/copacol-aerea.jpg";
 import cvaleImg from "@/media/works/cvale-fachada.jpg";
 
 const CLIENT_IMG: Record<string, StaticImageData | undefined> = {
@@ -18,25 +18,24 @@ const CLIENT_IMG: Record<string, StaticImageData | undefined> = {
 };
 
 export function Clientes() {
+  const t = useTranslations("clientes");
+
   return (
     <section id="clientes" className="relative bg-surface py-24 md:py-32">
       <div className="container-x">
         <SectionHeader
           index="03"
-          eyebrow="Quem confia na Centra"
+          eyebrow={t("eyebrow")}
           split
-          title={
-            <>
-              Parcerias que sustentam{" "}
-              <span className="text-brand-600">grandes operações</span>.
-            </>
-          }
-          description="Cooperativas agroindustriais e indústrias confiam à Centra obras de alta complexidade e impacto regional."
+          title={t.rich("title", {
+            accent: (chunks) => <span className="text-brand-600">{chunks}</span>,
+          })}
+          description={t("description")}
         />
 
         <Reveal delay={0.05}>
           <p className="mt-10 text-sm text-ink-soft uppercase tracking-widest">
-            Alguns dos nossos principais clientes
+            {t("listLabel")}
           </p>
         </Reveal>
 
@@ -50,7 +49,7 @@ export function Clientes() {
                     <>
                       <ParallaxImage
                         src={img}
-                        alt={`Obra realizada para ${c.name}`}
+                        alt={t("imageAlt", { client: c.name })}
                         clipReveal
                         speed={4 + (i % 3) * 3}
                         placeholder="blur"
@@ -78,7 +77,7 @@ export function Clientes() {
                       {c.name}
                     </span>
                     <p className="mt-1.5 text-sm font-medium text-white/65">
-                      {c.note}
+                      {t(`notes.${c.key}`)}
                     </p>
                   </div>
                 </article>
@@ -100,11 +99,11 @@ export function Clientes() {
             />
             <Quote className="relative h-9 w-9 text-brand-400" />
             <ScrubText
-              text="“Cada obra representa nosso compromisso com a excelência, a inovação e a entrega de resultados consistentes.”"
+              text={t("quote")}
               className="display relative mt-6 max-w-3xl text-2xl leading-snug text-white md:text-3xl"
             />
             <p className="relative mt-6 hud text-white/55">
-              Centra Engenharia e Empreendimentos
+              {t("quoteAuthor")}
             </p>
           </div>
         </Reveal>

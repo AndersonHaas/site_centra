@@ -11,7 +11,8 @@ import {
   type MotionValue,
 } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { SplitText } from "@/components/ui/SplitText";
@@ -34,29 +35,30 @@ const IMAGES: Record<string, StaticImageData> = {
 };
 
 export function Obras() {
+  const t = useTranslations("obras");
+
   return (
     <section id="obras" className="grain relative overflow-clip bg-ink-950 py-24 md:py-32">
       <div className="container-x">
         <SectionHeader
           index="01"
-          eyebrow="Obras realizadas"
+          eyebrow={t("eyebrow")}
           dark
           split
-          title={
-            <>
-              O que construímos para{" "}
-              <span className="text-gradient-brand">grandes operações</span>.
-            </>
-          }
-          description="Cada empreendimento entregue carrega excelência técnica, prazo cumprido e segurança — para cooperativas e indústrias do Sul do Brasil."
+          title={t.rich("title", {
+            accent: (chunks) => (
+              <span className="text-gradient-brand">{chunks}</span>
+            ),
+          })}
+          description={t("description")}
         />
       </div>
 
       {/* Deck pinado: cada obra desliza por cima da anterior */}
       <div className="mt-14 md:mt-20">
         <StickyStack overlay={(p) => <DeckHud progress={p} total={WORKS.length} />}>
-          {WORKS.map((w, i) => (
-            <WorkPanel key={w.slug} work={w} index={i} total={WORKS.length} />
+          {WORKS.map((slug, i) => (
+            <WorkPanel key={slug} slug={slug} index={i} total={WORKS.length} />
           ))}
         </StickyStack>
       </div>
@@ -66,7 +68,7 @@ export function Obras() {
         <Reveal>
           <div className="flex justify-center">
             <Link href="/obras" className="btn-ghost">
-              Ver mais obras
+              {t("cta")}
               <ArrowUpRight className="h-4 w-4" />
             </Link>
           </div>
@@ -78,21 +80,23 @@ export function Obras() {
         <Reveal>
           <div className="flex flex-col gap-6 rounded-3xl border border-white/10 bg-white/[0.03] p-7 md:flex-row md:items-center md:justify-between md:p-9">
             <div className="flex items-center gap-4">
-              <span className="hud text-brand-300">Atuação</span>
+              <span className="hud text-brand-300">{t("presenceLabel")}</span>
               <span className="text-lg font-medium text-white">
-                Presença em 4 estados e no Paraguai
+                {t("presenceTitle")}
               </span>
             </div>
             <div className="flex flex-wrap gap-2.5">
-              {PRESENCE.map((s) => (
+              {PRESENCE.map((place) => (
                 <span
-                  key={s.uf}
+                  key={place.code}
                   className="flex items-center gap-2 rounded-xl border border-white/10 bg-ink-900 px-3.5 py-2"
                 >
                   <span className="font-mono text-xs font-medium text-brand-300">
-                    {s.uf}
+                    {place.code}
                   </span>
-                  <span className="text-sm text-white/70">{s.name}</span>
+                  <span className="text-sm text-white/70">
+                    {t(`states.${place.code}`)}
+                  </span>
                 </span>
               ))}
             </div>
@@ -135,11 +139,11 @@ function DeckHud({
 }
 
 function WorkPanel({
-  work,
+  slug,
   index,
   total,
 }: {
-  work: (typeof WORKS)[number];
+  slug: string;
   index: number;
   total: number;
 }) {
@@ -147,6 +151,7 @@ function WorkPanel({
   const reduce = useReducedMotion();
   const panel = useStickyPanel();
   const inView = useInView(ref, { once: true, margin: "-5% 0px" });
+  const t = useTranslations(`works.${slug}`);
 
   /* Fluxo (mobile/reduced motion): pan pela posição do próprio painel.
      Deck: pan pelo progresso local distribuído pelo StickyStack. */
@@ -186,8 +191,8 @@ function WorkPanel({
           className="absolute inset-0 scale-[1.12]"
         >
           <Image
-            src={IMAGES[work.slug]}
-            alt={`${work.client} — ${work.title}`}
+            src={IMAGES[slug]}
+            alt={`${t("client")} — ${t("title")}`}
             fill
             placeholder="blur"
             sizes="100vw"
@@ -218,7 +223,7 @@ function WorkPanel({
               panel && "mt-10",
             )}
           >
-            {work.sector}
+            {t("sector")}
           </span>
         </div>
       </div>
@@ -226,7 +231,7 @@ function WorkPanel({
       {/* Conteúdo */}
       <div className="container-x absolute inset-x-0 bottom-8 z-10 md:bottom-10">
         <Reveal>
-          <p className="hud text-brand-300">{work.client}</p>
+          <p className="hud text-brand-300">{t("client")}</p>
         </Reveal>
         <SplitText
           as="h3"
@@ -234,15 +239,15 @@ function WorkPanel({
           delay={0.1}
           className="display mt-3 max-w-2xl text-3xl text-white sm:text-4xl md:text-5xl"
         >
-          {work.title}
+          {t("title")}
         </SplitText>
         <Reveal delay={0.18}>
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/75 sm:text-base">
-            {work.summary}
+            {t("summary")}
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
-            <Chip>{work.scope}</Chip>
-            <Chip>{work.location}</Chip>
+            <Chip>{t("scope")}</Chip>
+            <Chip>{t("location")}</Chip>
           </div>
         </Reveal>
       </div>
