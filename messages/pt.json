@@ -130,9 +130,9 @@
     },
     "silos-goldenhour": {
       "client": "Armazenagem",
-      "title": "Conjunto de silos",
-      "summary": "Estruturas de armazenagem de grãos com passarelas e sistemas de transporte de carga.",
-      "scope": "Estrutura metálica · Montagem",
+      "title": "Parte civil de conjunto de silos",
+      "summary": "Execução da obra civil que recebe os silos de armazenagem: estacas profundas, blocos de coroamento e anel de fundação — a montagem das estruturas metálicas é do fabricante.",
+      "scope": "Obra civil · Fundações",
       "sector": "Agroindustrial",
       "location": "Sul do Brasil"
     }

@@ -130,9 +130,9 @@
     },
     "silos-goldenhour": {
       "client": "Almacenaje",
-      "title": "Conjunto de silos",
-      "summary": "Estructuras de almacenaje de granos con pasarelas y sistemas de transporte de carga.",
-      "scope": "Estructura metálica · Montaje",
+      "title": "Parte civil de conjunto de silos",
+      "summary": "Ejecución de la obra civil que recibe los silos de almacenaje: pilotes profundos, cabezales y anillo de cimentación — el montaje de las estructuras metálicas es del fabricante.",
+      "scope": "Obra civil · Cimentaciones",
       "sector": "Agroindustrial",
       "location": "Sur de Brasil"
     }
