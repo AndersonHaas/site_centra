@@ -19,7 +19,7 @@ function toTelHref(phone: string) {
 /* Página de unidade de negócio ainda sem catálogo próprio (pré-moldados,
    metalúrgica, guindastes). O conteúdo é curto de propósito — o que ela
    precisa garantir é não ser um beco sem saída: leva ao formulário de
-   contato, ao telefone e de volta ao hub do grupo. */
+   contato, ao telefone e de volta às demais unidades. */
 export function UnitPage({
   market,
   unit,
@@ -38,8 +38,11 @@ export function UnitPage({
       <main className="pt-[70px]">
         <section className="container-x py-20 md:py-28">
           <Reveal>
+            {/* Âncora, e não a raiz nua: a raiz agora é a página da
+                construção, então "todas as unidades" só é verdade se o link
+                levar direto ao bloco delas (components/sections/Unidades.tsx). */}
             <Link
-              href="/"
+              href="/#unidades"
               className="inline-flex items-center gap-2 text-sm font-medium text-ink-soft transition-colors hover:text-ink"
             >
               <ArrowLeft className="h-4 w-4" />
@@ -64,7 +67,7 @@ export function UnitPage({
                 {t("catalogNote")}
               </p>
               <div className="mt-7 flex flex-wrap items-center gap-3">
-                <Link href={getContactHref(market)} className="btn-primary">
+                <Link href={getContactHref()} className="btn-primary">
                   {t("contactCta")}
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>

@@ -17,7 +17,9 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { SplitText } from "@/components/ui/SplitText";
 import { StickyStack, useStickyPanel } from "@/components/ui/StickyStack";
+import { Flag } from "@/components/ui/Flag";
 import { WORKS, PRESENCE } from "@/lib/content";
+import type { Market } from "@/lib/group/market";
 import { cn } from "@/lib/utils";
 
 import cvaleComplexo from "@/media/works/cvale-complexo.jpg";
@@ -67,7 +69,7 @@ export function Obras() {
       <div className="container-x mt-14 md:mt-16">
         <Reveal>
           <div className="flex justify-center">
-            <Link href="/obras" className="btn-ghost">
+            <Link href="/portfolio" className="btn-ghost">
               {t("cta")}
               <ArrowUpRight className="h-4 w-4" />
             </Link>
@@ -75,29 +77,59 @@ export function Obras() {
         </Reveal>
       </div>
 
-      {/* Faixa de atuação — presença nos estados */}
+      {/* Faixa de atuação — um bloco por país.
+
+          Antes era uma lista corrida de cinco siglas, em que "PY" chegava
+          depois de quatro estados brasileiros e sumia no meio. Com a bandeira
+          e o nome de cada país em destaque, e os estados subordinados ao
+          Brasil, a operação binacional se lê de relance — que é a única
+          leitura que o visitante do site faz desta faixa. */}
       <div className="container-x mt-16 md:mt-20">
         <Reveal>
-          <div className="flex flex-col gap-6 rounded-3xl border border-white/10 bg-white/[0.03] p-7 md:flex-row md:items-center md:justify-between md:p-9">
-            <div className="flex items-center gap-4">
+          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-7 md:p-9">
+            <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
               <span className="hud text-brand-300">{t("presenceLabel")}</span>
               <span className="text-lg font-medium text-white">
                 {t("presenceTitle")}
               </span>
             </div>
-            <div className="flex flex-wrap gap-2.5">
+
+            {/* items-start: sem isso a grade estica o card do Paraguai até a
+                altura do card do Brasil, que tem quatro estados listados, e o
+                espaço vazio resultante parece defeito de layout. */}
+            <div className="mt-7 grid items-start gap-4 sm:grid-cols-2">
               {PRESENCE.map((place) => (
-                <span
+                <div
                   key={place.code}
-                  className="flex items-center gap-2 rounded-xl border border-white/10 bg-ink-900 px-3.5 py-2"
+                  className="rounded-2xl border border-white/10 bg-ink-900 p-5"
                 >
-                  <span className="font-mono text-xs font-medium text-brand-300">
-                    {place.code}
-                  </span>
-                  <span className="text-sm text-white/70">
-                    {t(`states.${place.code}`)}
-                  </span>
-                </span>
+                  <div className="flex items-center gap-3">
+                    <Flag
+                      market={place.code.toLowerCase() as Market}
+                      className="h-4 w-6 shrink-0 rounded-[3px] ring-1 ring-white/15"
+                    />
+                    <span className="text-base font-semibold text-white">
+                      {t(`countries.${place.code}`)}
+                    </span>
+                  </div>
+                  {place.states.length > 0 && (
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {place.states.map((state) => (
+                        <span
+                          key={state}
+                          className="flex items-center gap-1.5 rounded-lg border border-white/10 px-2.5 py-1.5"
+                        >
+                          <span className="font-mono text-xs font-medium text-brand-300">
+                            {state}
+                          </span>
+                          <span className="text-xs text-white/60">
+                            {t(`states.${state}`)}
+                          </span>
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
           </div>

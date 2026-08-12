@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
 import { ConstrucaoContent } from "@/components/pages/ConstrucaoContent";
-import { GroupHub } from "@/components/pages/GroupHub";
-import { isSingleUnitMarket } from "@/lib/group/routes";
 import type { Market } from "@/lib/group/market";
 import { buildAlternates } from "@/lib/seo";
 
@@ -21,19 +19,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-/* Raiz do mercado. O que ela mostra depende de quantas unidades operam ali:
+/* Raiz do mercado: a página da construção civil, em todos os mercados.
 
-   - Brasil (4 unidades) → hub do grupo, que apresenta e distribui.
-   - Paraguai (só construção civil) → a própria página da construtora. Antes
-     havia aqui um hub com um único card, o que custava um clique e não
-     entregava nada; /py/construcao virou redirect para cá. */
+   A construção é o carro-chefe comercial — as outras unidades vendem pouco
+   perto dela —, então ela ocupa a home em vez de ficar atrás de um hub que
+   cobrava um clique antes do que o visitante veio ver. As demais unidades
+   continuam em páginas próprias, apresentadas aqui pela seção Unidades; no
+   Paraguai, onde só a construção opera, essa seção não renderiza nada.
+   /br/construcao e /py/construcao redirecionam para cá (next.config.ts). */
 export default async function MarketHomePage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  return isSingleUnitMarket(locale) ? (
-    <ConstrucaoContent market={locale} />
-  ) : (
-    <GroupHub market={locale} />
-  );
+  return <ConstrucaoContent market={locale} />;
 }

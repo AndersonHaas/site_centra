@@ -22,7 +22,7 @@ export function Footer({ market }: { market: Market }) {
               {t("footer.description")}
             </p>
             <Link
-              href={getContactHref(market)}
+              href={getContactHref()}
               className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-brand-300 transition-colors hover:text-brand-200"
             >
               {t("footer.cta")}

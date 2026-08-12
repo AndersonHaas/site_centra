@@ -10,19 +10,23 @@ import { PROJECTS } from "./portfolio-data";
 
 export { PROJECTS };
 
-/* Nome do estado/país em `obras.states.<code>`. `kind` separa estado
-   brasileiro de país: é o que permite a seção de números contar os estados
-   sozinha, sem que o "4 estados" descole desta lista — as duas coisas
-   aparecem na mesma página. */
+/* Presença agrupada por PAÍS, e não numa lista corrida de siglas.
+
+   A forma da estrutura é a mensagem: numa lista única, "PY" virava a quinta
+   sigla depois de quatro estados brasileiros e a atuação no Paraguai passava
+   despercebida. Separada em dois países, a operação binacional fica dita já
+   no layout (ver a faixa de atuação em components/sections/Obras.tsx).
+
+   Nome do país em `obras.countries.<code>` e do estado em
+   `obras.states.<code>`. */
 export const PRESENCE = [
-  { code: "PR", kind: "state" },
-  { code: "SC", kind: "state" },
-  { code: "RS", kind: "state" },
-  { code: "MS", kind: "state" },
-  { code: "PY", kind: "country" },
+  { code: "BR", states: ["PR", "SC", "RS", "MS"] },
+  { code: "PY", states: [] },
 ] as const;
 
-const BR_STATE_COUNT = PRESENCE.filter((p) => p.kind === "state").length;
+/* Contado a partir da lista acima para o "4 estados" da seção de números não
+   descolar da faixa de atuação — as duas coisas aparecem na mesma página. */
+const BR_STATE_COUNT = PRESENCE.flatMap((p) => p.states).length;
 
 /* Rótulo e sufixo em `stats.items.<key>`. A grade da seção se adapta à
    quantidade de itens (ver GRID_COLS em Stats.tsx), então acrescentar ou

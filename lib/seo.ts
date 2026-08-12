@@ -20,7 +20,8 @@ export const SITE_URL = "https://centraengenharia.vercel.app";
    - canonical é sempre auto-referencial: /{mercado}{path};
    - hreflang só é emitido quando a rota existe em mais de um mercado —
      nunca apontar para URL que 404a (ex.: /py/pre-moldados) nem para URL
-     que redireciona (ex.: /py/construcao, hoje servida na raiz /py);
+     que redireciona (ex.: /br/construcao e /py/construcao, hoje servidas na
+     raiz do mercado);
    - x-default aponta para "/", que detecta o mercado do visitante e
      redireciona — exatamente o caso de uso que o x-default descreve. */
 export function buildAlternates(

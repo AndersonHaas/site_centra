@@ -3,17 +3,16 @@ import type { BusinessUnitId } from "./types";
 import { MARKETS } from "./markets";
 import { BUSINESS_UNITS } from "./units";
 
-/* Mercado de unidade única: quando o grupo opera uma só unidade num
-   mercado, essa unidade NÃO ganha sub-rota própria — ela é o conteúdo da
-   raiz do mercado. É o caso do Paraguai, onde só a construção civil opera:
-   /py já é a página da construtora, sem um hub intermediário de um card só.
-   No Brasil, com quatro unidades, /br continua sendo o hub do grupo. */
-export function isSingleUnitMarket(market: Market): boolean {
-  return MARKETS[market].activeUnits.length === 1;
-}
+/* A construção civil é o carro-chefe comercial do grupo: as outras unidades
+   vendem pouco perto dela. Por isso ela NÃO tem sub-rota própria em mercado
+   nenhum — é o conteúdo da raiz do mercado (/br, /py), sem um hub
+   intermediário cobrando um clique antes do que o visitante veio ver. As
+   demais unidades continuam em páginas próprias, apresentadas na raiz pela
+   seção Unidades. */
+export const ROOT_UNIT: BusinessUnitId = "construcao";
 
-/* Unidades que têm rota /<mercado>/<unidade> própria — subconjunto de
-   activeUnits, vazio num mercado de unidade única.
+/* Unidades que têm rota /<mercado>/<unidade> própria — activeUnits menos a
+   unidade-raiz. Vazio no Paraguai, onde só a construção opera.
 
    Fonte única de verdade para o menu, o sitemap, o hreflang e o
    generateStaticParams de cada página de unidade. É isso que garante que
@@ -21,7 +20,7 @@ export function isSingleUnitMarket(market: Market): boolean {
    que a URL de uma unidade inativa simplesmente não exista naquele
    mercado. */
 export function unitRoutes(market: Market): readonly BusinessUnitId[] {
-  return isSingleUnitMarket(market) ? [] : MARKETS[market].activeUnits;
+  return MARKETS[market].activeUnits.filter((unit) => unit !== ROOT_UNIT);
 }
 
 /* Rotas que existem em todos os mercados, independentes de unidade de
@@ -29,8 +28,7 @@ export function unitRoutes(market: Market): readonly BusinessUnitId[] {
 export const SHARED_PATHS = [
   "",
   "/sobre",
-  "/equipe",
-  "/obras",
+  "/portfolio",
   "/aviso-legal",
 ] as const;
 

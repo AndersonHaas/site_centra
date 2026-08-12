@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import { Flag } from "@/components/ui/Flag";
 import { HREFLANG, type Market } from "@/lib/group/market";
 import { marketsForPath } from "@/lib/group/routes";
 import { cn } from "@/lib/utils";
@@ -56,12 +57,21 @@ export function MarketSwitcher({
             aria-current={active ? "true" : undefined}
             onClick={() => rememberMarket(target)}
             className={cn(
-              "rounded-md px-2.5 py-1 font-mono text-xs font-medium uppercase transition-colors",
+              "flex items-center gap-1.5 rounded-md px-2 py-1 font-mono text-xs font-medium uppercase transition-colors",
               active
                 ? "bg-white/15 text-white"
                 : "text-white/55 hover:bg-white/5 hover:text-white",
             )}
           >
+            {/* Bandeira do mercado inativo entra dessaturada: mantém a leitura
+                binacional sem competir com o estado selecionado. */}
+            <Flag
+              market={target}
+              className={cn(
+                "h-3 w-[1.125rem] shrink-0 rounded-[2px] transition-[filter,opacity]",
+                active ? "opacity-100" : "opacity-55 grayscale-[0.55]",
+              )}
+            />
             {target}
             <span className="sr-only"> — {t(target)}</span>
           </Link>

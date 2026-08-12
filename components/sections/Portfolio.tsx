@@ -47,6 +47,9 @@ export function Portfolio({ showAttributionNote = false }: PortfolioProps) {
 
   return (
     <section className="relative bg-paper py-24 md:py-32">
+      {/* Sem link de "voltar" aqui: a volta para a home é o item "Início" do
+          menu do topo (lib/group/nav.ts), que serve todas as páginas em vez de
+          só esta. */}
       <div className="container-x">
         <SectionHeader
           as="h1"

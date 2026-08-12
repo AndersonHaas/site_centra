@@ -27,17 +27,27 @@ const nextConfig: NextConfig = {
       { source: "/pt/:path*", destination: "/br/:path*", permanent: true },
       { source: "/es", destination: "/py", permanent: true },
       { source: "/es/:path*", destination: "/py/:path*", permanent: true },
-      /* O Paraguai é mercado de unidade única (ver lib/group/routes.ts): a
-         construção civil deixou de ter sub-rota e passou a ser a própria
-         raiz /py, eliminando um hub intermediário de um card só. Este
-         redirect preserva a URL antiga, que já esteve publicada. */
+      /* A construção civil é a unidade-raiz (ver ROOT_UNIT em
+         lib/group/routes.ts): deixou de ter sub-rota e passou a ser a própria
+         raiz do mercado, eliminando um hub que cobrava um clique antes do
+         conteúdo principal. Estes redirects preservam as URLs antigas, que já
+         estiveram publicadas. */
+      { source: "/br/construcao", destination: "/br", permanent: true },
       { source: "/py/construcao", destination: "/py", permanent: true },
       /* /solucoes é anterior à divisão em unidades de negócio. Cada mercado
-         aponta direto para o destino final — encadear /py/solucoes em
-         /py/construcao custaria dois saltos, já que aquele redireciona
-         de novo para /py. */
-      { source: "/br/solucoes", destination: "/br/construcao", permanent: true },
+         aponta direto para o destino final — encadear em /<mercado>/construcao
+         custaria dois saltos, já que aquele redireciona de novo para a raiz. */
+      { source: "/br/solucoes", destination: "/br", permanent: true },
       { source: "/py/solucoes", destination: "/py", permanent: true },
+      /* A página passou a se chamar Portfólio no menu; a URL acompanhou para
+         não ficar um nome no link e outro na barra de endereço. */
+      { source: "/br/obras", destination: "/br/portfolio", permanent: true },
+      { source: "/py/obras", destination: "/py/portfolio", permanent: true },
+      /* A página /equipe repetia, maiores, os mesmos sócios-fundadores já
+         listados na seção Credenciais da home — que por isso carrega o
+         id="equipe" para onde estes redirects apontam. */
+      { source: "/br/equipe", destination: "/br#equipe", permanent: true },
+      { source: "/py/equipe", destination: "/py#equipe", permanent: true },
     ];
   },
 };

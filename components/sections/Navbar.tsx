@@ -16,7 +16,7 @@ export function Navbar({ market }: { market: Market }) {
   const toggleRef = useRef<HTMLButtonElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
   const navLinks = getNavLinks();
-  const contactHref = getContactHref(market);
+  const contactHref = getContactHref();
   /* Sem namespace: os links trazem chaves completas (nav.*). */
   const t = useTranslations();
 
@@ -61,9 +61,14 @@ export function Navbar({ market }: { market: Market }) {
             ))}
           </ul>
 
-          <div className="hidden items-center gap-3 lg:flex">
+          {/* O gap-4 dos dois lados do divisor (e o strength reduzido do
+              magnético, que antes fazia o CTA "esticar" na direção do seletor)
+              existem para separar dois alvos de clique com consequências bem
+              diferentes: trocar de mercado x abrir o contato. */}
+          <div className="hidden items-center gap-4 lg:flex">
             <MarketSwitcher market={market} />
-            <Magnetic>
+            <span aria-hidden className="h-5 w-px bg-white/15" />
+            <Magnetic strength={0.2}>
               <Link href={contactHref} className="btn-primary">
                 {t("nav.cta")}
                 <ArrowUpRight className="h-4 w-4" />

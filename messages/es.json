@@ -4,9 +4,9 @@
     "openMenu": "Abrir menú",
     "closeMenu": "Cerrar menú",
     "cta": "Hable con Centra",
-    "obras": "Obras",
+    "inicio": "Inicio",
+    "portfolio": "Portafolio",
     "sobre": "Nosotros",
-    "equipe": "Equipo",
     "market": {
       "switchLabel": "Cambiar de mercado",
       "br": "Brasil",
@@ -54,18 +54,14 @@
   },
 
   "home": {
-    "eyebrow": "Grupo Centra",
-    "title": "Ingeniería e industria de <accent>alto desempeño</accent>.",
-    "description": "Construcción civil, prefabricados y artefactos de cemento, estructuras metálicas y locación de grúas — cuatro unidades que se completan dentro de la misma obra.",
-    "imageAlt": "Complejo agroindustrial construido por Centra en Brasil",
-    "unitsEyebrow": "Unidades de negocio",
-    "unitsTitle": "Cuatro frentes, una sola ingeniería.",
-    "cta": "Conocer",
-    "contactCta": "Hable con Centra"
+    "unitsEyebrow": "El resto del grupo",
+    "unitsTitle": "La obra entera sale de casa.",
+    "cta": "Conocer"
   },
 
   "hero": {
     "eyebrow": "Ingeniería · Construcción · Emprendimientos",
+    "binational": "Brasil y Paraguay",
     "headline": {
       "line1": "Proyectos que se vuelven",
       "line2": "emprendimientos",
@@ -82,7 +78,7 @@
   },
 
   "trustBar": {
-    "title": "La confianza de quien construye en el Sur de Brasil",
+    "title": "La confianza de quien construye en Brasil y en Paraguay",
     "industrial": "Sector industrial",
     "agroindustria": "Agroindustria",
     "cooperativas": "Cooperativas"
@@ -91,16 +87,19 @@
   "obras": {
     "eyebrow": "Obras ejecutadas",
     "title": "Lo que construimos para <accent>grandes operaciones</accent>.",
-    "description": "Cada emprendimiento entregado lleva excelencia técnica, plazo cumplido y seguridad — para cooperativas e industrias del Sur de Brasil.",
-    "cta": "Ver más obras",
+    "description": "Cada emprendimiento entregado lleva excelencia técnica, plazo cumplido y seguridad — para cooperativas e industrias de Brasil y de Paraguay.",
+    "cta": "Ver portafolio completo",
     "presenceLabel": "Actuación",
-    "presenceTitle": "Presencia en 4 estados de Brasil y en Paraguay",
+    "presenceTitle": "Dos países, cuatro estados brasileños",
+    "countries": {
+      "BR": "Brasil",
+      "PY": "Paraguay"
+    },
     "states": {
       "PR": "Paraná",
       "SC": "Santa Catarina",
       "RS": "Rio Grande do Sul",
-      "MS": "Mato Grosso do Sul",
-      "PY": "Paraguay"
+      "MS": "Mato Grosso do Sul"
     }
   },
 
@@ -143,7 +142,6 @@
     "eyebrow": "Quién firma",
     "title": "Cada obra tiene un <accent>ingeniero responsable</accent>.",
     "description": "Centra es conducida por socios fundadores ingenieros civiles, con registro activo en el CREA-PR — el consejo profesional de ingeniería de Paraná, Brasil —, al frente de un equipo técnico que acompaña cada etapa del proyecto, de la planificación a la entrega.",
-    "cta": "Conozca todo el equipo técnico",
     "founderRole": "Socio fundador · Ingeniero Civil"
   },
 
@@ -257,7 +255,7 @@
       },
       "visao": {
         "title": "Visión",
-        "body": "Ser reconocida como una de las principales referencias en ingeniería y construcción de la región Sur de Brasil, destacándose por la calidad de las entregas, la solidez de las relaciones, la capacidad técnica y la contribución al desarrollo de los sectores industrial, agroindustrial y comercial."
+        "body": "Ser reconocida como una de las principales referencias en ingeniería y construcción en Brasil y en Paraguay, destacándose por la calidad de las entregas, la solidez de las relaciones, la capacidad técnica y la contribución al desarrollo de los sectores industrial, agroindustrial y comercial."
       },
       "valores": {
         "title": "Valores",
@@ -266,12 +264,6 @@
     }
   },
 
-  "equipe": {
-    "eyebrow": "Equipo técnico",
-    "title": "Ingenieros y gestores que <accent>firman cada obra</accent>.",
-    "description": "Profesionales experimentados, integrados en todas las etapas de los proyectos — desde la planificación hasta la entrega final. El mismo equipo fundador, con sede en Brasil, conduce también la expansión del Grupo Centra en Paraguay.",
-    "founderRole": "Socio fundador · Ingeniero Civil"
-  },
 
   "portfolio": {
     "eyebrow": "Portafolio",
@@ -328,10 +320,6 @@
       "title": "Construcción civil en Paraguay",
       "description": "Construcción civil del Grupo Centra en Paraguay: ejecución completa de obras industriales, agroindustriales y comerciales, con el respaldo de la experiencia del grupo en Brasil."
     },
-    "construcao": {
-      "title": "Construcción civil",
-      "description": "Ejecución completa de obras industriales, agroindustriales y comerciales — del proyecto a la entrega final."
-    },
     "pre-moldados": {
       "title": "Prefabricados y artefactos de cemento",
       "description": "Industria de prefabricados y artefactos de cemento del Grupo Centra."
@@ -344,17 +332,13 @@
       "title": "Locación de grúas",
       "description": "Flota de grúas y equipos para movimiento de cargas en obras de gran porte."
     },
-    "obras": {
-      "title": "Obras",
+    "portfolio": {
+      "title": "Portafolio",
       "description": "Portafolio de obras del Grupo Centra. Las obras ejecutadas en Brasil están identificadas como tales, con el país de ejecución en cada proyecto."
     },
     "sobre": {
       "title": "Nosotros",
       "description": "Conozca al Grupo Centra — misión, visión, valores y el equipo que transforma proyectos en emprendimientos de alto desempeño. Operamos en Brasil y, con la construcción civil, también en Paraguay."
-    },
-    "equipe": {
-      "title": "Equipo",
-      "description": "Conozca a los ingenieros y profesionales del Grupo Centra. El mismo equipo fundador, con sede en Brasil, conduce la expansión en Paraguay."
     },
     "avisoLegal": {
       "title": "Aviso legal",

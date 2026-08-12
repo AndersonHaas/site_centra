@@ -5,6 +5,7 @@ import { TrustBar } from "@/components/sections/TrustBar";
 import { Obras } from "@/components/sections/Obras";
 import { Credenciais } from "@/components/sections/Credenciais";
 import { Fundacao } from "@/components/sections/Fundacao";
+import { Unidades } from "@/components/sections/Unidades";
 import { Stats } from "@/components/sections/Stats";
 import { Clientes } from "@/components/sections/Clientes";
 import { Contato } from "@/components/sections/Contato";
@@ -15,12 +16,11 @@ import type { Market } from "@/lib/group/market";
    são destaques dentro da unidade de construção. */
 const DIFERENCIAIS = ["terraplanagem", "gestao"] as const;
 
-/* Página completa da unidade de construção civil.
+/* Página completa da construção civil — e raiz de todo mercado (/br, /py).
 
-   Vive num componente próprio porque é servida em duas URLs diferentes: em
-   /br/construcao, como uma das quatro unidades do grupo, e em /py, onde a
-   construção é a única unidade e por isso ocupa a raiz do mercado (ver
-   isSingleUnitMarket em lib/group/routes.ts). */
+   A construção é o que efetivamente vende, então ocupa a home em vez de ficar
+   atrás de um hub de unidades; as outras três aparecem aqui pela seção
+   Unidades e mantêm páginas próprias (ver ROOT_UNIT em lib/group/routes.ts). */
 export function ConstrucaoContent({ market }: { market: Market }) {
   const t = useTranslations("diferenciais");
 
@@ -55,6 +55,7 @@ export function ConstrucaoContent({ market }: { market: Market }) {
             </div>
           </div>
         </section>
+        <Unidades market={market} />
         <Fundacao />
         <Stats />
         <Clientes />

@@ -12,6 +12,7 @@ import { ArrowDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { SECTORS } from "@/lib/content";
 import { SplitText } from "@/components/ui/SplitText";
+import { Flag } from "@/components/ui/Flag";
 import heroImg from "@/media/works/cvale-complexo.jpg";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -76,13 +77,34 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
-          className="flex items-center gap-3"
+          className="flex flex-wrap items-center gap-x-3 gap-y-3"
         >
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-400 opacity-60" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-400" />
+          {/* Ponto e eyebrow num grupo só: com o flex-wrap da linha, soltos,
+              o ponto virava órfão numa linha própria no mobile. */}
+          <span className="flex items-center gap-3">
+            <span className="relative flex h-2 w-2 shrink-0">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-400 opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-400" />
+            </span>
+            <span className="eyebrow text-white/70">{t("eyebrow")}</span>
           </span>
-          <span className="eyebrow text-white/70">{t("eyebrow")}</span>
+
+          {/* Selo binacional — a atuação nos dois países dita na primeira tela,
+              e não só na faixa de atuação lá embaixo. É o primeiro elemento do
+              caminho de leitura, então quem abre o site já sai sabendo. Para
+              remover, basta apagar deste divisor até o fim do bloco. */}
+          <span aria-hidden className="hidden h-3.5 w-px bg-white/20 sm:block" />
+          <span className="flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.07] px-3 py-1.5 backdrop-blur-sm">
+            <Flag
+              market="br"
+              className="h-3 w-[1.125rem] shrink-0 rounded-[2px] ring-1 ring-white/20"
+            />
+            <Flag
+              market="py"
+              className="h-3 w-[1.125rem] shrink-0 rounded-[2px] ring-1 ring-white/20"
+            />
+            <span className="hud text-white/80">{t("binational")}</span>
+          </span>
         </motion.div>
 
         <h1 className="display mt-6 max-w-[20ch] text-[1.4rem] text-white sm:text-4xl md:text-5xl lg:text-[3.5rem] xl:text-[4rem]">
