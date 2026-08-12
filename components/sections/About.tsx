@@ -3,7 +3,7 @@
 import { Target, Eye, Gem } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { Reveal, RevealStagger, RevealItem } from "@/components/ui/Reveal";
+import { RevealStagger, RevealItem } from "@/components/ui/Reveal";
 
 const PILLARS = [
   { key: "missao", icon: Target },
@@ -30,17 +30,6 @@ export function About() {
             })}
             description={t("description")}
           />
-
-          <Reveal delay={0.18} className="mt-10">
-            <div className="flex items-center gap-6 border-t border-hair pt-6">
-              <div>
-                <div className="display text-3xl text-ink">
-                  {t("statesValue")}
-                </div>
-                <p className="mt-1 text-sm text-ink-soft">{t("statesLabel")}</p>
-              </div>
-            </div>
-          </Reveal>
         </div>
 
         <RevealStagger className="flex flex-col gap-4" gap={0.1}>

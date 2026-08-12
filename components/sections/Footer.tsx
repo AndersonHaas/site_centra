@@ -1,6 +1,5 @@
 import { useTranslations } from "next-intl";
 import { Logo } from "@/components/ui/Logo";
-import { Reveal } from "@/components/ui/Reveal";
 import { Link } from "@/i18n/navigation";
 import { SECTORS } from "@/lib/content";
 import { getContactHref, getFooterLinks } from "@/lib/group/nav";
@@ -78,16 +77,6 @@ export function Footer({ market }: { market: Market }) {
           </p>
         </div>
       </div>
-
-      {/* Wordmark gigante em contorno — assinatura de rodapé */}
-      <Reveal y={60} className="pointer-events-none select-none">
-        <p
-          aria-hidden="true"
-          className="text-stroke-white -mb-[0.24em] text-center font-sans text-[17.5vw] font-bold leading-none tracking-tight opacity-25"
-        >
-          CENTRA
-        </p>
-      </Reveal>
     </footer>
   );
 }
