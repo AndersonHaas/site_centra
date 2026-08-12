@@ -1,102 +1,37 @@
 import type { Metadata } from "next";
-import { Navbar } from "@/components/sections/Navbar";
-import { Hero } from "@/components/sections/Hero";
-import { TrustBar } from "@/components/sections/TrustBar";
-import { Obras } from "@/components/sections/Obras";
-import { Credenciais } from "@/components/sections/Credenciais";
-import { Fundacao } from "@/components/sections/Fundacao";
-import { Stats } from "@/components/sections/Stats";
-import { Clientes } from "@/components/sections/Clientes";
-import { Contato } from "@/components/sections/Contato";
-import { Footer } from "@/components/sections/Footer";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { ConstrucaoContent } from "@/components/pages/ConstrucaoContent";
 import type { Market } from "@/lib/group/market";
 import { buildAlternates } from "@/lib/seo";
+import { marketsForPath } from "@/lib/group/routes";
+
+/* A unidade só existe como rota nos mercados em que opera. Restringir os
+   params aqui (com dynamicParams desligado) faz /py/construcao ser uma URL que não
+   casa com rota nenhuma — e portanto cair no 404 do app/global-not-found.tsx,
+   com layout e estilo. Um notFound() em rota existente devolveria o shell de
+   erro cru do Next, porque não há app/layout.tsx para compor a página. */
+export function generateStaticParams() {
+  return marketsForPath("/construcao").map((locale) => ({ locale }));
+}
+
+export const dynamicParams = false;
 
 type Props = {
-  params: Promise<{ locale: string }>;
-};
-
-const META: Record<Market, { title: string; description: string }> = {
-  br: {
-    title: "Construção civil",
-    description:
-      "Execução completa de obras industriais, agroindustriais e comerciais — do projeto à entrega final, com terraplanagem e gestão de projetos integradas.",
-  },
-  py: {
-    title: "Construcción civil",
-    description:
-      "Ejecución completa de obras industriales, agroindustriales y comerciales — del proyecto a la entrega final.",
-  },
+  params: Promise<{ locale: Market }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const market = locale as Market;
+  const t = await getTranslations({ locale, namespace: "meta.construcao" });
   return {
-    title: META[market].title,
-    description: META[market].description,
-    alternates: buildAlternates(market, "/construcao"),
+    title: t("title"),
+    description: t("description"),
+    alternates: buildAlternates(locale, "/construcao"),
   };
 }
 
-/* Diferenciais que antes eram "unidades" no antigo array de soluções
-   (removido de lib/content.ts, agora sem consumidores) e agora vivem como
-   destaques dentro da unidade de construção. BR-only por enquanto — sem
-   copy em espanhol ainda. */
-const DIFERENCIAIS = [
-  {
-    title: "Terraplanagem",
-    desc: "Preparação e movimentação de terra com frota própria, garantindo base sólida para cada empreendimento.",
-  },
-  {
-    title: "Gestão de projetos",
-    desc: "Equipe técnica integrada que atua em todas as etapas, do planejamento à entrega de resultados consistentes.",
-  },
-];
-
 export default async function ConstrucaoPage({ params }: Props) {
   const { locale } = await params;
-  const market = locale as Market;
-
-  return (
-    <>
-      <Navbar market={market} />
-      <main>
-        <Hero />
-        <TrustBar />
-        <Obras />
-        <Credenciais />
-        {market === "br" && (
-          <section className="relative bg-surface py-20 md:py-28">
-            <div className="container-x">
-              <p className="hud text-brand-600">Diferenciais</p>
-              <h2 className="display mt-4 max-w-xl text-2xl sm:text-3xl">
-                Mais do que construção civil.
-              </h2>
-              <div className="mt-10 grid gap-4 sm:grid-cols-2">
-                {DIFERENCIAIS.map((d) => (
-                  <div
-                    key={d.title}
-                    className="rounded-2xl border border-hair bg-paper p-6"
-                  >
-                    <h3 className="text-base font-semibold text-ink">
-                      {d.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                      {d.desc}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-        <Fundacao />
-        <Stats />
-        <Clientes />
-        <Contato />
-      </main>
-      <Footer market={market} />
-    </>
-  );
+  setRequestLocale(locale);
+  return <ConstrucaoContent market={locale} />;
 }

@@ -1,11 +1,15 @@
-// Handles URLs that don't match any route at all (e.g. a business-unit
-// route not yet built). Required because this app has two independent
-// root layouts (app/(selector)/layout.tsx and app/[locale]/layout.tsx) —
-// there's no single layout Next.js could otherwise compose a 404 from, so
-// without this file + the `experimental.globalNotFound` flag in
-// next.config.ts, unmatched URLs fell through to Next's built-in default
-// 404 instead of a branded page. Bypasses normal rendering entirely, so it
-// must import its own global styles/fonts and provide the full document.
+// O 404 de todo o site. Toda rota vive sob app/[locale], então não existe
+// app/layout.tsx que o Next pudesse usar para compor um 404 — sem este
+// arquivo e a flag `experimental.globalNotFound` do next.config.ts, uma URL
+// desconhecida cairia no 404 padrão do Next em vez de numa página com a
+// marca. Ele contorna a renderização normal, e por isso importa os próprios
+// estilos e fontes e devolve o documento inteiro.
+//
+// É bilíngue porque atende URLs de que não se pode inferir mercado nenhum, e
+// porque é ele que responde também às unidades inativas num mercado (ex.:
+// /py/guindastes): elas não são rotas ali — cada página de unidade restringe
+// seus params aos mercados em que a unidade opera (ver generateStaticParams
+// em app/[locale]/<unidade>/page.tsx).
 // Deliberadamente fora do analytics: este root layout não renderiza o GA4,
 // então 404s sem mercado (ex.: /rota-inexistente) não viram pageview — só
 // os 404s dentro de [locale] (ex.: /br/rota-inexistente) são contabilizados.

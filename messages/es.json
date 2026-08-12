@@ -1,1 +1,364 @@
-{}
+{
+  "nav": {
+    "logoLabel": "Centra — inicio",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "cta": "Hable con Centra",
+    "obras": "Obras",
+    "sobre": "Nosotros",
+    "equipe": "Equipo",
+    "market": {
+      "switchLabel": "Cambiar de mercado",
+      "br": "Brasil",
+      "py": "Paraguay"
+    }
+  },
+
+  "sectors": {
+    "industrial": "Industrial",
+    "agroindustrial": "Agroindustrial",
+    "comercial": "Comercial"
+  },
+
+  "units": {
+    "backLabel": "Todas las unidades",
+    "construcao": {
+      "label": "Construcción",
+      "eyebrow": "Unidad de negocio",
+      "short": "Obras industriales, agroindustriales y comerciales — del proyecto a la entrega final."
+    },
+    "pre-moldados": {
+      "label": "Prefabricados",
+      "eyebrow": "Unidad de negocio",
+      "short": "Elementos prefabricados y artefactos de cemento que aceleran el plazo de obra.",
+      "description": "Industria de prefabricados y artefactos de cemento del Grupo Centra.",
+      "catalogNote": "Contenido en actualización. Hable con nuestro equipo comercial para especificaciones y plazos.",
+      "contactCta": "Hablar con el equipo comercial"
+    },
+    "metalurgica": {
+      "label": "Metalúrgica",
+      "eyebrow": "Unidad de negocio",
+      "short": "Fabricación y montaje de estructuras metálicas de gran luz.",
+      "description": "Fabricación y montaje de estructuras metálicas de alto desempeño.",
+      "catalogNote": "Contenido en actualización. Hable con nuestro equipo comercial para especificaciones y plazos.",
+      "contactCta": "Hablar con el equipo comercial"
+    },
+    "guindastes": {
+      "label": "Grúas",
+      "eyebrow": "Unidad de negocio",
+      "short": "Flota propia para movimiento de cargas en obras de gran porte.",
+      "description": "Flota de grúas y equipos para movimiento de cargas en obras de gran porte.",
+      "catalogNote": "Contenido en actualización. Hable con nuestro equipo comercial para especificaciones y plazos.",
+      "contactCta": "Hablar con el equipo comercial"
+    }
+  },
+
+  "home": {
+    "eyebrow": "Grupo Centra",
+    "title": "Ingeniería e industria de <accent>alto desempeño</accent>.",
+    "description": "Construcción civil, prefabricados y artefactos de cemento, estructuras metálicas y locación de grúas — cuatro unidades que se completan dentro de la misma obra.",
+    "imageAlt": "Complejo agroindustrial construido por Centra en Brasil",
+    "unitsEyebrow": "Unidades de negocio",
+    "unitsTitle": "Cuatro frentes, una sola ingeniería.",
+    "cta": "Conocer",
+    "contactCta": "Hable con Centra"
+  },
+
+  "hero": {
+    "eyebrow": "Ingeniería · Construcción · Emprendimientos",
+    "headline": {
+      "line1": "Proyectos que se vuelven",
+      "line2": "emprendimientos",
+      "line3": "de alto desempeño."
+    },
+    "lead": "Construcción civil en Paraguay, con la experiencia del Grupo Centra en Brasil en obras industriales, agroindustriales y comerciales.",
+    "sectorsLabel": "Sectores de actuación",
+    "hudLine1": "Obra ejecutada en Brasil",
+    "hudLine2": "Palotina · Paraná · Brasil",
+    "scroll": "Deslizar",
+    "workIndex": "Obra 01",
+    "workLabel": "C.Vale · Unidad industrial",
+    "imageAlt": "Complejo agroindustrial construido por Centra en Brasil"
+  },
+
+  "trustBar": {
+    "title": "La confianza de quien construye en el Sur de Brasil",
+    "industrial": "Sector industrial",
+    "agroindustria": "Agroindustria",
+    "cooperativas": "Cooperativas"
+  },
+
+  "obras": {
+    "eyebrow": "Obras ejecutadas",
+    "title": "Lo que construimos para <accent>grandes operaciones</accent>.",
+    "description": "Cada emprendimiento entregado lleva excelencia técnica, plazo cumplido y seguridad — para cooperativas e industrias del Sur de Brasil.",
+    "cta": "Ver más obras",
+    "presenceLabel": "Actuación",
+    "presenceTitle": "Presencia en 4 estados de Brasil y en Paraguay",
+    "states": {
+      "PR": "Paraná",
+      "SC": "Santa Catarina",
+      "RS": "Rio Grande do Sul",
+      "MS": "Mato Grosso do Sul",
+      "PY": "Paraguay"
+    }
+  },
+
+  "works": {
+    "cvale-complexo": {
+      "client": "C.Vale",
+      "title": "Complejo agroindustrial",
+      "summary": "Unidad industrial de gran porte que integra silos, almacenes y edificaciones administrativas.",
+      "scope": "Obra civil · Estructura metálica",
+      "sector": "Agroindustrial",
+      "location": "Paraná · Brasil"
+    },
+    "cvale-fachada": {
+      "client": "C.Vale",
+      "title": "Edificio corporativo",
+      "summary": "Edificación comercial con fachada en piel de vidrio y terminación de alto estándar.",
+      "scope": "Obra civil · Terminación",
+      "sector": "Comercial",
+      "location": "Paraná · Brasil"
+    },
+    "copacol-unidade": {
+      "client": "Copacol",
+      "title": "Unidad industrial",
+      "summary": "Galpón industrial de gran luz con cubierta metálica e identidad visual aplicada a la fachada.",
+      "scope": "Estructura metálica · Cubierta",
+      "sector": "Industrial",
+      "location": "Paraná · Brasil"
+    },
+    "silos-goldenhour": {
+      "client": "Almacenaje",
+      "title": "Conjunto de silos",
+      "summary": "Estructuras de almacenaje de granos con pasarelas y sistemas de transporte de carga.",
+      "scope": "Estructura metálica · Montaje",
+      "sector": "Agroindustrial",
+      "location": "Sur de Brasil"
+    }
+  },
+
+  "credenciais": {
+    "eyebrow": "Quién firma",
+    "title": "Cada obra tiene un <accent>ingeniero responsable</accent>.",
+    "description": "Centra es conducida por socios fundadores ingenieros civiles, con registro activo en el CREA-PR — el consejo profesional de ingeniería de Paraná, Brasil —, al frente de un equipo técnico que acompaña cada etapa del proyecto, de la planificación a la entrega.",
+    "cta": "Conozca todo el equipo técnico",
+    "founderRole": "Socio fundador · Ingeniero Civil"
+  },
+
+  "diferenciais": {
+    "eyebrow": "Diferenciales",
+    "title": "Más que construcción civil.",
+    "terraplanagem": {
+      "title": "Movimiento de suelos",
+      "description": "Preparación y movimiento de tierra con flota propia, garantizando una base sólida para cada emprendimiento."
+    },
+    "gestao": {
+      "title": "Gestión de proyectos",
+      "description": "Equipo técnico integrado que actúa en todas las etapas, de la planificación a la entrega de resultados consistentes."
+    }
+  },
+
+  "fundacao": {
+    "eyebrow": "Ingeniería",
+    "kicker": "Cómo construimos",
+    "title": "De la <accent>cimentación</accent> a la cima del silo.",
+    "depthLabel": "Cota",
+    "stageLabel": "Etapa",
+    "stages": {
+      "estacas": {
+        "title": "Pilotes profundos",
+        "spec": "Transferencia de carga al suelo firme · cabezales de pilotes"
+      },
+      "anel": {
+        "title": "Anillo de cimentación",
+        "spec": "Bloque circular armado · armadura continua · pernos de anclaje"
+      },
+      "costado": {
+        "title": "Fuste del silo",
+        "spec": "Chapas onduladas · montantes de acero galvanizado"
+      }
+    }
+  },
+
+  "stats": {
+    "eyebrow": "En números",
+    "title": "La escala de quien entrega <accent>alto desempeño</accent>.",
+    "items": {
+      "states": { "suffix": "estados", "label": "En el Sur de Brasil y MS, además de Paraguay" },
+      "commitment": { "suffix": "%", "label": "Compromiso con plazo y seguridad" }
+    }
+  },
+
+  "clientes": {
+    "eyebrow": "Quién confía en Centra",
+    "title": "Alianzas que sostienen <accent>grandes operaciones</accent>.",
+    "description": "Cooperativas agroindustriales e industrias de Brasil confían a Centra obras de alta complejidad e impacto regional.",
+    "listLabel": "Algunos de nuestros principales clientes",
+    "imageAlt": "Obra ejecutada para {client}",
+    "quote": "“Cada obra representa nuestro compromiso con la excelencia, la innovación y la entrega de resultados consistentes.”",
+    "quoteAuthor": "Centra Engenharia e Empreendimentos",
+    "notes": {
+      "copacol": "Cooperativa Agroindustrial (Brasil)",
+      "cvale": "Cooperativa Agroindustrial (Brasil)"
+    }
+  },
+
+  "contato": {
+    "eyebrow": "Vamos a construir",
+    "title": "Su próximo emprendimiento empieza aquí.",
+    "description": "Cuéntele a nuestro equipo sobre su proyecto. Volvemos con una propuesta técnica hecha para su desafío.",
+    "emailLabel": "Correo electrónico",
+    "phoneLabel": "Teléfono",
+    "baseLabel": "Sede del grupo",
+    "baseValue": "Paraná · Brasil",
+    "form": {
+      "nome": "Nombre",
+      "empresa": "Empresa",
+      "email": "Correo electrónico",
+      "telefone": "Teléfono",
+      "telefonePlaceholder": "+595 000 000 000",
+      "mensagem": "Sobre el proyecto",
+      "mensagemPlaceholder": "Tipo de obra, ubicación, plazo estimado…",
+      "submit": "Enviar mensaje",
+      "submitting": "Enviando…",
+      "sendingStatus": "Enviando mensaje…",
+      "replyNote": "Respuesta en hasta 1 día hábil."
+    },
+    "success": {
+      "title": "¡Mensaje recibido!",
+      "body": "Gracias por el contacto. Nuestro equipo técnico responderá en breve."
+    },
+    "errors": {
+      "nome_required": "Ingrese su nombre.",
+      "nome_too_long": "Nombre demasiado largo (máx. 120 caracteres).",
+      "email_required": "Ingrese su correo electrónico.",
+      "email_invalid": "Correo electrónico inválido.",
+      "empresa_too_long": "Nombre de la empresa demasiado largo.",
+      "telefone_too_long": "Teléfono demasiado largo.",
+      "mensagem_too_long": "Mensaje demasiado largo (máx. 2000 caracteres).",
+      "invalid_request": "Solicitud inválida.",
+      "send_failed": "No fue posible enviar su mensaje ahora. Intente nuevamente en breve o contáctenos por teléfono o correo electrónico.",
+      "network": "Fallo de conexión. Verifique su internet e intente nuevamente."
+    }
+  },
+
+  "about": {
+    "eyebrow": "Quiénes somos",
+    "title": "La fuerza de Centra<br></br>está en las <accent>personas</accent>.",
+    "description": "Un equipo técnico especializado — ingenieros, gestores y profesionales experimentados — que actúa de forma integrada en todas las etapas, transformando proyectos en emprendimientos de alto desempeño. El Grupo Centra opera en Brasil, y su unidad de construcción civil también opera en Paraguay.",
+    "statesValue": "4 estados",
+    "statesLabel": "de presencia consolidada en Brasil",
+    "pillars": {
+      "missao": {
+        "title": "Misión",
+        "body": "Entregar soluciones de ingeniería y construcción con excelencia técnica, innovación y eficiencia operacional, transformando proyectos en emprendimientos de alto desempeño — con compromiso, seguridad y responsabilidad, generando valor sostenible para clientes, socios y comunidades."
+      },
+      "visao": {
+        "title": "Visión",
+        "body": "Ser reconocida como una de las principales referencias en ingeniería y construcción de la región Sur de Brasil, destacándose por la calidad de las entregas, la solidez de las relaciones, la capacidad técnica y la contribución al desarrollo de los sectores industrial, agroindustrial y comercial."
+      },
+      "valores": {
+        "title": "Valores",
+        "body": "Actuamos con ética, transparencia y compromiso en todas las relaciones y proyectos. Valoramos la excelencia técnica, la seguridad, la innovación y el desarrollo continuo, buscando soluciones de alta calidad que generen resultados duraderos."
+      }
+    }
+  },
+
+  "equipe": {
+    "eyebrow": "Equipo técnico",
+    "title": "Ingenieros y gestores que <accent>firman cada obra</accent>.",
+    "description": "Profesionales experimentados, integrados en todas las etapas de los proyectos — desde la planificación hasta la entrega final. El mismo equipo fundador, con sede en Brasil, conduce también la expansión del Grupo Centra en Paraguay.",
+    "founderRole": "Socio fundador · Ingeniero Civil"
+  },
+
+  "portfolio": {
+    "eyebrow": "Portafolio",
+    "title": "Obras que muestran <accent>nuestra escala</accent>.",
+    "description": "Proyectos entregados por el Grupo Centra — cada uno con su registro fotográfico.",
+    "allClients": "Todas",
+    "allCountries": "Todos los países",
+    "brazil": "Brasil",
+    "paraguay": "Paraguay",
+    "attributionNote": "Obras ejecutadas por el Grupo Centra en Brasil.",
+    "badgeBR": "Ejecutado en Brasil",
+    "badgePY": "Ejecutado en Paraguay"
+  },
+
+  "avisoLegal": {
+    "eyebrow": "Información legal",
+    "title": "Aviso legal",
+    "entityLabel": "Razón social",
+    "pendingLabel": "a confirmar",
+    "pendingNote": "Datos registrales en proceso de confirmación.",
+    "addressLabel": "Dirección",
+    "phoneLabel": "Teléfono",
+    "linkLabel": "Aviso legal"
+  },
+
+  "footer": {
+    "description": "Ingeniería y construcción de alto desempeño para los sectores industrial, agroindustrial y comercial.",
+    "navTitle": "Navegación",
+    "sectorsTitle": "Sectores",
+    "cta": "Hable con Centra →",
+    "tagline": "Grupo Centra — Brasil y Paraguay",
+    "rightsReserved": "Todos los derechos reservados."
+  },
+
+
+  "meta": {
+    "site": {
+      "titleDefault": "Grupo Centra",
+      "titleTemplate": "%s | Grupo Centra",
+      "description": "Construcción civil del Grupo Centra en Paraguay, con el respaldo de la experiencia del grupo en Brasil en obras industriales, agroindustriales y comerciales.",
+      "ogTitle": "Grupo Centra | Ingeniería y Construcción de Alto Desempeño",
+      "ogDescription": "Construcción civil en Paraguay, con el respaldo de la experiencia del Grupo Centra en Brasil.",
+      "siteName": "Grupo Centra",
+      "keywords": [
+        "constructora",
+        "ingeniería civil",
+        "obras industriales",
+        "agroindustrial",
+        "construcción",
+        "Paraguay"
+      ]
+    },
+    "home": {
+      "title": "Construcción civil en Paraguay",
+      "description": "Construcción civil del Grupo Centra en Paraguay: ejecución completa de obras industriales, agroindustriales y comerciales, con el respaldo de la experiencia del grupo en Brasil."
+    },
+    "construcao": {
+      "title": "Construcción civil",
+      "description": "Ejecución completa de obras industriales, agroindustriales y comerciales — del proyecto a la entrega final."
+    },
+    "pre-moldados": {
+      "title": "Prefabricados y artefactos de cemento",
+      "description": "Industria de prefabricados y artefactos de cemento del Grupo Centra."
+    },
+    "metalurgica": {
+      "title": "Metalúrgica",
+      "description": "Fabricación y montaje de estructuras metálicas de alto desempeño."
+    },
+    "guindastes": {
+      "title": "Locación de grúas",
+      "description": "Flota de grúas y equipos para movimiento de cargas en obras de gran porte."
+    },
+    "obras": {
+      "title": "Obras",
+      "description": "Portafolio de obras del Grupo Centra. Las obras ejecutadas en Brasil están identificadas como tales, con el país de ejecución en cada proyecto."
+    },
+    "sobre": {
+      "title": "Nosotros",
+      "description": "Conozca al Grupo Centra — misión, visión, valores y el equipo que transforma proyectos en emprendimientos de alto desempeño. Operamos en Brasil y, con la construcción civil, también en Paraguay."
+    },
+    "equipe": {
+      "title": "Equipo",
+      "description": "Conozca a los ingenieros y profesionales del Grupo Centra. El mismo equipo fundador, con sede en Brasil, conduce la expansión en Paraguay."
+    },
+    "avisoLegal": {
+      "title": "Aviso legal",
+      "description": "Información legal del Grupo Centra en Paraguay. Datos registrales en proceso de confirmación."
+    }
+  }
+}

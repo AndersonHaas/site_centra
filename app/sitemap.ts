@@ -5,21 +5,10 @@ import { marketsForPath, pathsForMarket } from "@/lib/group/routes";
 import { SITE_URL } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  /* A raiz é o seletor de país — é ela que o x-default aponta. */
-  const entries: MetadataRoute.Sitemap = [
-    {
-      url: `${SITE_URL}/`,
-      changeFrequency: "yearly",
-      priority: 1,
-      alternates: {
-        languages: {
-          [HREFLANG.br]: `${SITE_URL}/br`,
-          [HREFLANG.py]: `${SITE_URL}/py`,
-          "x-default": `${SITE_URL}/`,
-        },
-      },
-    },
-  ];
+  /* A raiz não entra: ela detecta o mercado e redireciona (307), então não é
+     uma URL indexável. Ela segue sendo o alvo do x-default de cada rota —
+     ver buildAlternates em lib/seo.ts. */
+  const entries: MetadataRoute.Sitemap = [];
 
   for (const market of routing.locales) {
     for (const path of pathsForMarket(market)) {

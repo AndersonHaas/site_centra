@@ -1,24 +1,11 @@
+import { Building2, Boxes, Frame, Construction, type LucideIcon } from "lucide-react";
 import type { BusinessUnitId } from "./types";
-import type { Market } from "./market";
 
-export const BUSINESS_UNITS: Record<
-  BusinessUnitId,
-  { icon: string; label: Record<Market, string> }
-> = {
-  construcao: {
-    icon: "Building2",
-    label: { br: "Construção", py: "Construcción" },
-  },
-  "pre-moldados": {
-    icon: "Boxes",
-    label: { br: "Pré-moldados", py: "Prefabricados" },
-  },
-  metalurgica: {
-    icon: "Frame",
-    label: { br: "Metalúrgica", py: "Metalúrgica" },
-  },
-  guindastes: {
-    icon: "Construction",
-    label: { br: "Guindastes", py: "Grúas" },
-  },
+/* Rótulos e descrições das unidades vivem nos catálogos de tradução
+   (messages/*.json, namespace `units`) — aqui fica só o que não é texto. */
+export const BUSINESS_UNITS: Record<BusinessUnitId, { icon: LucideIcon }> = {
+  construcao: { icon: Building2 },
+  "pre-moldados": { icon: Boxes },
+  metalurgica: { icon: Frame },
+  guindastes: { icon: Construction },
 };

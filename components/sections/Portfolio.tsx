@@ -3,83 +3,39 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { ImageIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal, RevealStagger, RevealItem } from "@/components/ui/Reveal";
 import { Lightbox } from "@/components/ui/Lightbox";
 import { PROJECTS, type ProjectClient } from "@/lib/content";
 import { cn } from "@/lib/utils";
-import type { Market } from "@/lib/group/market";
 import type { ProjectCountry } from "@/lib/group/types";
 
-const CLIENT_FILTERS: Array<{ label: string; value: ProjectClient | "Todas" }> = [
-  { label: "Todas", value: "Todas" },
-  { label: "C.Vale", value: "C.Vale" },
-  { label: "Copacol", value: "Copacol" },
-];
-
-type CountryFilterOption = { label: string; value: ProjectCountry | "Todos" };
-
-const COPY: Record<
-  Market,
-  {
-    eyebrow: string;
-    title: React.ReactNode;
-    description: string;
-    countryFilters: CountryFilterOption[];
-    attributionNote: string;
-    countryBadge: Record<ProjectCountry, string>;
-  }
-> = {
-  br: {
-    eyebrow: "Portfólio",
-    title: (
-      <>
-        Obras que mostram{" "}
-        <span className="text-brand-600">nossa escala</span>.
-      </>
-    ),
-    description:
-      "Projetos entregues pelo Grupo Centra — cada um com seu registro fotográfico.",
-    countryFilters: [
-      { label: "Todos os países", value: "Todos" },
-      { label: "Brasil", value: "BR" },
-      { label: "Paraguai", value: "PY" },
-    ],
-    attributionNote: "Obras executadas pelo Grupo Centra no Brasil.",
-    countryBadge: { BR: "Executado no Brasil", PY: "Executado no Paraguai" },
-  },
-  py: {
-    eyebrow: "Portafolio",
-    title: (
-      <>
-        Obras que muestran{" "}
-        <span className="text-brand-600">nuestra escala</span>.
-      </>
-    ),
-    description:
-      "Proyectos entregados por el Grupo Centra — cada uno con su registro fotográfico.",
-    countryFilters: [
-      { label: "Todos los países", value: "Todos" },
-      { label: "Brasil", value: "BR" },
-      { label: "Paraguay", value: "PY" },
-    ],
-    attributionNote: "Obras ejecutadas por el Grupo Centra en Brasil.",
-    countryBadge: { BR: "Ejecutado en Brasil", PY: "Ejecutado en Paraguay" },
-  },
-};
+/* Nomes de cliente são nomes próprios — não passam pelo catálogo. */
+const CLIENT_VALUES: Array<ProjectClient | "Todas"> = ["Todas", "C.Vale", "Copacol"];
+const COUNTRY_VALUES: Array<ProjectCountry | "Todos"> = ["Todos", "BR", "PY"];
 
 type PortfolioProps = {
-  market: Market;
   showAttributionNote?: boolean;
 };
 
-export function Portfolio({ market, showAttributionNote = false }: PortfolioProps) {
-  const copy = COPY[market];
+export function Portfolio({ showAttributionNote = false }: PortfolioProps) {
+  const t = useTranslations("portfolio");
   const [clientFilter, setClientFilter] = useState<ProjectClient | "Todas">("Todas");
   const [countryFilter, setCountryFilter] = useState<ProjectCountry | "Todos">("Todos");
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
+
+  const countryLabel: Record<ProjectCountry | "Todos", string> = {
+    Todos: t("allCountries"),
+    BR: t("brazil"),
+    PY: t("paraguay"),
+  };
+  const countryBadge: Record<ProjectCountry, string> = {
+    BR: t("badgeBR"),
+    PY: t("badgePY"),
+  };
 
   const projects = PROJECTS.filter(
     (p) =>
@@ -95,15 +51,17 @@ export function Portfolio({ market, showAttributionNote = false }: PortfolioProp
         <SectionHeader
           as="h1"
           index="01"
-          eyebrow={copy.eyebrow}
-          title={copy.title}
-          description={copy.description}
+          eyebrow={t("eyebrow")}
+          title={t.rich("title", {
+            accent: (chunks) => <span className="text-brand-600">{chunks}</span>,
+          })}
+          description={t("description")}
         />
 
         {showAttributionNote && projects.some((p) => p.country === "BR") && (
           <Reveal className="mt-6">
             <p className="rounded-xl border border-hair bg-paper-2 px-4 py-3 text-sm text-ink-soft">
-              {copy.attributionNote}
+              {t("attributionNote")}
             </p>
           </Reveal>
         )}
@@ -114,36 +72,36 @@ export function Portfolio({ market, showAttributionNote = false }: PortfolioProp
             block and silently breaks `position: sticky` on descendants. */}
         <div className="sticky top-[70px] z-20 -mx-6 mt-10 flex flex-col gap-2 overflow-x-auto bg-paper px-6 pb-1 md:mx-0 md:px-0">
           <Reveal className="flex gap-2">
-            {CLIENT_FILTERS.map((f) => (
+            {CLIENT_VALUES.map((value) => (
               <button
-                key={f.value}
+                key={value}
                 type="button"
-                onClick={() => setClientFilter(f.value)}
+                onClick={() => setClientFilter(value)}
                 className={cn(
                   "shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-colors",
-                  clientFilter === f.value
+                  clientFilter === value
                     ? "border-brand-500 bg-brand-500 text-white"
                     : "border-hair bg-surface text-ink-soft hover:border-brand-200 hover:text-ink",
                 )}
               >
-                {f.label}
+                {value === "Todas" ? t("allClients") : value}
               </button>
             ))}
           </Reveal>
           <Reveal className="flex gap-2">
-            {copy.countryFilters.map((f) => (
+            {COUNTRY_VALUES.map((value) => (
               <button
-                key={f.value}
+                key={value}
                 type="button"
-                onClick={() => setCountryFilter(f.value)}
+                onClick={() => setCountryFilter(value)}
                 className={cn(
                   "shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-colors",
-                  countryFilter === f.value
+                  countryFilter === value
                     ? "border-brand-500 bg-brand-500 text-white"
                     : "border-hair bg-surface text-ink-soft hover:border-brand-200 hover:text-ink",
                 )}
               >
-                {f.label}
+                {countryLabel[value]}
               </button>
             ))}
           </Reveal>
@@ -180,7 +138,7 @@ export function Portfolio({ market, showAttributionNote = false }: PortfolioProp
                     {project.client}
                   </span>
                   <span className="hud rounded-full border border-white/15 bg-ink-950/40 px-3 py-1.5 text-white/80 backdrop-blur-sm">
-                    {copy.countryBadge[project.country]}
+                    {countryBadge[project.country]}
                   </span>
                 </div>
                 <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-2">

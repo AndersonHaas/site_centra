@@ -9,32 +9,16 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { SplitText } from "@/components/ui/SplitText";
 import { VideoScrub } from "@/components/ui/VideoScrub";
+import { FOUNDATION_STAGES } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 const SiloFoundation = dynamic(
   () => import("@/components/three/SiloFoundation"),
   { ssr: false },
 );
-
-const STAGES = [
-  {
-    title: "Estacas profundas",
-    spec: "Transferência de carga ao solo firme · blocos de coroamento",
-    range: [0.04, 0.34] as const,
-  },
-  {
-    title: "Anel de fundação",
-    spec: "Bloco circular armado · armadura contínua · chumbadores",
-    range: [0.36, 0.64] as const,
-  },
-  {
-    title: "Costado do silo",
-    spec: "Chapas onduladas · montantes de aço galvanizado",
-    range: [0.66, 0.96] as const,
-  },
-];
 
 /* Seção pinada: exploração da fundação do silo dirigida pelo scroll.
    variant="3d"    → cena Three.js procedural (wireframe)
@@ -43,6 +27,7 @@ const STAGES = [
 export function Fundacao({ variant = "3d" }: { variant?: "3d" | "video" }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
+  const t = useTranslations("fundacao");
   const { scrollYProgress } = useScroll({
     target: wrapRef,
     offset: ["start start", "end end"],
@@ -58,10 +43,7 @@ export function Fundacao({ variant = "3d" }: { variant?: "3d" | "video" }) {
 
   return (
     <section id="fundacao" className="relative bg-ink-950">
-      <div
-        ref={wrapRef}
-        style={reduce ? undefined : { height: "260vh" }}
-      >
+      <div ref={wrapRef} style={reduce ? undefined : { height: "260vh" }}>
         <div
           className={cn(
             "grain h-svh overflow-hidden",
@@ -73,10 +55,7 @@ export function Fundacao({ variant = "3d" }: { variant?: "3d" | "video" }) {
           {variant === "3d" ? (
             <SiloFoundation progress={scrollYProgress} />
           ) : (
-            <VideoScrub
-              src="/videos/fundacao.mp4"
-              progress={scrollYProgress}
-            />
+            <VideoScrub src="/videos/fundacao.mp4" progress={scrollYProgress} />
           )}
 
           <div
@@ -90,17 +69,20 @@ export function Fundacao({ variant = "3d" }: { variant?: "3d" | "video" }) {
           {/* Cabeçalho */}
           <div className="container-x pointer-events-none absolute inset-x-0 top-24 z-10">
             <div className="flex items-center gap-3">
-              <span className="eyebrow text-brand-300">Engenharia</span>
+              <span className="eyebrow text-brand-300">{t("eyebrow")}</span>
               <span className="h-px w-8 bg-white/20" />
-              <span className="eyebrow text-white/55">Como construímos</span>
+              <span className="eyebrow text-white/55">{t("kicker")}</span>
             </div>
             <SplitText
               as="h2"
               delay={0.05}
               className="display mt-5 max-w-2xl text-3xl text-white sm:text-4xl md:text-[2.9rem]"
             >
-              Da <span className="text-gradient-brand">fundação</span> ao topo
-              do silo.
+              {t.rich("title", {
+                accent: (chunks) => (
+                  <span className="text-gradient-brand">{chunks}</span>
+                ),
+              })}
             </SplitText>
           </div>
 
@@ -109,28 +91,30 @@ export function Fundacao({ variant = "3d" }: { variant?: "3d" | "video" }) {
             <div className="flex items-end justify-between gap-6">
               {reduce ? (
                 <div className="flex flex-col gap-5">
-                  {STAGES.map((s, i) => (
-                    <div key={s.title}>
+                  {FOUNDATION_STAGES.map((s, i) => (
+                    <div key={s.key}>
                       <p className="hud text-brand-300">
                         {String(i + 1).padStart(2, "0")}
                       </p>
                       <h3 className="display mt-1 text-xl text-white">
-                        {s.title}
+                        {t(`stages.${s.key}.title`)}
                       </h3>
-                      <p className="mt-1 text-sm text-white/65">{s.spec}</p>
+                      <p className="mt-1 text-sm text-white/65">
+                        {t(`stages.${s.key}.spec`)}
+                      </p>
                     </div>
                   ))}
                 </div>
               ) : (
                 <div className="relative h-28 w-full max-w-md">
-                  {STAGES.map((s, i) => (
+                  {FOUNDATION_STAGES.map((s, i) => (
                     <Caption
-                      key={s.title}
+                      key={s.key}
                       progress={scrollYProgress}
                       range={s.range}
                       index={i}
-                      title={s.title}
-                      spec={s.spec}
+                      title={t(`stages.${s.key}.title`)}
+                      spec={t(`stages.${s.key}.spec`)}
                     />
                   ))}
                 </div>
@@ -139,10 +123,11 @@ export function Fundacao({ variant = "3d" }: { variant?: "3d" | "video" }) {
               {!reduce && (
                 <div className="hidden shrink-0 flex-col items-end gap-2 sm:flex">
                   <span className="hud text-brand-300">
-                    Cota&ensp;<motion.span>{depth}</motion.span>
+                    {t("depthLabel")}&ensp;<motion.span>{depth}</motion.span>
                   </span>
                   <span className="hud text-white/55">
-                    Etapa&ensp;<motion.span>{stage}</motion.span>&ensp;/ 03
+                    {t("stageLabel")}&ensp;<motion.span>{stage}</motion.span>
+                    &ensp;/ 03
                   </span>
                 </div>
               )}

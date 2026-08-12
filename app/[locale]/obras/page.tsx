@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Navbar } from "@/components/sections/Navbar";
 import { Portfolio } from "@/components/sections/Portfolio";
 import { Footer } from "@/components/sections/Footer";
@@ -9,39 +10,29 @@ type Props = {
   params: Promise<{ locale: Market }>;
 };
 
-const META: Record<Market, { title: string; description: string }> = {
-  br: {
-    title: "Obras",
-    description:
-      "Portfólio de obras do Grupo Centra — projetos entregues para cooperativas agroindustriais e clientes industriais no Sul do Brasil.",
-  },
-  py: {
-    title: "Obras",
-    description:
-      "Portafolio de obras del Grupo Centra. Las obras ejecutadas en Brasil están identificadas como tales, con el país de ejecución en cada proyecto.",
-  },
-};
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "meta.obras" });
   return {
-    title: META[locale].title,
-    description: META[locale].description,
+    title: t("title"),
+    description: t("description"),
     alternates: buildAlternates(locale, "/obras"),
   };
 }
 
 export default async function ObrasPage({ params }: Props) {
   const { locale } = await params;
-  const market = locale;
+  setRequestLocale(locale);
 
   return (
     <>
-      <Navbar market={market} />
+      <Navbar market={locale} />
       <main className="pt-[70px]">
-        <Portfolio market={market} showAttributionNote={market === "py"} />
+        {/* Todo o portfólio publicado é de obras no Brasil. No Paraguai isso
+            precisa estar dito na página, não subentendido. */}
+        <Portfolio showAttributionNote={locale === "py"} />
       </main>
-      <Footer market={market} />
+      <Footer market={locale} />
     </>
   );
 }

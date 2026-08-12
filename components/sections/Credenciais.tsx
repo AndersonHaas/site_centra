@@ -1,7 +1,8 @@
 "use client";
 
 import { BadgeCheck, ArrowUpRight } from "lucide-react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal, RevealStagger, RevealItem } from "@/components/ui/Reveal";
 import { FOUNDERS } from "@/lib/content";
@@ -17,28 +18,29 @@ function initials(name: string) {
 }
 
 export function Credenciais() {
+  const t = useTranslations("credenciais");
+
   return (
     <section id="credenciais" className="relative bg-paper py-24 md:py-32">
       <div className="container-x grid gap-12 lg:grid-cols-[0.85fr_1fr] lg:gap-20">
         <div>
           <SectionHeader
             index="02"
-            eyebrow="Quem assina"
+            eyebrow={t("eyebrow")}
             split
-            title={
-              <>
-                Cada obra tem um{" "}
-                <span className="text-brand-600">engenheiro responsável</span>.
-              </>
-            }
-            description="A Centra é conduzida por sócios-fundadores engenheiros civis, com registro ativo no CREA-PR, à frente de uma equipe técnica que acompanha cada etapa do projeto — do planejamento à entrega."
+            title={t.rich("title", {
+              accent: (chunks) => (
+                <span className="text-brand-600">{chunks}</span>
+              ),
+            })}
+            description={t("description")}
           />
           <Reveal delay={0.15} className="mt-8">
             <Link
               href="/equipe"
               className="group inline-flex items-center gap-1.5 text-sm font-medium text-brand-700"
             >
-              Conheça toda a equipe técnica
+              {t("cta")}
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </Reveal>
@@ -58,7 +60,9 @@ export function Credenciais() {
                     </h3>
                     <BadgeCheck className="h-4 w-4 shrink-0 text-brand-500" />
                   </div>
-                  <p className="mt-0.5 text-sm text-ink-soft">{f.role}</p>
+                  <p className="mt-0.5 text-sm text-ink-soft">
+                    {t("founderRole")}
+                  </p>
                   <p className="mt-1 font-mono text-xs text-ink-soft">
                     {f.crea}
                   </p>

@@ -1,22 +1,23 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { VelocityMarquee } from "@/components/ui/VelocityMarquee";
 import { CLIENTS } from "@/lib/content";
 
-const items = [
-  ...CLIENTS.map((c) => c.name),
-  "Setor industrial",
-  "Agroindústria",
-  "Cooperativas",
-];
-
 export function TrustBar() {
+  const t = useTranslations("trustBar");
+
+  const items = [
+    ...CLIENTS.map((c) => c.name),
+    t("industrial"),
+    t("agroindustria"),
+    t("cooperativas"),
+  ];
+
   return (
     <div className="relative border-y border-white/10 bg-ink-950 py-7">
       <div className="container-x mb-5">
-        <p className="eyebrow text-center text-white/55">
-          A confiança de quem constrói o Sul do Brasil
-        </p>
+        <p className="eyebrow text-center text-white/55">{t("title")}</p>
       </div>
       <div className="mask-fade-x">
         <VelocityMarquee>

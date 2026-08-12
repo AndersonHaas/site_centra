@@ -5,8 +5,8 @@ import type { Market } from "@/lib/group/market";
    Segmentar Brasil × Paraguai por user property é mais robusto do que
    depender de regex de path do lado do GA4: o dado viaja junto do evento,
    sobrevive a mudanças de URL e funciona em relatórios que não expõem o
-   caminho da página. Só existe dentro da árvore [locale] — em "/" (o
-   seletor de país) o visitante ainda não escolheu mercado nenhum.
+   caminho da página. Só existe dentro da árvore [locale] — "/" não renderiza
+   página nenhuma, apenas detecta o mercado e redireciona (ver proxy.ts).
 
    Por que um <script> inline no servidor, e não um useEffect: o
    `gtag('config', ...)` do <GoogleAnalytics> roda de forma síncrona no
