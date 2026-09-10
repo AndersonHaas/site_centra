@@ -1,18 +1,25 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import logoImg from "@/media/logo.png";
+import logoPyImg from "@/media/logo-py-mark.png";
+import type { Market } from "@/lib/group/market";
 
 export function LogoMark({
+  market,
   className,
+  alt = "",
   priority = false,
 }: {
+  market: Market;
   className?: string;
+  alt?: string;
   priority?: boolean;
 }) {
   return (
     <Image
-      src={logoImg}
-      alt="Logo Centra"
+      src={market === "py" ? logoPyImg : logoImg}
+      alt={alt}
       className={cn("h-8 w-auto", className)}
       priority={priority}
     />
@@ -20,17 +27,25 @@ export function LogoMark({
 }
 
 export function Logo({
+  market,
   className,
   dark = true,
   priority = false,
 }: {
+  market: Market;
   className?: string;
   dark?: boolean;
   priority?: boolean;
 }) {
+  const t = useTranslations("brand");
+
   return (
     <span className={cn("flex items-center gap-2.5", className)}>
-      <LogoMark priority={priority} />
+      <LogoMark
+        market={market}
+        priority={priority}
+        alt={t("symbolAlt")}
+      />
       <span className="flex flex-col leading-none">
         <span
           className={cn(
@@ -46,7 +61,7 @@ export function Logo({
             dark ? "text-white/55" : "text-ink-soft",
           )}
         >
-          ENGENHARIA · EMPREENDIMENTOS
+          {t(market === "py" ? "pySubtitle" : "brSubtitle")}
         </span>
       </span>
     </span>

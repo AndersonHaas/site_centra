@@ -197,14 +197,14 @@ function WorkPanel({
     ["-8%", "8%"],
   );
 
-  const doClip = !reduce && (!panel || panel.first);
+  const doClip = !reduce && Boolean(panel?.first);
 
   return (
     <article
       ref={ref}
       className={cn(
         "relative w-full overflow-hidden",
-        panel ? "h-full" : "h-[78vh] min-h-[520px]",
+        panel ? "h-full" : "md:h-[78vh] md:min-h-[520px]",
       )}
     >
       {/* Imagem: wipe de içamento na entrada + pan amarrado ao scroll.
@@ -219,8 +219,8 @@ function WorkPanel({
         className="absolute inset-0"
       >
         <motion.div
-          style={{ y: reduce ? 0 : y }}
-          className="absolute inset-0 scale-[1.12]"
+          style={{ y: reduce || !panel ? 0 : y }}
+          className="absolute inset-0 md:scale-[1.08]"
         >
           <Image
             src={IMAGES[slug]}
@@ -233,15 +233,26 @@ function WorkPanel({
         </motion.div>
       </motion.div>
 
+      <div className="relative aspect-[4/3] md:hidden">
+        <Image
+          src={IMAGES[slug]}
+          alt={`${t("client")} — ${t("title")}`}
+          fill
+          placeholder="blur"
+          sizes="100vw"
+          className="object-cover"
+        />
+      </div>
+
       {/* Gradientes */}
-      <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/15 to-ink-950/55" />
-      <div className="absolute inset-0 bg-gradient-to-r from-ink-950/70 via-transparent to-transparent" />
+      <div className="absolute inset-0 hidden bg-gradient-to-t from-ink-950 via-ink-950/15 to-ink-950/55 md:block" />
+      <div className="absolute inset-0 hidden bg-gradient-to-r from-ink-950/70 via-transparent to-transparent md:block" />
 
       {/* HUD topo: contador só no modo fluxo (no deck fica no DeckHud);
           no deck, tudo desce para não ficar atrás da navbar fixa */}
       <div
         className={cn(
-          "container-x absolute inset-x-0 z-10",
+          "container-x absolute inset-x-0 z-10 hidden md:block",
           panel ? "top-24" : "top-7",
         )}
       >
@@ -261,7 +272,7 @@ function WorkPanel({
       </div>
 
       {/* Conteúdo */}
-      <div className="container-x absolute inset-x-0 bottom-8 z-10 md:bottom-10">
+      <div className="container-x absolute inset-x-0 bottom-8 z-10 hidden md:block md:bottom-10">
         <Reveal>
           <p className="hud text-brand-300">{t("client")}</p>
         </Reveal>
@@ -282,6 +293,16 @@ function WorkPanel({
             <Chip>{t("location")}</Chip>
           </div>
         </Reveal>
+      </div>
+      <div className="container-x relative z-10 border-b border-white/15 bg-ink-950 py-6 md:hidden">
+        <p className="hud text-brand-300">{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")} · {t("sector")}</p>
+        <p className="mt-4 text-sm font-medium text-white/70">{t("client")}</p>
+        <h3 className="display mt-2 text-3xl text-white">{t("title")}</h3>
+        <p className="mt-4 text-base leading-relaxed text-white/75">{t("summary")}</p>
+        <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
+          <Chip>{t("scope")}</Chip>
+          <Chip>{t("location")}</Chip>
+        </div>
       </div>
     </article>
   );

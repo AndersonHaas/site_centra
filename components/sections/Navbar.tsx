@@ -6,7 +6,6 @@ import { Menu, X, ArrowUpRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Logo } from "@/components/ui/Logo";
-import { Magnetic } from "@/components/ui/Magnetic";
 import { MarketSwitcher } from "@/components/ui/MarketSwitcher";
 import { getContactHref, getNavLinks } from "@/lib/group/nav";
 import type { Market } from "@/lib/group/market";
@@ -44,7 +43,7 @@ export function Navbar({ market }: { market: Market }) {
       <div className="border-b border-white/10 bg-ink-950/95 backdrop-blur-xl">
         <nav className="container-x flex h-[70px] items-center justify-between">
           <Link href="/" aria-label={t("nav.logoLabel")}>
-            <Logo priority />
+            <Logo market={market} priority />
           </Link>
 
           <ul className="hidden items-center gap-9 lg:flex">
@@ -68,12 +67,10 @@ export function Navbar({ market }: { market: Market }) {
           <div className="hidden items-center gap-4 lg:flex">
             <MarketSwitcher market={market} />
             <span aria-hidden className="h-5 w-px bg-white/15" />
-            <Magnetic strength={0.2}>
-              <Link href={contactHref} className="btn-primary">
-                {t("nav.cta")}
-                <ArrowUpRight className="h-4 w-4" />
-              </Link>
-            </Magnetic>
+            <Link href={contactHref} className="btn-primary">
+              {t("nav.cta")}
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
           </div>
 
           <div className="flex items-center gap-2 lg:hidden">

@@ -91,7 +91,7 @@ export function Stats() {
                 key={s.key}
                 className="bg-ink-950/70 p-7 backdrop-blur-sm md:p-9"
               >
-                <div className="display flex items-baseline whitespace-nowrap text-6xl text-white md:text-7xl xl:text-8xl">
+                <div className="market-number display flex items-baseline whitespace-nowrap text-6xl text-white md:text-7xl xl:text-8xl">
                   <Counter to={s.value} progress={countProgress} />
                   <span
                     className={cn(

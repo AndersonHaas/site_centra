@@ -1,4 +1,9 @@
 {
+  "brand": {
+    "brSubtitle": "ENGENHARIA · EMPREENDIMENTOS",
+    "pySubtitle": "ENGENHARIA · CONSTRUÇÃO",
+    "symbolAlt": "Símbolo Centra"
+  },
   "nav": {
     "logoLabel": "Centra — início",
     "openMenu": "Abrir menu",

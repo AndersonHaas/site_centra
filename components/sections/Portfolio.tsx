@@ -46,7 +46,7 @@ export function Portfolio({ showAttributionNote = false }: PortfolioProps) {
   const activeProject = PROJECTS.find((p) => p.slug === activeSlug) ?? null;
 
   return (
-    <section className="relative bg-paper py-24 md:py-32">
+    <section className="relative bg-paper py-16 md:py-24">
       {/* Sem link de "voltar" aqui: a volta para a home é o item "Início" do
           menu do topo (lib/group/nav.ts), que serve todas as páginas em vez de
           só esta. */}
@@ -81,9 +81,9 @@ export function Portfolio({ showAttributionNote = false }: PortfolioProps) {
                 type="button"
                 onClick={() => setClientFilter(value)}
                 className={cn(
-                  "shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-colors",
+                  "shrink-0 rounded-lg border px-4 py-2 text-sm font-medium transition-colors",
                   clientFilter === value
-                    ? "border-brand-500 bg-brand-500 text-white"
+                    ? "market-filter-active border-brand-500 bg-brand-500 text-white"
                     : "border-hair bg-surface text-ink-soft hover:border-brand-200 hover:text-ink",
                 )}
               >
@@ -98,9 +98,9 @@ export function Portfolio({ showAttributionNote = false }: PortfolioProps) {
                 type="button"
                 onClick={() => setCountryFilter(value)}
                 className={cn(
-                  "shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-colors",
+                  "shrink-0 rounded-lg border px-4 py-2 text-sm font-medium transition-colors",
                   countryFilter === value
-                    ? "border-brand-500 bg-brand-500 text-white"
+                    ? "market-filter-active border-brand-500 bg-brand-500 text-white"
                     : "border-hair bg-surface text-ink-soft hover:border-brand-200 hover:text-ink",
                 )}
               >
@@ -124,7 +124,7 @@ export function Portfolio({ showAttributionNote = false }: PortfolioProps) {
                   setActiveSlug(project.slug);
                   setActiveIndex(0);
                 }}
-                className="group relative block aspect-[4/3] w-full overflow-hidden rounded-2xl border border-hair bg-paper-2 text-left"
+                className="group block w-full text-left"
               >
                 {/* Sem placeholder="blur": imagens vêm de public/ por caminho de string (não import estático) — ver docs/superpowers/specs/2026-07-28-portfolio-obras-design.md */}
                 <Image
@@ -133,27 +133,24 @@ export function Portfolio({ showAttributionNote = false }: PortfolioProps) {
                   fill
                   sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
                   priority={index === 0}
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="hidden object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink-950/85 via-ink-950/10 to-transparent" />
-                <div className="absolute left-4 top-4 flex flex-wrap gap-2">
-                  <span className="hud rounded-full border border-white/15 bg-ink-950/40 px-3 py-1.5 text-white/80 backdrop-blur-sm">
-                    {project.client}
-                  </span>
-                  <span className="hud rounded-full border border-white/15 bg-ink-950/40 px-3 py-1.5 text-white/80 backdrop-blur-sm">
-                    {countryBadge[project.country]}
-                  </span>
+                <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-hair bg-paper-2">
+                  <Image
+                    src={project.images[0]}
+                    alt={`${project.client} — ${project.title}`}
+                    fill
+                    sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                    priority={index === 0}
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
                 </div>
-                <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-2">
-                  <h3 className="text-lg font-semibold leading-tight text-white">
-                    {project.title}
-                  </h3>
-                  {project.images.length > 1 && (
-                    <span className="hud flex shrink-0 items-center gap-1.5 rounded-full border border-white/15 bg-ink-950/40 px-2.5 py-1.5 text-white/80 backdrop-blur-sm">
-                      <ImageIcon className="h-3 w-3" />
-                      {project.images.length}
-                    </span>
-                  )}
+                <div className="flex items-start justify-between gap-3 pt-3">
+                  <div>
+                    <p className="hud text-brand-600">{project.client} · {countryBadge[project.country]}</p>
+                    <h3 className="mt-2 text-lg font-semibold leading-tight text-ink">{project.title}</h3>
+                  </div>
+                  {project.images.length > 1 && <span className="hud mt-1 flex shrink-0 items-center gap-1 text-ink-soft"><ImageIcon className="h-3 w-3" />{project.images.length}</span>}
                 </div>
               </button>
             </RevealItem>

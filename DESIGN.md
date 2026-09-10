@@ -75,7 +75,9 @@ components:
 
 ## 1. Overview
 
-**Creative North Star: "The Industrial HUD"**
+**Creative North Star: "A engenharia em primeiro plano"**
+
+O sistema usa fotografia real e tipografia como elementos principais. O HUD fica restrito a identificadores curtos; cartões, ícones e molduras não definem mais a composição. Seções usam 64px de respiro vertical em telas pequenas e 96px em desktop, títulos de 30–48px e corpo entre 16–18px. Botões e superfícies usam raio de 8px. Animações são entradas de opacidade com deslocamento de até 12px, em 300–450ms; o hero conserva movimento de fundo apenas no desktop.
 
 O sistema visual da Centra trata o site como um overlay técnico de central de comando sobre obras reais: navy profundo nas seções de impacto (hero, números, contato), labels em mono com coordenadas geográficas e marcadores de canto que lembram a moldura de uma câmera de monitoramento de obra. A fotografia é sempre real — galpões, silos, equipe em campo — nunca ilustração genérica; o grain sutil sobre o escuro e o Ken Burns lento no hero reforçam a sensação de "estamos olhando para uma obra em andamento, agora". O sistema rejeita explicitamente o institucional-genérico (gradiente azul-corporativo raso, ícone em card, stock photo descontextualizada) em favor de prova concreta: números reais, fotos reais, nomes de clientes reais.
 

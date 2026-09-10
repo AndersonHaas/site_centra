@@ -19,7 +19,10 @@ export default function SiloFoundation({
 }) {
   const mountRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<MotionValue<number> | undefined>(progress);
-  progressRef.current = progress;
+
+  useEffect(() => {
+    progressRef.current = progress;
+  }, [progress]);
 
   useEffect(() => {
     const mount = mountRef.current;

@@ -54,8 +54,6 @@ function PanelShell({
   );
   /* Saída: encolhe e escurece sob o próximo painel. */
   const exit = useTransform(progress, [index / n, (index + 1) / n], [0, 1]);
-  const scale = useTransform(exit, [0, 1], [1, 0.94]);
-  const dim = useTransform(exit, [0, 1], [0, 0.35]);
   const local = useTransform(
     progress,
     [Math.max(index - 1, 0) / n, Math.min(index + 1, n) / n],
@@ -65,14 +63,10 @@ function PanelShell({
   return (
     <PanelCtx.Provider value={{ local, exit, first: index === 0 }}>
       <motion.div
-        style={{ y, scale }}
+        style={{ y }}
         className="absolute inset-0 will-change-transform"
       >
         {children}
-        <motion.div
-          style={{ opacity: dim }}
-          className="pointer-events-none absolute inset-0 z-20 bg-ink-950"
-        />
       </motion.div>
     </PanelCtx.Provider>
   );

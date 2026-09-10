@@ -16,7 +16,7 @@ export function Footer({ market }: { market: Market }) {
       <div className="container-x py-16">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
-            <Logo />
+            <Logo market={market} />
             <p className="mt-6 max-w-xs text-sm leading-relaxed text-white/55">
               {t("footer.description")}
             </p>

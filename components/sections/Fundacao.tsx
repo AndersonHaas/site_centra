@@ -43,7 +43,7 @@ export function Fundacao({ variant = "3d" }: { variant?: "3d" | "video" }) {
 
   return (
     <section id="fundacao" className="relative bg-ink-950">
-      <div ref={wrapRef} style={reduce ? undefined : { height: "260vh" }}>
+      <div ref={wrapRef} style={reduce ? undefined : { height: "180vh" }}>
         <div
           className={cn(
             "grain h-svh overflow-hidden",
