@@ -10,6 +10,7 @@ import {
   Mail,
   Phone,
   MapPin,
+  UserRound,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Reveal } from "@/components/ui/Reveal";
@@ -29,6 +30,11 @@ type FieldName = (typeof FIELDS)[number]["name"] | "mensagem";
 type Status = "idle" | "submitting" | "success" | "error";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function toWhatsAppHref(phone: string, message: string) {
+  const number = phone.replace(/\D/g, "");
+  return `https://wa.me/${number}?${new URLSearchParams({ text: message })}`;
+}
 
 /* A validação do cliente devolve CÓDIGOS, não frases — os mesmos que a rota
    /api/contato devolve. É o que permite as duas origens de erro (cliente e
@@ -64,8 +70,14 @@ export function Contato({ market }: { market: Market }) {
   const address = MARKETS[market].legalEntity.address;
 
   const contactRows = [
-    { icon: Mail, label: t("emailLabel"), value: contact.email },
-    { icon: Phone, label: t("phoneLabel"), value: contact.phone },
+    { icon: UserRound, label: t("personLabel"), value: contact.name },
+    { icon: Mail, label: t("emailLabel"), value: contact.email, href: `mailto:${contact.email}` },
+    {
+      icon: Phone,
+      label: t("whatsAppLabel"),
+      value: contact.phone,
+      href: toWhatsAppHref(contact.phone, t("whatsAppMessage")),
+    },
     { icon: MapPin, label: t("baseLabel"), value: t("baseValue") },
   ];
 
@@ -170,9 +182,21 @@ export function Contato({ market }: { market: Market }) {
                     <span className="block font-mono text-[0.6rem] uppercase tracking-[0.18em] text-white/55">
                       {c.label}
                     </span>
-                    <span className="text-sm font-medium text-white/85">
-                      {c.value}
-                    </span>
+                    {c.href ? (
+                      <a
+                        href={c.href}
+                        className="text-sm font-medium text-white/85 transition-colors hover:text-brand-300"
+                        {...(c.href.startsWith("https")
+                          ? { target: "_blank", rel: "noreferrer" }
+                          : {})}
+                      >
+                        {c.value}
+                      </a>
+                    ) : (
+                      <span className="text-sm font-medium text-white/85">
+                        {c.value}
+                      </span>
+                    )}
                   </span>
                 </li>
               ))}

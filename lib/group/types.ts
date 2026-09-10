@@ -29,5 +29,5 @@ export interface MarketConfig {
   market: Market;
   legalEntity: LegalEntity;
   activeUnits: readonly BusinessUnitId[];
-  contact: { phone: string; email: string };
+  contact: { name: string; phone: string; email: string };
 }
