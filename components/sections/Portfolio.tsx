@@ -1,49 +1,57 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { ImageIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal, RevealStagger, RevealItem } from "@/components/ui/Reveal";
 import { Lightbox } from "@/components/ui/Lightbox";
-import { PROJECTS, type ProjectClient } from "@/lib/content";
+import type { PortfolioCountry, PortfolioObra } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
-import type { ProjectCountry } from "@/lib/group/types";
 
-/* Nomes de cliente são nomes próprios — não passam pelo catálogo. */
-const CLIENT_VALUES: Array<ProjectClient | "Todas"> = ["Todas", "C.Vale", "Copacol"];
-const COUNTRY_VALUES: Array<ProjectCountry | "Todos"> = ["Todos", "BR", "PY"];
+const COUNTRY_VALUES: Array<PortfolioCountry | "Todos"> = ["Todos", "BR", "PY"];
 
 type PortfolioProps = {
+  /* Obras publicadas, já buscadas no servidor (ver
+     app/[locale]/portfolio/page.tsx) — o cadastro (cliente, fotos,
+     publicar/despublicar) agora vive no DashboardCentra, não mais em
+     lib/portfolio-data.ts. */
+  projects: PortfolioObra[];
   showAttributionNote?: boolean;
 };
 
-export function Portfolio({ showAttributionNote = false }: PortfolioProps) {
+export function Portfolio({ projects: allProjects, showAttributionNote = false }: PortfolioProps) {
   const t = useTranslations("portfolio");
-  const [clientFilter, setClientFilter] = useState<ProjectClient | "Todas">("Todas");
-  const [countryFilter, setCountryFilter] = useState<ProjectCountry | "Todos">("Todos");
+  /* Clientes são dinâmicos agora (vêm do cadastro, não de um union fixo de
+     2 valores) — nomes próprios, não passam pelo catálogo de tradução. */
+  const clientValues = useMemo(
+    () => ["Todas", ...Array.from(new Set(allProjects.map((p) => p.client)))],
+    [allProjects],
+  );
+  const [clientFilter, setClientFilter] = useState<string>("Todas");
+  const [countryFilter, setCountryFilter] = useState<PortfolioCountry | "Todos">("Todos");
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
 
-  const countryLabel: Record<ProjectCountry | "Todos", string> = {
+  const countryLabel: Record<PortfolioCountry | "Todos", string> = {
     Todos: t("allCountries"),
     BR: t("brazil"),
     PY: t("paraguay"),
   };
-  const countryBadge: Record<ProjectCountry, string> = {
+  const countryBadge: Record<PortfolioCountry, string> = {
     BR: t("badgeBR"),
     PY: t("badgePY"),
   };
 
-  const projects = PROJECTS.filter(
+  const projects = allProjects.filter(
     (p) =>
       (clientFilter === "Todas" || p.client === clientFilter) &&
       (countryFilter === "Todos" || p.country === countryFilter),
   );
 
-  const activeProject = PROJECTS.find((p) => p.slug === activeSlug) ?? null;
+  const activeProject = allProjects.find((p) => p.slug === activeSlug) ?? null;
 
   return (
     <section className="relative bg-paper py-16 md:py-24">
@@ -75,7 +83,7 @@ export function Portfolio({ showAttributionNote = false }: PortfolioProps) {
             block and silently breaks `position: sticky` on descendants. */}
         <div className="sticky top-[70px] z-20 -mx-6 mt-10 flex flex-col gap-2 overflow-x-auto bg-paper px-6 pb-1 md:mx-0 md:px-0">
           <Reveal className="flex gap-2">
-            {CLIENT_VALUES.map((value) => (
+            {clientValues.map((value) => (
               <button
                 key={value}
                 type="button"

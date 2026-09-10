@@ -6,6 +6,18 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(__dirname),
   },
+  images: {
+    // Fotos do portfólio agora vêm do bucket público mkt-portfolio no
+    // Supabase do DashboardCentra (ver lib/portfolio.ts), não mais de
+    // public/images/portfolio/.
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "tfafdtizakzgxpzhkhhz.supabase.co",
+        pathname: "/storage/v1/object/public/mkt-portfolio/**",
+      },
+    ],
+  },
   experimental: {
     // Every route of this app lives under app/[locale] — there is no
     // app/layout.tsx at the root, so for a URL that matches no route at all
