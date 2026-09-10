@@ -11,7 +11,6 @@ import {
 import { ArrowDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { SECTORS } from "@/lib/content";
-import { SplitText } from "@/components/ui/SplitText";
 import { Flag } from "@/components/ui/Flag";
 import heroImg from "@/media/works/cvale-complexo.jpg";
 
@@ -31,24 +30,18 @@ export function Hero() {
   const yContent = useTransform(scrollYProgress, [0, 1], ["0%", "-6%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
-  const headlineLines = [
-    { text: t("headline.line1"), accent: false },
-    { text: t("headline.line2"), accent: true },
-    { text: t("headline.line3"), accent: false },
-  ];
-
   return (
     <section
       id="top"
       ref={ref}
-      className="grain relative flex min-h-[100svh] items-center overflow-hidden bg-ink-950"
+      className="grain relative flex min-h-[42rem] items-center overflow-hidden bg-ink-950 md:min-h-[100svh]"
     >
       {/* Fundo: foto real com Ken Burns + parallax */}
       <motion.div
         style={{ y: reduce ? 0 : yBg, scale: reduce ? 1 : scaleBg }}
         className="absolute inset-0 -z-0"
       >
-        <div className="absolute inset-0 animate-kenburns">
+        <div className="hero-image-motion absolute inset-0">
           <Image
             src={heroImg}
             alt={t("imageAlt")}
@@ -62,29 +55,28 @@ export function Hero() {
       </motion.div>
 
       {/* Gradientes de leitura */}
-      <div className="absolute inset-0 -z-0 bg-gradient-to-r from-ink-950 via-ink-950/60 to-ink-950/20" />
+      <div className="absolute inset-0 -z-0 bg-gradient-to-r from-ink-950 via-ink-950/75 to-ink-950/10" />
       <div className="absolute inset-0 -z-0 bg-gradient-to-t from-ink-950 via-ink-950/10 to-ink-950/65" />
 
       {/* Molduras de canto (HUD de câmera) */}
-      <CornerTicks />
 
       {/* Conteúdo */}
       <motion.div
         style={{ y: reduce ? 0 : yContent, opacity: reduce ? 1 : opacity }}
-        className="container-x relative z-10 w-full pt-28 pb-28"
+        className="container-x relative z-10 w-full pt-24 pb-20 md:pt-28 md:pb-28"
       >
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
+          transition={{ duration: 0.4, ease: EASE, delay: 0.05 }}
           className="flex flex-wrap items-center gap-x-3 gap-y-3"
         >
           {/* Ponto e eyebrow num grupo só: com o flex-wrap da linha, soltos,
               o ponto virava órfão numa linha própria no mobile. */}
           <span className="flex items-center gap-3">
             <span className="relative flex h-2 w-2 shrink-0">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-400 opacity-60" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-400" />
+              <span className="market-indicator absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-400 opacity-60" />
+              <span className="market-indicator relative inline-flex h-2 w-2 rounded-full bg-brand-400" />
             </span>
             <span className="eyebrow text-white/70">{t("eyebrow")}</span>
           </span>
@@ -107,23 +99,10 @@ export function Hero() {
           </span>
         </motion.div>
 
-        <h1 className="display mt-6 max-w-[20ch] text-[1.4rem] text-white sm:text-4xl md:text-5xl lg:text-[3.5rem] xl:text-[4rem]">
-          {headlineLines.map((line, i) => (
-            <SplitText
-              key={i}
-              as="span"
-              mode="mount"
-              delay={0.25 + i * 0.14}
-              stagger={0.05}
-              className="block"
-            >
-              {line.accent ? (
-                <span className="text-gradient-brand">{line.text}</span>
-              ) : (
-                line.text
-              )}
-            </SplitText>
-          ))}
+        <h1 className="display mt-6 max-w-[18ch] text-[clamp(2.125rem,9vw,2.5rem)] leading-[1.08] text-white md:max-w-[20ch] md:text-5xl md:leading-[0.98] lg:text-[3.5rem] xl:text-[4rem]">
+          <span>{t("headline.line1")} </span>
+          <span className="text-gradient-brand">{t("headline.line2")} </span>
+          <span>{t("headline.line3")}</span>
         </h1>
 
         {/* Posicionamento em uma frase. É o que diz ao visitante do Paraguai
@@ -132,8 +111,8 @@ export function Hero() {
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: EASE, delay: 0.8 }}
-          className="mt-7 max-w-xl text-sm leading-relaxed text-white/70 sm:text-base"
+          transition={{ duration: 0.45, ease: EASE, delay: 0.15 }}
+          className="mt-6 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg"
         >
           {t("lead")}
         </motion.p>
@@ -141,8 +120,8 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, ease: EASE, delay: 1 }}
-          className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-white/10 pt-6"
+          transition={{ duration: 0.45, ease: EASE, delay: 0.22 }}
+          className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-white/10 pt-5"
         >
           <span className="eyebrow text-white/55">{t("sectorsLabel")}</span>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
@@ -159,7 +138,7 @@ export function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 1 }}
+        transition={{ delay: 0.3, duration: 0.4 }}
         className="absolute inset-x-0 bottom-5 z-10"
       >
         <div className="container-x flex items-end justify-between">
@@ -186,17 +165,5 @@ export function Hero() {
         </div>
       </motion.div>
     </section>
-  );
-}
-
-function CornerTicks() {
-  const base = "pointer-events-none absolute h-9 w-9 border-white/20 z-10";
-  return (
-    <>
-      <span className={`${base} left-5 top-24 border-l border-t`} />
-      <span className={`${base} right-5 top-24 border-r border-t`} />
-      <span className={`${base} bottom-20 left-5 border-b border-l`} />
-      <span className={`${base} bottom-20 right-5 border-b border-r`} />
-    </>
   );
 }

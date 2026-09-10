@@ -9,7 +9,6 @@ import { HTML_LANG, OG_LOCALE, type Market } from "@/lib/group/market";
 import { SITE_URL } from "@/lib/seo";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
-import { CustomCursor } from "@/components/ui/CustomCursor";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { GA_ID } from "@/lib/analytics";
 import { MarketUserProperty } from "@/components/analytics/MarketUserProperty";
@@ -55,7 +54,12 @@ export async function generateMetadata({
     title: { default: t("titleDefault"), template: t("titleTemplate") },
     description: t("description"),
     keywords: t.raw("keywords") as string[],
-    authors: [{ name: "Grupo Centra" }],
+    authors: [
+      {
+        name:
+          market === "py" ? "CENTRA Ingeniería y Construcción" : "Grupo Centra",
+      },
+    ],
     openGraph: {
       title: t("ogTitle"),
       description: t("ogDescription"),
@@ -88,12 +92,12 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html
       lang={HTML_LANG[locale]}
+      data-market={locale}
       className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
     >
       <body>
         <NextIntlClientProvider messages={messages}>
           <ScrollProgress />
-          <CustomCursor />
           <SmoothScroll>{children}</SmoothScroll>
         </NextIntlClientProvider>
         {GA_ID && (

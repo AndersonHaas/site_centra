@@ -30,7 +30,7 @@ export function Counter({
   useMotionValueEvent(progress ?? fallback, "change", (v) => {
     if (!progress) return;
     if (reduce) {
-      setValue(to);
+      requestAnimationFrame(() => setValue(to));
       return;
     }
     const p = Math.min(Math.max(v, 0), 1);
@@ -40,8 +40,8 @@ export function Counter({
   useEffect(() => {
     if (progress || !inView) return;
     if (reduce) {
-      setValue(to);
-      return;
+      const raf = requestAnimationFrame(() => setValue(to));
+      return () => cancelAnimationFrame(raf);
     }
     let raf = 0;
     const start = performance.now();
@@ -57,7 +57,9 @@ export function Counter({
 
   /* Com progress + reduced motion, garante o valor final mesmo sem eventos. */
   useEffect(() => {
-    if (progress && reduce) setValue(to);
+    if (!progress || !reduce) return;
+    const raf = requestAnimationFrame(() => setValue(to));
+    return () => cancelAnimationFrame(raf);
   }, [progress, reduce, to]);
 
   return (

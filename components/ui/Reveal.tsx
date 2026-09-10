@@ -17,7 +17,7 @@ export function Reveal({
   children,
   className,
   delay = 0,
-  y = 24,
+  y = 12,
   as = "div",
 }: RevealProps) {
   const reduce = useReducedMotion();
@@ -29,7 +29,7 @@ export function Reveal({
       initial={reduce ? { opacity: 0 } : { opacity: 0, y }}
       whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-12% 0px -10% 0px" }}
-      transition={{ duration: 0.8, ease: EASE, delay }}
+      transition={{ duration: 0.4, ease: EASE, delay }}
     >
       {children}
     </MotionTag>
@@ -69,7 +69,7 @@ export function RevealStagger({
 export function RevealItem({
   children,
   className,
-  y = 22,
+  y = 12,
 }: {
   children: React.ReactNode;
   className?: string;
@@ -81,7 +81,7 @@ export function RevealItem({
     show: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.7, ease: EASE },
+      transition: { duration: 0.4, ease: EASE },
     },
   };
   return (

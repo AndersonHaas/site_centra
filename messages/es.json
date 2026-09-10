@@ -1,4 +1,9 @@
 {
+  "brand": {
+    "brSubtitle": "INGENIERÍA · EMPRENDIMIENTOS",
+    "pySubtitle": "INGENIERÍA · CONSTRUCCIÓN",
+    "symbolAlt": "Símbolo CENTRA"
+  },
   "nav": {
     "logoLabel": "Centra — inicio",
     "openMenu": "Abrir menú",
@@ -299,12 +304,12 @@
 
   "meta": {
     "site": {
-      "titleDefault": "Grupo Centra",
-      "titleTemplate": "%s | Grupo Centra",
-      "description": "Construcción civil del Grupo Centra en Paraguay, con el respaldo de la experiencia del grupo en Brasil en obras industriales, agroindustriales y comerciales.",
-      "ogTitle": "Grupo Centra | Ingeniería y Construcción de Alto Desempeño",
-      "ogDescription": "Construcción civil en Paraguay, con el respaldo de la experiencia del Grupo Centra en Brasil.",
-      "siteName": "Grupo Centra",
+      "titleDefault": "CENTRA Ingeniería y Construcción",
+      "titleTemplate": "%s | CENTRA Ingeniería y Construcción",
+      "description": "CENTRA Ingeniería y Construcción en Paraguay, con el respaldo de la experiencia del grupo en Brasil en obras industriales, agroindustriales y comerciales.",
+      "ogTitle": "CENTRA | Ingeniería y Construcción de Alto Desempeño",
+      "ogDescription": "CENTRA Ingeniería y Construcción en Paraguay, con el respaldo de la experiencia del grupo en Brasil.",
+      "siteName": "CENTRA Ingeniería y Construcción",
       "keywords": [
         "constructora",
         "ingeniería civil",

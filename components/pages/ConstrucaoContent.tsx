@@ -32,19 +32,20 @@ export function ConstrucaoContent({ market }: { market: Market }) {
         <TrustBar />
         <Obras />
         <Credenciais />
-        <section className="relative bg-surface py-20 md:py-28">
+        <section className="relative bg-surface py-16 md:py-24">
           <div className="container-x">
             <p className="hud text-brand-600">{t("eyebrow")}</p>
             <h2 className="display mt-4 max-w-xl text-2xl sm:text-3xl">
               {t("title")}
             </h2>
-            <div className="mt-10 grid gap-4 sm:grid-cols-2">
-              {DIFERENCIAIS.map((key) => (
+            <div className="mt-10 grid gap-x-8 sm:grid-cols-2">
+              {DIFERENCIAIS.map((key, index) => (
                 <div
                   key={key}
-                  className="rounded-2xl border border-hair bg-paper p-6"
+                  className="border-t border-hair py-6"
                 >
-                  <h3 className="text-base font-semibold text-ink">
+                  <span className="hud text-brand-600">0{index + 1}</span>
+                  <h3 className="mt-4 text-base font-semibold text-ink">
                     {t(`${key}.title`)}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-ink-soft">
