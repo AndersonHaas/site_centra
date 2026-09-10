@@ -12,8 +12,9 @@ export const MARKETS: Record<"br" | "py", MarketConfig> = {
     },
     activeUnits: ["construcao", "pre-moldados", "metalurgica", "guindastes"],
     contact: {
-      phone: "+55 (45) 0000-0000",
-      email: "contato@centraengenharia.com.br",
+      name: "José Ricado Pasetti",
+      phone: "+55 (45) 99923-4050",
+      email: "pasetti@centra.eng.br",
     },
   },
   py: {
@@ -27,8 +28,9 @@ export const MARKETS: Record<"br" | "py", MarketConfig> = {
     },
     activeUnits: ["construcao"],
     contact: {
-      phone: "+595 (00) 000-0000",
-      email: "contacto@centra.com", // placeholder — domínio final ainda não decidido
+      name: "José Ricado Pasetti",
+      phone: "+55 (45) 99923-4050",
+      email: "pasetti@centra.eng.br",
     },
   },
 };

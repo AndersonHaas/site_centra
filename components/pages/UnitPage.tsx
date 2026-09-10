@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowUpRight, Phone } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, MessageCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Navbar } from "@/components/sections/Navbar";
@@ -12,8 +12,9 @@ import type { BusinessUnitId } from "@/lib/group/types";
 
 /* Reduz um telefone formatado (ex.: "+55 (45) 0000-0000") a um URI tel: válido,
    mantendo apenas dígitos e o "+" inicial. */
-function toTelHref(phone: string) {
-  return `tel:${phone.replace(/[^\d+]/g, "")}`;
+function toWhatsAppHref(phone: string, message: string) {
+  const number = phone.replace(/\D/g, "");
+  return `https://wa.me/${number}?${new URLSearchParams({ text: message })}`;
 }
 
 /* Página de unidade de negócio ainda sem catálogo próprio (pré-moldados,
@@ -29,6 +30,7 @@ export function UnitPage({
 }) {
   const t = useTranslations(`units.${unit}`);
   const tUnits = useTranslations("units");
+  const tContact = useTranslations("contato");
   const Icon = BUSINESS_UNITS[unit].icon;
   const phone = MARKETS[market].contact.phone;
 
@@ -72,10 +74,12 @@ export function UnitPage({
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>
                 <a
-                  href={toTelHref(phone)}
+                  href={toWhatsAppHref(phone, tContact("whatsAppMessage"))}
+                  target="_blank"
+                  rel="noreferrer"
                   className="inline-flex items-center gap-2 text-sm font-medium text-brand-700 transition-colors hover:text-brand-600"
                 >
-                  <Phone className="h-4 w-4" />
+                  <MessageCircle className="h-4 w-4" />
                   {phone}
                 </a>
               </div>
