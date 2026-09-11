@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useDesktopMotion } from "@/lib/use-desktop-motion";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -20,16 +21,16 @@ export function Reveal({
   y = 12,
   as = "div",
 }: RevealProps) {
-  const reduce = useReducedMotion();
+  const reduce = !useDesktopMotion();
   const MotionTag = motion[as];
 
   return (
     <MotionTag
       className={className}
-      initial={reduce ? { opacity: 0 } : { opacity: 0, y }}
+      initial={reduce ? false : { opacity: 0, y }}
       whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-12% 0px -10% 0px" }}
-      transition={{ duration: 0.4, ease: EASE, delay }}
+      transition={{ duration: reduce ? 0 : 0.4, ease: EASE, delay: reduce ? 0 : delay }}
     >
       {children}
     </MotionTag>
@@ -46,7 +47,7 @@ export function RevealStagger({
   className?: string;
   gap?: number;
 }) {
-  const reduce = useReducedMotion();
+  const reduce = !useDesktopMotion();
   const container: Variants = {
     hidden: {},
     show: {
@@ -57,7 +58,7 @@ export function RevealStagger({
     <motion.div
       className={className}
       variants={container}
-      initial="hidden"
+      initial={reduce ? false : "hidden"}
       whileInView="show"
       viewport={{ once: true, margin: "-10% 0px" }}
     >
@@ -75,9 +76,9 @@ export function RevealItem({
   className?: string;
   y?: number;
 }) {
-  const reduce = useReducedMotion();
+  const reduce = !useDesktopMotion();
   const item: Variants = {
-    hidden: reduce ? { opacity: 0 } : { opacity: 0, y },
+    hidden: reduce ? { opacity: 1 } : { opacity: 0, y },
     show: {
       opacity: 1,
       y: 0,

@@ -40,7 +40,7 @@ export function Obras() {
   const t = useTranslations("obras");
 
   return (
-    <section id="obras" className="grain relative overflow-clip bg-ink-950 py-24 md:py-32">
+    <section id="obras" className="grain relative overflow-clip bg-ink-950 py-16 md:py-32">
       <div className="container-x">
         <SectionHeader
           index="01"
@@ -199,6 +199,23 @@ function WorkPanel({
 
   const doClip = !reduce && Boolean(panel?.first);
 
+  if (!panel) {
+    return (
+      <article ref={ref} className="w-full bg-ink-950">
+        <Image src={IMAGES[slug]} alt={`${t("client")} — ${t("title")}`} placeholder="blur" sizes="100vw" className="h-auto w-full" />
+        <div className="container-x border-b border-white/15 py-6">
+          <p className="hud leading-relaxed text-brand-300">{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")} · {t("sector")}</p>
+          <p className="mt-4 text-sm font-medium text-white/75">{t("client")}</p>
+          <h3 className="display mt-2 text-3xl text-white">{t("title")}</h3>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/75">{t("summary")}</p>
+          <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
+            <Chip>{t("scope")}</Chip><Chip>{t("location")}</Chip>
+          </div>
+        </div>
+      </article>
+    );
+  }
+
   return (
     <article
       ref={ref}
@@ -232,17 +249,6 @@ function WorkPanel({
           />
         </motion.div>
       </motion.div>
-
-      <div className="relative aspect-[4/3] md:hidden">
-        <Image
-          src={IMAGES[slug]}
-          alt={`${t("client")} — ${t("title")}`}
-          fill
-          placeholder="blur"
-          sizes="100vw"
-          className="object-cover"
-        />
-      </div>
 
       {/* Gradientes */}
       <div className="absolute inset-0 hidden bg-gradient-to-t from-ink-950/60 via-transparent to-ink-950/35 md:block" />
@@ -293,16 +299,6 @@ function WorkPanel({
             <Chip>{t("location")}</Chip>
           </div>
         </Reveal>
-      </div>
-      <div className="container-x relative z-10 border-b border-white/15 bg-ink-950 py-6 md:hidden">
-        <p className="hud text-brand-300">{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")} · {t("sector")}</p>
-        <p className="mt-4 text-sm font-medium text-white/70">{t("client")}</p>
-        <h3 className="display mt-2 text-3xl text-white">{t("title")}</h3>
-        <p className="mt-4 text-base leading-relaxed text-white/75">{t("summary")}</p>
-        <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
-          <Chip>{t("scope")}</Chip>
-          <Chip>{t("location")}</Chip>
-        </div>
       </div>
     </article>
   );

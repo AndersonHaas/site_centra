@@ -32,12 +32,12 @@ export function Footer({ market }: { market: Market }) {
             <h3 className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white/55">
               {t("footer.navTitle")}
             </h3>
-            <ul className="mt-5 space-y-3">
+            <ul className="mt-4">
               {navLinks.map((l) => (
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    className="text-sm text-white/65 transition-colors hover:text-white"
+                    className="inline-flex min-h-11 items-center text-sm text-white/65 transition-colors hover:text-white"
                   >
                     {t(l.labelKey)}
                   </Link>
@@ -50,7 +50,7 @@ export function Footer({ market }: { market: Market }) {
             <h3 className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white/55">
               {t("footer.sectorsTitle")}
             </h3>
-            <ul className="mt-5 space-y-3">
+            <ul className="mt-4">
               {SECTORS.map((sector) => (
                 <li key={sector} className="text-sm text-white/65">
                   {t(`sectors.${sector}`)}
@@ -67,7 +67,7 @@ export function Footer({ market }: { market: Market }) {
             </p>
             <Link
               href="/aviso-legal"
-              className="text-xs text-white/55 underline-offset-2 transition-colors hover:text-white hover:underline"
+              className="inline-flex min-h-11 items-center text-xs text-white/55 underline-offset-2 transition-colors hover:text-white hover:underline"
             >
               {t("avisoLegal.linkLabel")}
             </Link>

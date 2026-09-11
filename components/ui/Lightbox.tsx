@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type LightboxProps = {
   images: readonly string[];
@@ -20,6 +21,7 @@ export function Lightbox({
   onClose,
   onIndexChange,
 }: LightboxProps) {
+  const t = useTranslations("portfolio.gallery");
   const closeRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
@@ -72,7 +74,8 @@ export function Lightbox({
       role="dialog"
       aria-modal="true"
       aria-label={title}
-      className="fixed inset-0 z-[70] flex flex-col bg-ink-950"
+      data-lenis-prevent
+      className="fixed inset-0 z-[70] flex h-dvh flex-col overflow-hidden bg-ink-950"
       onTouchStart={(e) => {
         touchStartX.current = e.touches[0].clientX;
       }}
@@ -86,8 +89,8 @@ export function Lightbox({
         touchStartX.current = null;
       }}
     >
-      <div className="flex items-center justify-between gap-3 px-5 py-4 md:px-8">
-        <p className="hud min-w-0 truncate text-white/70">
+      <div className="flex shrink-0 items-center justify-between gap-3 px-4 py-2 sm:px-6 md:py-4 md:px-8">
+        <p aria-live="polite" className="hud min-w-0 truncate text-white/85">
           {title} · {String(index + 1).padStart(2, "0")} /{" "}
           {String(images.length).padStart(2, "0")}
         </p>
@@ -95,21 +98,21 @@ export function Lightbox({
           ref={closeRef}
           type="button"
           onClick={onClose}
-          aria-label="Fechar"
+          aria-label={t("close")}
           className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/15 text-white/80 transition-colors hover:border-white/40 hover:text-white"
         >
           <X className="h-4 w-4" />
         </button>
       </div>
 
-      <div className="relative flex-1">
+      <div className="relative min-h-0 flex-1">
         {/* onClick aqui (não no container): a Image com `fill` cobre toda
             a área, inclusive o letterboxing, então é ela quem recebe o
             tap tanto "na foto" quanto "fora" dela. */}
         <Image
           key={images[index]}
           src={images[index]}
-          alt={`${title} — foto ${index + 1}`}
+          alt={t("imageAlt", { title, index: index + 1 })}
           fill
           sizes="100vw"
           className="object-contain"
@@ -121,7 +124,7 @@ export function Lightbox({
             <button
               type="button"
               onClick={goPrev}
-              aria-label="Foto anterior"
+              aria-label={t("previous")}
               className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-ink-950/50 text-white/80 transition-colors hover:border-white/40 hover:text-white md:left-6"
             >
               <ChevronLeft className="h-5 w-5" />
@@ -129,7 +132,7 @@ export function Lightbox({
             <button
               type="button"
               onClick={goNext}
-              aria-label="Próxima foto"
+              aria-label={t("next")}
               className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-ink-950/50 text-white/80 transition-colors hover:border-white/40 hover:text-white md:right-6"
             >
               <ChevronRight className="h-5 w-5" />

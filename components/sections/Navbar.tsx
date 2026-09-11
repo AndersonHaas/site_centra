@@ -14,17 +14,34 @@ export function Navbar({ market }: { market: Market }) {
   const [open, setOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
   const navLinks = getNavLinks();
   const contactHref = getContactHref();
   /* Sem namespace: os links trazem chaves completas (nav.*). */
   const t = useTranslations();
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    if (open) {
-      firstLinkRef.current?.focus();
-    }
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    const toggle = toggleRef.current;
+    document.body.style.overflow = "hidden";
+    const background = Array.from(document.querySelectorAll<HTMLElement>("main, footer"));
+    const previousInert = background.map(el => el.inert);
+    background.forEach(el => { el.inert = true; });
+    firstLinkRef.current?.focus();
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      background.forEach((el, i) => { el.inert = previousInert[i]; });
+      if (window.matchMedia("(max-width: 1023px)").matches) toggle?.focus();
+    };
   }, [open]);
+
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const closeOnDesktop = () => { if (desktop.matches) setOpen(false); };
+    desktop.addEventListener("change", closeOnDesktop);
+    return () => desktop.removeEventListener("change", closeOnDesktop);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -33,16 +50,29 @@ export function Navbar({ market }: { market: Market }) {
         setOpen(false);
         toggleRef.current?.focus();
       }
+      if (e.key === "Tab") {
+        const controls = Array.from(headerRef.current?.querySelectorAll<HTMLElement>("a[href], button") ?? [])
+          .filter(el => el.getClientRects().length > 0);
+        const first = controls[0];
+        const last = controls.at(-1);
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault(); last?.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault(); first?.focus();
+        }
+      }
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header ref={headerRef} className="fixed inset-x-0 top-0 z-50" onClick={(e) => {
+      if ((e.target as HTMLElement).closest("a")) setOpen(false);
+    }}>
       <div className="border-b border-white/10 bg-ink-950/95 backdrop-blur-xl">
-        <nav className="container-x flex h-[70px] items-center justify-between">
-          <Link href="/" aria-label={t("nav.logoLabel")}>
+        <nav className="container-x flex h-[70px] items-center justify-between gap-2">
+          <Link href="/" className="flex min-h-11 shrink-0 items-center" aria-label={t("nav.logoLabel")}>
             <Logo market={market} priority />
           </Link>
 
@@ -51,7 +81,7 @@ export function Navbar({ market }: { market: Market }) {
               <li key={l.href}>
                 <Link
                   href={l.href}
-                  className="group relative text-sm font-medium text-white/70 transition-colors hover:text-white"
+                  className="group relative inline-flex min-h-11 items-center text-sm font-medium text-white/70 transition-colors hover:text-white"
                 >
                   {t(l.labelKey)}
                   <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-brand-400 transition-all duration-300 group-hover:w-full" />
@@ -73,7 +103,7 @@ export function Navbar({ market }: { market: Market }) {
             </Link>
           </div>
 
-          <div className="flex items-center gap-2 lg:hidden">
+          <div className="flex shrink-0 items-center gap-1 sm:gap-2 lg:hidden">
             <MarketSwitcher market={market} />
             <button
               ref={toggleRef}
@@ -94,11 +124,12 @@ export function Navbar({ market }: { market: Market }) {
         {open && (
           <motion.div
             id="mobile-menu"
+            data-lenis-prevent
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="border-b border-white/10 bg-ink-950/95 backdrop-blur-xl lg:hidden"
+            className="max-h-[calc(100dvh-70px)] overflow-y-auto overscroll-contain border-b border-white/10 bg-ink-950/95 backdrop-blur-xl lg:hidden"
           >
             <ul className="container-x flex flex-col gap-1 py-6">
               {navLinks.map((l, i) => (

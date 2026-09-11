@@ -83,7 +83,7 @@ export function Contato({ market }: { market: Market }) {
 
   /* Um endereço registral confirmado é mais específico que a base declarada
      na copy — quando existir, ele manda. */
-  if (address) contactRows[2].value = address;
+  if (address) contactRows[3].value = address;
 
   /* Código desconhecido (versão do servidor à frente da do cliente) nunca
      deve renderizar a chave crua na tela. */
@@ -103,6 +103,7 @@ export function Contato({ market }: { market: Market }) {
     if (Object.keys(clientErrors).length > 0) {
       setFieldErrors(clientErrors);
       setFormError(null);
+      document.getElementById(Object.keys(clientErrors)[0])?.focus();
       return;
     }
 
@@ -142,7 +143,7 @@ export function Contato({ market }: { market: Market }) {
   return (
     <section
       id="contato"
-      className="relative overflow-hidden bg-ink-950 py-24 md:py-32"
+      className="relative overflow-hidden bg-ink-950 py-16 md:py-32"
     >
       <div className="grid-lines pointer-events-none absolute inset-0 opacity-40" />
       <div
@@ -175,17 +176,17 @@ export function Contato({ market }: { market: Market }) {
             <ul className="space-y-4">
               {contactRows.map((c) => (
                 <li key={c.label} className="flex items-center gap-4">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 text-brand-300 ring-1 ring-white/10">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/5 text-brand-300 ring-1 ring-white/10">
                     <c.icon className="h-4 w-4" />
                   </span>
-                  <span>
+                  <span className="min-w-0 break-words">
                     <span className="block font-mono text-[0.6rem] uppercase tracking-[0.18em] text-white/55">
                       {c.label}
                     </span>
                     {c.href ? (
                       <a
                         href={c.href}
-                        className="text-sm font-medium text-white/85 transition-colors hover:text-brand-300"
+                        className="inline-flex min-h-11 items-center text-sm font-medium text-white/85 transition-colors hover:text-brand-300"
                         {...(c.href.startsWith("https")
                           ? { target: "_blank", rel: "noreferrer" }
                           : {})}
@@ -206,7 +207,7 @@ export function Contato({ market }: { market: Market }) {
 
         {/* Form */}
         <Reveal delay={0.1}>
-          <div className="relative rounded-3xl border border-white/10 bg-white/[0.03] p-7 backdrop-blur-sm md:p-9">
+          <div className="relative rounded-3xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-sm sm:p-7 md:p-9">
             <AnimatePresence mode="wait">
               {status === "success" ? (
                 <motion.div
@@ -280,7 +281,7 @@ export function Contato({ market }: { market: Market }) {
                             aria-describedby={
                               errorCode ? `${f.name}-error` : undefined
                             }
-                            className={`h-12 rounded-lg border bg-ink-900/60 px-4 text-sm text-white outline-none transition-colors placeholder:text-white/50 focus:ring-2 disabled:opacity-50 ${
+                            className={`h-12 min-w-0 w-full rounded-lg border bg-ink-900/60 px-4 text-base text-white outline-none transition-colors placeholder:text-white/50 focus:ring-2 disabled:opacity-50 ${
                               errorCode
                                 ? "border-red-400/60 focus:border-red-400 focus:ring-red-500/30"
                                 : "border-white/12 focus:border-brand-400 focus:ring-brand-500/30"
@@ -314,7 +315,7 @@ export function Contato({ market }: { market: Market }) {
                       value={values.mensagem}
                       onChange={(e) => update("mensagem", e.target.value)}
                       disabled={submitting}
-                      className="resize-none rounded-lg border border-white/12 bg-ink-900/60 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-white/50 focus:border-brand-400 focus:ring-2 focus:ring-brand-500/30 disabled:opacity-50"
+                      className="w-full resize-y rounded-lg border border-white/12 bg-ink-900/60 px-4 py-3 text-base text-white outline-none transition-colors placeholder:text-white/50 focus:border-brand-400 focus:ring-2 focus:ring-brand-500/30 disabled:opacity-50"
                     />
                   </div>
                   <button

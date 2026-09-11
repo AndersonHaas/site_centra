@@ -8,6 +8,7 @@ import { STATS } from "@/lib/content";
 import { Counter } from "@/components/ui/Counter";
 import { Reveal, RevealStagger, RevealItem } from "@/components/ui/Reveal";
 import { cn } from "@/lib/utils";
+import { useDesktopMotion } from "@/lib/use-desktop-motion";
 /* Chapa de atmosfera, não obra do portfólio: entra 85% escurecida e com zoom
    scrubado, só para dar textura atrás dos números. É a única consumidora deste
    arquivo desde que o painel de silos passou a usar silos-base-civil.jpg —
@@ -19,14 +20,15 @@ import silosBg from "@/media/works/silos-goldenhour.jpg";
    acrescentar ou remover uma métrica em STATS não deixa coluna vazia. */
 const GRID_COLS: Record<number, string> = {
   1: "grid-cols-1",
-  2: "grid-cols-2",
+  2: "grid-cols-1 sm:grid-cols-2",
   3: "grid-cols-1 sm:grid-cols-3",
-  4: "grid-cols-2 lg:grid-cols-4",
+  4: "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4",
 };
 
 export function Stats() {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
+  const desktopMotion = useDesktopMotion();
   const t = useTranslations("stats");
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -41,12 +43,12 @@ export function Stats() {
   return (
     <section
       ref={ref}
-      className="grain relative overflow-hidden bg-ink-950 py-24 md:py-32"
+      className="grain relative overflow-hidden bg-ink-950 py-16 md:py-32"
     >
       {/* Fundo: foto atmosférica com parallax + zoom scrubado */}
       <motion.div
-        style={reduce ? undefined : { y, scale }}
-        className={reduce ? "absolute inset-0 scale-110" : "absolute inset-0"}
+        style={!desktopMotion || reduce ? undefined : { y, scale }}
+        className="absolute inset-0"
       >
         <Image
           src={silosBg}
@@ -92,7 +94,7 @@ export function Stats() {
                 className="bg-ink-950/70 p-7 backdrop-blur-sm md:p-9"
               >
                 <div className="market-number display flex items-baseline whitespace-nowrap text-6xl text-white md:text-7xl xl:text-8xl">
-                  <Counter to={s.value} progress={countProgress} />
+                  {desktopMotion ? <Counter to={s.value} progress={countProgress} /> : <span className="tabular-nums">{s.value}</span>}
                   <span
                     className={cn(
                       "text-2xl font-semibold text-brand-300 md:text-3xl",

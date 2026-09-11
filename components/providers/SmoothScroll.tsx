@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Lenis from "lenis";
+import { useDesktopMotion } from "@/lib/use-desktop-motion";
 
 /**
  * Scroll suave com momentum (estilo studio).
@@ -9,17 +10,14 @@ import Lenis from "lenis";
  * - Intercepta âncoras (#secao) para rolar suavemente com offset do header.
  */
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
+  const desktopMotion = useDesktopMotion();
   useEffect(() => {
-    const reduce = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    if (reduce) return;
+    if (!desktopMotion) return;
 
     const lenis = new Lenis({
       duration: 1.15,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      touchMultiplier: 1.6,
     });
 
     let raf = 0;
@@ -28,6 +26,14 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
+
+    const syncLock = () => {
+      if (document.body.style.overflow === "hidden") lenis.stop();
+      else lenis.start();
+    };
+    const observer = new MutationObserver(syncLock);
+    observer.observe(document.body, { attributes: true, attributeFilter: ["style"] });
+    syncLock();
 
     const onClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
@@ -44,10 +50,11 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
 
     return () => {
       cancelAnimationFrame(raf);
+      observer.disconnect();
       document.removeEventListener("click", onClick);
       lenis.destroy();
     };
-  }, []);
+  }, [desktopMotion]);
 
   return <>{children}</>;
 }

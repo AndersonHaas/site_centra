@@ -57,7 +57,7 @@ export function MarketSwitcher({
             aria-current={active ? "true" : undefined}
             onClick={() => rememberMarket(target)}
             className={cn(
-              "flex items-center gap-1.5 rounded-md px-2 py-1 font-mono text-xs font-medium uppercase transition-colors",
+              "flex min-h-11 min-w-11 items-center justify-center gap-1 rounded-md px-1 py-1 font-mono text-[0.65rem] font-medium uppercase transition-colors sm:gap-1.5 sm:px-2 sm:text-xs",
               active
                 ? "bg-white/15 text-white"
                 : "text-white/55 hover:bg-white/5 hover:text-white",

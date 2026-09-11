@@ -4,18 +4,16 @@ import {
   Children,
   createContext,
   useContext,
-  useLayoutEffect,
   useRef,
-  useState,
 } from "react";
 import {
   motion,
-  useReducedMotion,
   useScroll,
   useTransform,
   type MotionValue,
 } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useDesktopMotion } from "@/lib/use-desktop-motion";
 
 type PanelMotion = {
   /* 0→1 enquanto o painel está em cena (da entrada até ser coberto) —
@@ -127,22 +125,11 @@ export function StickyStack({
   className,
   flowClassName,
 }: StickyStackProps) {
-  const reduce = useReducedMotion();
-  const [flow, setFlow] = useState(false);
-
-  /* useLayoutEffect: troca deck→fluxo antes do primeiro paint no mobile,
-     sem mismatch de hydration (SSR sempre renderiza o deck). */
-  useLayoutEffect(() => {
-    const mq = window.matchMedia("(max-width: 767px)");
-    const update = () => setFlow(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
+  const desktopMotion = useDesktopMotion();
 
   const panels = Children.toArray(children);
 
-  if (flow || reduce) {
+  if (!desktopMotion) {
     return (
       <div className={cn("flex flex-col gap-5 md:gap-7", className)}>
         {panels.map((p, i) => (

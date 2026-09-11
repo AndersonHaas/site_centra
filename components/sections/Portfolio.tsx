@@ -81,15 +81,16 @@ export function Portfolio({ projects: allProjects, showAttributionNote = false }
             framer-motion leaves an inline transform on its element after
             animating (even translateY(0)), which creates a new containing
             block and silently breaks `position: sticky` on descendants. */}
-        <div className="sticky top-[70px] z-20 -mx-6 mt-10 flex flex-col gap-2 overflow-x-auto bg-paper px-6 pb-1 md:mx-0 md:px-0">
-          <Reveal className="flex gap-2">
+        <div data-portfolio-filters className="mt-8 flex flex-col gap-3 bg-paper py-3 lg:sticky lg:top-[70px] lg:z-20">
+          <div role="group" aria-label={t("clientFilterLabel")} className="flex flex-wrap gap-2">
             {clientValues.map((value) => (
               <button
                 key={value}
                 type="button"
                 onClick={() => setClientFilter(value)}
+                aria-pressed={clientFilter === value}
                 className={cn(
-                  "shrink-0 rounded-lg border px-4 py-2 text-sm font-medium transition-colors",
+                  "min-h-11 max-w-full rounded-lg border px-4 py-2 text-sm font-medium transition-colors",
                   clientFilter === value
                     ? "market-filter-active border-brand-500 bg-brand-500 text-white"
                     : "border-hair bg-surface text-ink-soft hover:border-brand-200 hover:text-ink",
@@ -98,15 +99,16 @@ export function Portfolio({ projects: allProjects, showAttributionNote = false }
                 {value === "Todas" ? t("allClients") : value}
               </button>
             ))}
-          </Reveal>
-          <Reveal className="flex gap-2">
+          </div>
+          <div role="group" aria-label={t("countryFilterLabel")} className="flex flex-wrap gap-2">
             {COUNTRY_VALUES.map((value) => (
               <button
                 key={value}
                 type="button"
                 onClick={() => setCountryFilter(value)}
+                aria-pressed={countryFilter === value}
                 className={cn(
-                  "shrink-0 rounded-lg border px-4 py-2 text-sm font-medium transition-colors",
+                  "min-h-11 max-w-full rounded-lg border px-4 py-2 text-sm font-medium transition-colors",
                   countryFilter === value
                     ? "market-filter-active border-brand-500 bg-brand-500 text-white"
                     : "border-hair bg-surface text-ink-soft hover:border-brand-200 hover:text-ink",
@@ -115,8 +117,10 @@ export function Portfolio({ projects: allProjects, showAttributionNote = false }
                 {countryLabel[value]}
               </button>
             ))}
-          </Reveal>
+          </div>
         </div>
+
+        {projects.length === 0 && <p role="status" className="mt-8 rounded-xl border border-hair p-5 text-ink-soft">{t("empty")}</p>}
 
         <RevealStagger
           key={`${clientFilter}-${countryFilter}`}
@@ -135,21 +139,13 @@ export function Portfolio({ projects: allProjects, showAttributionNote = false }
                 className="group block w-full text-left"
               >
                 {/* Sem placeholder="blur": imagens vêm de public/ por caminho de string (não import estático) — ver docs/superpowers/specs/2026-07-28-portfolio-obras-design.md */}
-                <Image
-                  src={project.images[0]}
-                  alt={`${project.client} — ${project.title}`}
-                  fill
-                  sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                  priority={index === 0}
-                  className="hidden object-cover"
-                />
                 <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-hair bg-paper-2">
                   <Image
                     src={project.images[0]}
                     alt={`${project.client} — ${project.title}`}
                     fill
                     sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                    priority={index === 0}
+                    preload={index === 0}
                     className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                   />
                   {project.status === "em_andamento" && (

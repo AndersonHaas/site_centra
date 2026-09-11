@@ -1,175 +1,56 @@
 "use client";
 
-import { useRef } from "react";
 import Image from "next/image";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useReducedMotion,
-} from "framer-motion";
-import { ArrowDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { SECTORS } from "@/lib/content";
 import { Flag } from "@/components/ui/Flag";
 import heroImg from "@/media/works/sede-totem.png";
 
-const EASE = [0.16, 1, 0.3, 1] as const;
-
 export function Hero() {
-  const ref = useRef<HTMLElement>(null);
-  const reduce = useReducedMotion();
   const t = useTranslations("hero");
   const tSectors = useTranslations("sectors");
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
-  const scaleBg = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
-  const yContent = useTransform(scrollYProgress, [0, 1], ["0%", "-6%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   return (
-    <section
-      id="top"
-      ref={ref}
-      className="grain relative flex min-h-[54rem] items-start overflow-hidden bg-ink-950 md:min-h-[100svh]"
-    >
-      {/* Fundo: foto real com Ken Burns + parallax */}
-      <motion.div
-        style={{ y: reduce ? 0 : yBg, scale: reduce ? 1 : scaleBg }}
-        className="absolute inset-0 -z-0"
-      >
-        <div className="hero-image-motion absolute inset-0">
-          <Image
-            src={heroImg}
-            alt={t("imageAlt")}
-            fill
-            priority
-            placeholder="blur"
-            sizes="100vw"
-            className="object-cover object-[63%_55%]"
-          />
-        </div>
-      </motion.div>
-
-      {/* Gradientes de leitura, bem mais sutis do que a primeira versão. */}
-      <div className="absolute inset-0 -z-0 bg-gradient-to-r from-ink-950/55 via-ink-950/35 to-transparent" />
-      <div className="absolute inset-0 -z-0 bg-gradient-to-b from-ink-950/50 via-transparent to-ink-950/35" />
-
-      {/* Molduras de canto (HUD de câmera) */}
-
-      {/* Conteúdo */}
-      <motion.div
-        style={{ y: reduce ? 0 : yContent, opacity: reduce ? 1 : opacity }}
-        className="container-x relative z-10 w-full pt-24 pb-20 md:pt-28 md:pb-28"
-      >
-        {/* max-w vive aqui dentro, não na div com container-x: container-x já
-            tem margin-inline:auto para centralizar até 1280px, então um
-            max-w menor ali vira uma caixa estreita CENTRALIZADA no viewport
-            em vez de continuar alinhada à esquerda com o header. */}
-        <div className="max-w-[30rem]">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, ease: EASE, delay: 0.05 }}
-            className="flex flex-wrap items-center gap-x-3 gap-y-3"
-          >
-            {/* Ponto e eyebrow num grupo só: com o flex-wrap da linha, soltos,
-                o ponto virava órfão numa linha própria no mobile. */}
-            <span className="flex items-center gap-3">
-              <span className="relative flex h-2 w-2 shrink-0">
-                <span className="market-indicator absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-400 opacity-60" />
-                <span className="market-indicator relative inline-flex h-2 w-2 rounded-full bg-brand-400" />
-              </span>
-              <span className="eyebrow text-white/70">{t("eyebrow")}</span>
-            </span>
-
-            {/* Selo binacional — a atuação nos dois países dita na primeira tela,
-                e não só na faixa de atuação lá embaixo. É o primeiro elemento do
-                caminho de leitura, então quem abre o site já sai sabendo. Para
-                remover, basta apagar deste divisor até o fim do bloco. */}
-            <span aria-hidden className="hidden h-3.5 w-px bg-white/20 sm:block" />
-            <span className="flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.07] px-3 py-1.5 backdrop-blur-sm">
-              <Flag
-                market="br"
-                className="h-3 w-[1.125rem] shrink-0 rounded-[2px] ring-1 ring-white/20"
-              />
-              <Flag
-                market="py"
-                className="h-3 w-[1.125rem] shrink-0 rounded-[2px] ring-1 ring-white/20"
-              />
-              <span className="hud text-white/80">{t("binational")}</span>
-            </span>
-          </motion.div>
-
-          <h1 className="display mt-6 text-[clamp(2.125rem,9vw,2.5rem)] leading-[1.08] text-white md:text-5xl md:leading-[1] lg:text-[3.25rem]">
+    <section id="top" className="hero relative isolate bg-ink-950 pt-[70px]">
+      <div className="hero-content container-x relative z-10 py-10 sm:py-12 lg:py-16">
+        <div className="hero-copy max-w-[36rem] lg:w-[38%] lg:max-w-[30rem]">
+          <p className="eyebrow flex items-start gap-3 leading-relaxed text-white/80">
+            <span className="market-indicator mt-1.5 h-2 w-2 shrink-0 rounded-full bg-brand-400" />
+            {t("eyebrow")}
+          </p>
+          <div className="mt-4 inline-flex max-w-full items-center gap-2 rounded-full border border-white/20 bg-white/[0.07] px-3 py-2">
+            <Flag market="br" className="h-3 w-[1.125rem] shrink-0 rounded-[2px]" />
+            <Flag market="py" className="h-3 w-[1.125rem] shrink-0 rounded-[2px]" />
+            <span className="hud text-white/85">{t("binational")}</span>
+          </div>
+          <h1 className="hero-title display mt-6 leading-[1.08] text-white">
             <span>{t("headline.line1")} </span>
             <span className="text-gradient-brand">{t("headline.line2")} </span>
             <span>{t("headline.line3")}</span>
           </h1>
-
-          {/* Posicionamento em uma frase. É o que diz ao visitante do Paraguai
-              o que a Centra faz NO PAÍS DELE — sem ela, o hero é só uma
-              manchete e uma foto de obra brasileira. */}
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: EASE, delay: 0.15 }}
-            className="mt-6 text-base leading-relaxed text-white/80 sm:text-lg"
-          >
-            {t("lead")}
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.45, ease: EASE, delay: 0.22 }}
-            className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-white/10 pt-5"
-          >
-            <span className="eyebrow text-white/55">{t("sectorsLabel")}</span>
-            <div className="flex flex-wrap gap-x-6 gap-y-2">
-              {SECTORS.map((sector) => (
-                <span key={sector} className="text-sm font-medium text-white/75">
-                  {tSectors(sector)}
-                </span>
+          <p className="hero-lead mt-6 text-base leading-relaxed text-white/85 sm:text-lg">{t("lead")}</p>
+          <div className="hero-sectors mt-7 border-t border-white/20 pt-5">
+            <p className="eyebrow text-white/75">{t("sectorsLabel")}</p>
+            <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+              {SECTORS.map(sector => (
+                <span key={sector} className="text-sm font-medium text-white/85">{tSectors(sector)}</span>
               ))}
             </div>
-          </motion.div>
-        </div>
-      </motion.div>
-
-      {/* Faixa HUD inferior */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.4 }}
-        className="absolute inset-x-0 bottom-5 z-10"
-      >
-        <div className="container-x flex items-end justify-between">
-          <div className="hidden flex-col gap-1 sm:flex">
-            <span className="hud text-white/55">{t("hudLine1")}</span>
-            <span className="hud text-white/55">{t("hudLine2")}</span>
-          </div>
-
-          <div className="hidden -translate-x-1/2 sm:absolute sm:left-1/2 sm:flex">
-            <motion.div
-              animate={reduce ? {} : { y: [0, 7, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="flex flex-col items-center gap-2 text-white/55"
-            >
-              <span className="hud">{t("scroll")}</span>
-              <ArrowDown className="h-4 w-4" />
-            </motion.div>
-          </div>
-
-          <div className="flex flex-col items-start gap-1 sm:items-end">
-            <span className="hud text-brand-300">{t("workIndex")}</span>
-            <span className="hud text-white/55">{t("workLabel")}</span>
           </div>
         </div>
-      </motion.div>
+      </div>
+      <figure className="hero-photo lg:absolute lg:inset-0 lg:-z-10">
+        <Image src={heroImg} alt="" aria-hidden="true" sizes="100vw"
+          className="hero-atmosphere hidden" />
+        <Image src={heroImg} alt={t("imageAlt")} preload placeholder="blur" sizes="100vw"
+          className="hero-totem block h-auto w-full lg:h-full lg:object-cover lg:object-bottom" />
+        <div aria-hidden="true" className="hero-shade pointer-events-none absolute inset-0 hidden lg:block" />
+        <figcaption className="container-x py-4 text-right lg:absolute lg:inset-x-0 lg:bottom-0 lg:py-6">
+          <span className="hud inline-block rounded bg-ink-950/85 px-3 py-2 leading-relaxed text-white/85">
+            {t("workIndex")} · {t("workLabel")}
+          </span>
+        </figcaption>
+      </figure>
     </section>
   );
 }

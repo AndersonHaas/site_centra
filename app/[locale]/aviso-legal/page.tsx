@@ -53,7 +53,7 @@ function LegalEntityTable({ market }: { market: Market }) {
   ];
 
   return (
-    <section className="container-x py-24 md:py-32">
+    <section className="container-x py-16 md:py-32">
       <p className="hud text-brand-600">{t("eyebrow")}</p>
       <h1 className="display mt-4 text-3xl md:text-5xl">{t("title")}</h1>
 

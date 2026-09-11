@@ -21,7 +21,8 @@ export function LogoMark({
       src={market === "py" ? logoPyImg : logoImg}
       alt={alt}
       className={cn("h-8 w-auto", className)}
-      priority={priority}
+      preload={priority}
+      sizes="40px"
     />
   );
 }
@@ -57,7 +58,7 @@ export function Logo({
         </span>
         <span
           className={cn(
-            "mt-1 font-mono text-[0.5rem] tracking-[0.22em]",
+            "logo-subtitle mt-1 font-mono text-[0.5rem] tracking-[0.22em]",
             dark ? "text-white/55" : "text-ink-soft",
           )}
         >

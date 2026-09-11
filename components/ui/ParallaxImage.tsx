@@ -5,11 +5,11 @@ import Image, { type ImageProps } from "next/image";
 import {
   motion,
   useInView,
-  useReducedMotion,
   useScroll,
   useTransform,
 } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useDesktopMotion } from "@/lib/use-desktop-motion";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -32,7 +32,7 @@ export function ParallaxImage({
   ...img
 }: ParallaxImageProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
+  const reduce = !useDesktopMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
@@ -59,8 +59,8 @@ export function ParallaxImage({
       >
         <motion.div
           style={{ y: reduce ? 0 : y }}
-          initial={{ scale: doClip ? 1.26 : 1.12 }}
-          animate={inView ? { scale: 1.12 } : undefined}
+          initial={{ scale: reduce ? 1 : doClip ? 1.26 : 1.12 }}
+          animate={inView ? { scale: reduce ? 1 : 1.12 } : undefined}
           transition={{ duration: 1.3, ease: EASE }}
           className="absolute inset-0"
         >

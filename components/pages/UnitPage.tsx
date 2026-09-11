@@ -38,7 +38,7 @@ export function UnitPage({
     <>
       <Navbar market={market} />
       <main className="pt-[70px]">
-        <section className="container-x py-20 md:py-28">
+        <section className="container-x py-12 md:py-28">
           <Reveal>
             {/* Âncora, e não a raiz nua: a raiz agora é a página da
                 construção, então "todas as unidades" só é verdade se o link

@@ -4,7 +4,6 @@ import { useRef } from "react";
 import dynamic from "next/dynamic";
 import {
   motion,
-  useReducedMotion,
   useScroll,
   useTransform,
   type MotionValue,
@@ -13,7 +12,7 @@ import { useTranslations } from "next-intl";
 import { SplitText } from "@/components/ui/SplitText";
 import { VideoScrub } from "@/components/ui/VideoScrub";
 import { FOUNDATION_STAGES } from "@/lib/content";
-import { cn } from "@/lib/utils";
+import { useDesktopMotion } from "@/lib/use-desktop-motion";
 
 const SiloFoundation = dynamic(
   () => import("@/components/three/SiloFoundation"),
@@ -25,8 +24,34 @@ const SiloFoundation = dynamic(
    variant="video" → vídeo scroll-scrub (gerado por IA; ver
                      docs/video-prompts-fundacao.md) */
 export function Fundacao({ variant = "3d" }: { variant?: "3d" | "video" }) {
+  const desktopMotion = useDesktopMotion();
+  const t = useTranslations("fundacao");
+
+  if (desktopMotion) return <InteractiveFoundation variant={variant} />;
+
+  return (
+    <section id="fundacao" className="relative bg-ink-950 py-16 md:py-24">
+      <div className="container-x">
+        <p className="eyebrow leading-relaxed text-brand-300">{t("eyebrow")} · {t("kicker")}</p>
+        <h2 className="display mt-5 max-w-2xl text-3xl text-white sm:text-4xl">
+          {t.rich("title", { accent: chunks => <span className="text-gradient-brand">{chunks}</span> })}
+        </h2>
+        <ol className="mt-10 grid gap-6 lg:grid-cols-3">
+          {FOUNDATION_STAGES.map((s, i) => (
+            <li key={s.key} className="border-t border-white/20 pt-6">
+              <p className="hud text-brand-300">{String(i + 1).padStart(2, "0")}</p>
+              <h3 className="mt-3 text-xl font-semibold text-white">{t(`stages.${s.key}.title`)}</h3>
+              <p className="mt-3 text-base leading-relaxed text-white/75">{t(`stages.${s.key}.spec`)}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
+function InteractiveFoundation({ variant }: { variant: "3d" | "video" }) {
   const wrapRef = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
   const t = useTranslations("fundacao");
   const { scrollYProgress } = useScroll({
     target: wrapRef,
@@ -43,13 +68,8 @@ export function Fundacao({ variant = "3d" }: { variant?: "3d" | "video" }) {
 
   return (
     <section id="fundacao" className="relative bg-ink-950">
-      <div ref={wrapRef} style={reduce ? undefined : { height: "180vh" }}>
-        <div
-          className={cn(
-            "grain h-svh overflow-hidden",
-            reduce ? "relative" : "sticky top-0",
-          )}
-        >
+      <div ref={wrapRef} style={{ height: "180vh" }}>
+        <div className="grain sticky top-0 h-svh overflow-hidden">
           <div className="grid-lines absolute inset-0 opacity-30" />
 
           {variant === "3d" ? (
@@ -89,23 +109,6 @@ export function Fundacao({ variant = "3d" }: { variant?: "3d" | "video" }) {
           {/* Legendas por etapa + leituras HUD */}
           <div className="container-x absolute inset-x-0 bottom-10 z-10 md:bottom-14">
             <div className="flex items-end justify-between gap-6">
-              {reduce ? (
-                <div className="flex flex-col gap-5">
-                  {FOUNDATION_STAGES.map((s, i) => (
-                    <div key={s.key}>
-                      <p className="hud text-brand-300">
-                        {String(i + 1).padStart(2, "0")}
-                      </p>
-                      <h3 className="display mt-1 text-xl text-white">
-                        {t(`stages.${s.key}.title`)}
-                      </h3>
-                      <p className="mt-1 text-sm text-white/65">
-                        {t(`stages.${s.key}.spec`)}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              ) : (
                 <div className="relative h-28 w-full max-w-md">
                   {FOUNDATION_STAGES.map((s, i) => (
                     <Caption
@@ -118,9 +121,6 @@ export function Fundacao({ variant = "3d" }: { variant?: "3d" | "video" }) {
                     />
                   ))}
                 </div>
-              )}
-
-              {!reduce && (
                 <div className="hidden shrink-0 flex-col items-end gap-2 sm:flex">
                   <span className="hud text-brand-300">
                     {t("depthLabel")}&ensp;<motion.span>{depth}</motion.span>
@@ -130,7 +130,6 @@ export function Fundacao({ variant = "3d" }: { variant?: "3d" | "video" }) {
                     &ensp;/ 03
                   </span>
                 </div>
-              )}
             </div>
           </div>
         </div>

@@ -271,6 +271,15 @@
 
 
   "portfolio": {
+    "clientFilterLabel": "Filtrar por cliente",
+    "countryFilterLabel": "Filtrar por país",
+    "empty": "No hay obras disponibles para estos filtros.",
+    "gallery": {
+      "close": "Cerrar galería",
+      "previous": "Foto anterior",
+      "next": "Foto siguiente",
+      "imageAlt": "{title} — foto {index}"
+    },
     "eyebrow": "Portafolio",
     "title": "Obras que muestran <accent>nuestra escala</accent>.",
     "description": "Proyectos entregados por el Grupo Centra — cada uno con su registro fotográfico.",

@@ -85,7 +85,7 @@ html[data-market="py"] {
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv01", "cv11";
-    overflow-x: hidden;
+    overflow-wrap: anywhere;
   }
 
   ::selection {
@@ -134,7 +134,12 @@ html[data-market="py"] {
     width: 100%;
     max-width: 80rem;
     margin-inline: auto;
-    padding-inline: 1.5rem;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) {
+    .container-x {
+      padding-inline: 1.5rem;
+    }
   }
   @media (min-width: 768px) {
     .container-x {
@@ -188,7 +193,7 @@ html[data-market="py"] {
     display: inline-flex;
     align-items: center;
     gap: 0.55rem;
-    background: var(--color-brand-500);
+    background: var(--color-brand-600);
     color: #fff;
     font-weight: 500;
     font-size: 0.95rem;
@@ -221,6 +226,93 @@ html[data-market="py"] {
     background: rgba(255, 255, 255, 0.06);
     border-color: rgba(255, 255, 255, 0.4);
   }
+
+  .hero-title {
+    font-size: clamp(1.875rem, 8.9vw, 3.25rem);
+  }
+  .hero-shade {
+    background: linear-gradient(90deg, rgba(5, 11, 20, .97) 0%, rgba(5, 11, 20, .90) 36%, rgba(5, 11, 20, .55) 47%, transparent 62%);
+  }
+
+  @media (min-width: 1024px) {
+    .hero {
+      min-height: max(740px, 56.25vw);
+    }
+    .hero-title {
+      font-size: clamp(2.5rem, 3.5vw, 3.25rem);
+    }
+  }
+}
+
+  @media (max-width: 1023px) {
+    .hero {
+      min-height: 100svh;
+    }
+    .hero-content {
+      padding-top: 2rem;
+      padding-bottom: clamp(13rem, 40vw, 20rem);
+    }
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .hero-photo .hero-atmosphere {
+      display: block;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 66% center;
+      filter: blur(4px);
+      mask-image: linear-gradient(to bottom, #000 25%, transparent 65%);
+    }
+    .hero-photo .hero-totem {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: clamp(20rem, 105vw, 40rem);
+      object-fit: cover;
+      object-position: 78% bottom;
+      mask-image: linear-gradient(to bottom, transparent, #000 35%);
+    }
+    .hero-shade {
+      display: block;
+      background: linear-gradient(to bottom, rgba(5, 11, 20, .85) 0%, rgba(5, 11, 20, .86) 35%, rgba(5, 11, 20, .72) 55%, rgba(5, 11, 20, .12) 78%, rgba(5, 11, 20, .08) 88%, rgba(5, 11, 20, .65) 100%);
+    }
+    .hero-photo figcaption {
+      display: none;
+    }
+    .hero-title {
+      font-size: clamp(1.875rem, 8.4vw, 3.25rem);
+      margin-top: 1.25rem;
+    }
+    .hero-lead {
+      margin-top: 1rem;
+    }
+    .hero-sectors {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+    }
+  }
+
+/* Fixed navigation, native anchors and long labels share these constraints. */
+:where(main, footer) :where(a, button) {
+  min-height: 44px;
+}
+:where(main, footer) :where(.grid, .flex) > * {
+  min-width: 0;
+}
+section[id] { scroll-margin-top: 86px; }
+.btn-primary, .btn-ghost { min-height: 44px; }
+.btn-primary svg, .btn-ghost svg { flex-shrink: 0; }
+@media (max-width: 479px) {
+  header .logo-subtitle { display: none; }
+}
+@media (pointer: coarse) {
+  html { scroll-behavior: auto; }
 }
 
 /* Ficam fora de @layer para vencer as utilities Tailwind brand-* aplicadas
@@ -303,16 +395,6 @@ html[data-market="py"] .market-filter-active {
     line-height: 1.2;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-  }
-}
-
-.hero-image-motion {
-  animation: kenburns 26s ease-out forwards;
-}
-
-@media (max-width: 767px) {
-  .hero-image-motion {
-    animation: none;
   }
 }
 

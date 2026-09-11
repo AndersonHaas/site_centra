@@ -21,7 +21,7 @@ export function Clientes() {
   const t = useTranslations("clientes");
 
   return (
-    <section id="clientes" className="relative bg-surface py-24 md:py-32">
+    <section id="clientes" className="relative bg-surface py-16 md:py-32">
       <div className="container-x">
         <SectionHeader
           index="03"
@@ -39,7 +39,7 @@ export function Clientes() {
           </p>
         </Reveal>
 
-        <RevealStagger className="mt-4 grid gap-4 md:grid-cols-3" gap={0.1}>
+        <RevealStagger className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" gap={0.1}>
           {CLIENTS.map((c, i) => {
             const img = CLIENT_IMG[c.name];
             return (
@@ -88,7 +88,7 @@ export function Clientes() {
 
         {/* Declaração de impacto */}
         <Reveal delay={0.1} className="mt-6">
-          <div className="grain relative overflow-hidden rounded-3xl bg-ink-950 p-10 md:p-14">
+          <div className="grain relative overflow-hidden rounded-3xl bg-ink-950 p-6 sm:p-10 md:p-14">
             <div className="grid-lines absolute inset-0 opacity-40" />
             <div
               className="pointer-events-none absolute inset-0"

@@ -7,8 +7,9 @@ import {
   useRef,
   useState,
 } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useDesktopMotion } from "@/lib/use-desktop-motion";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -60,7 +61,7 @@ export function SplitText({
   className,
   once = true,
 }: SplitTextProps) {
-  const reduce = useReducedMotion();
+  const reduce = !useDesktopMotion();
   const rootRef = useRef<HTMLElement>(null);
   const [lineOf, setLineOf] = useState<number[] | null>(null);
   const inView = useInView(rootRef, { once, margin: "-10% 0px" });
@@ -104,19 +105,14 @@ export function SplitText({
   if (reduce) {
     return (
       <Tag ref={rootRef as never} className={className}>
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={mode === "mount" || inView ? { opacity: 1 } : undefined}
-          transition={{ duration: 0.5, delay }}
-          className="inline-block"
-        >
+        <span>
           {words.map((w, i) => (
             <span key={i} className={w.className}>
               {w.text}
               {i < words.length - 1 && !isPunct(words[i + 1].text) ? " " : null}
             </span>
           ))}
-        </motion.span>
+        </span>
       </Tag>
     );
   }
@@ -130,7 +126,7 @@ export function SplitText({
       {words.map((w, i) => (
         <span key={i} aria-hidden="true">
           {/* máscara: pb/-mb evitam cortar descendentes (g, p, j) */}
-          <span className="inline-block overflow-hidden pb-[0.12em] -mb-[0.12em] align-bottom">
+          <span className="inline-block max-w-full overflow-hidden pb-[0.12em] -mb-[0.12em] align-bottom">
             <motion.span
               data-split-word
               initial={{ y: "115%" }}

@@ -3,11 +3,11 @@
 import { useRef } from "react";
 import {
   motion,
-  useReducedMotion,
   useScroll,
   useTransform,
   type MotionValue,
 } from "framer-motion";
+import { useDesktopMotion } from "@/lib/use-desktop-motion";
 
 /* Palavra em subcomponente: um useTransform por palavra sem violar as
    regras de hooks (a lista de palavras é estável entre renders). */
@@ -34,7 +34,7 @@ type ScrubTextProps = {
    do scroll (scrub) — sem timers. */
 export function ScrubText({ text, as: Tag = "p", className }: ScrubTextProps) {
   const ref = useRef<HTMLElement>(null);
-  const reduce = useReducedMotion();
+  const reduce = !useDesktopMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 0.85", "end 0.45"],
@@ -44,7 +44,7 @@ export function ScrubText({ text, as: Tag = "p", className }: ScrubTextProps) {
   const n = words.length;
 
   if (reduce) {
-    return <Tag className={className}>{text}</Tag>;
+    return <Tag ref={ref as never} className={className}>{text}</Tag>;
   }
 
   return (
