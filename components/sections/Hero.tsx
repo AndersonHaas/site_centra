@@ -54,13 +54,7 @@ export function Hero() {
         </div>
       </motion.div>
 
-      {/* Gradientes de leitura. O texto agora fica ancorado no topo (ver
-          items-start abaixo) e o totem sobra livre na parte de baixo da
-          foto — essa separação vertical funciona em qualquer largura de
-          tela, ao contrário de tentar "desviar" do totem na horizontal
-          (que só dá certo em alguns tamanhos de viewport). */}
-      <div className="absolute inset-0 -z-0 bg-gradient-to-r from-ink-950 via-ink-950/70 to-ink-950/10" />
-      <div className="absolute inset-0 -z-0 bg-gradient-to-b from-ink-950/80 via-ink-950/15 to-ink-950/55" />
+      {/* Gradientes de leitura — removidos temporariamente para teste visual. */}
 
       {/* Molduras de canto (HUD de câmera) */}
 
