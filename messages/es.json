@@ -74,12 +74,12 @@
     },
     "lead": "Construcción civil en Paraguay, con la experiencia del Grupo Centra en Brasil en obras industriales, agroindustriales y comerciales.",
     "sectorsLabel": "Sectores de actuación",
-    "hudLine1": "Obra ejecutada en Brasil",
-    "hudLine2": "Palotina · Paraná · Brasil",
+    "hudLine1": "Sede · Fachada",
+    "hudLine2": "Matriz · Centra Construtora",
     "scroll": "Deslizar",
-    "workIndex": "Obra 01",
-    "workLabel": "C.Vale · Unidad industrial",
-    "imageAlt": "Complejo agroindustrial construido por Centra en Brasil"
+    "workIndex": "Sede",
+    "workLabel": "Fachada de la matriz",
+    "imageAlt": "Fachada de la sede de Centra Construtora, con el tótem de la marca en primer plano"
   },
 
   "trustBar": {

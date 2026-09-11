@@ -74,12 +74,12 @@
     },
     "lead": "Construção civil, terraplanagem e gestão de projetos para os setores industrial, agroindustrial e comercial.",
     "sectorsLabel": "Setores de atuação",
-    "hudLine1": "Lat −24.61° · Lon −53.30°",
-    "hudLine2": "Palotina · Paraná · BR",
+    "hudLine1": "Sede · Fachada",
+    "hudLine2": "Matriz · Centra Construtora",
     "scroll": "Role",
-    "workIndex": "Obra 01",
-    "workLabel": "C.Vale · Unidade industrial",
-    "imageAlt": "Complexo agroindustrial construído pela Centra Engenharia"
+    "workIndex": "Sede",
+    "workLabel": "Fachada da matriz",
+    "imageAlt": "Fachada da sede da Centra Construtora, com o totem da marca em destaque"
   },
 
   "trustBar": {

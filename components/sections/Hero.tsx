@@ -12,7 +12,7 @@ import { ArrowDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { SECTORS } from "@/lib/content";
 import { Flag } from "@/components/ui/Flag";
-import heroImg from "@/media/works/cvale-complexo.jpg";
+import heroImg from "@/media/works/sede-totem.png";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -49,13 +49,15 @@ export function Hero() {
             priority
             placeholder="blur"
             sizes="100vw"
-            className="object-cover object-center"
+            className="object-cover object-[center_58%]"
           />
         </div>
       </motion.div>
 
-      {/* Gradientes de leitura */}
-      <div className="absolute inset-0 -z-0 bg-gradient-to-r from-ink-950 via-ink-950/75 to-ink-950/10" />
+      {/* Gradientes de leitura. Faixa esquerda mais forte e mais estreita:
+          a foto tem o totem à direita do centro, então o texto precisa
+          ficar contido à esquerda dele em vez de cobrir a largura toda. */}
+      <div className="absolute inset-0 -z-0 bg-gradient-to-r from-ink-950 via-ink-950/80 from-0% via-[38%] to-transparent to-[68%]" />
       <div className="absolute inset-0 -z-0 bg-gradient-to-t from-ink-950 via-ink-950/10 to-ink-950/65" />
 
       {/* Molduras de canto (HUD de câmera) */}
@@ -63,7 +65,7 @@ export function Hero() {
       {/* Conteúdo */}
       <motion.div
         style={{ y: reduce ? 0 : yContent, opacity: reduce ? 1 : opacity }}
-        className="container-x relative z-10 w-full pt-24 pb-20 md:pt-28 md:pb-28"
+        className="container-x relative z-10 w-full max-w-[26rem] pt-24 pb-20 md:pt-28 md:pb-28"
       >
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -99,7 +101,7 @@ export function Hero() {
           </span>
         </motion.div>
 
-        <h1 className="display mt-6 max-w-[18ch] text-[clamp(2.125rem,9vw,2.5rem)] leading-[1.08] text-white md:max-w-[20ch] md:text-5xl md:leading-[0.98] lg:text-[3.5rem] xl:text-[4rem]">
+        <h1 className="display mt-6 text-[clamp(2.125rem,9vw,2.5rem)] leading-[1.08] text-white md:text-4xl md:leading-[1.05] lg:text-[2.75rem]">
           <span>{t("headline.line1")} </span>
           <span className="text-gradient-brand">{t("headline.line2")} </span>
           <span>{t("headline.line3")}</span>
