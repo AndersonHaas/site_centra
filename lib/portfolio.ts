@@ -13,6 +13,7 @@ const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const BUCKET = "mkt-portfolio";
 
 export type PortfolioCountry = "BR" | "PY";
+export type PortfolioStatus = "finalizado" | "em_andamento";
 
 export type PortfolioObra = {
   slug: string;
@@ -23,6 +24,7 @@ export type PortfolioObra = {
   cidade: string;
   uf: string;
   detalhes: string;
+  status: PortfolioStatus;
 };
 
 type ObraApi = {
@@ -33,6 +35,7 @@ type ObraApi = {
   uf: string;
   pais: PortfolioCountry;
   detalhes: string;
+  situacao: PortfolioStatus;
   ordem: number;
   fotos: string[];
 };
@@ -75,5 +78,6 @@ export async function getPortfolio(): Promise<PortfolioObra[]> {
     cidade: o.cidade,
     uf: o.uf,
     detalhes: o.detalhes,
+    status: o.situacao,
   }));
 }

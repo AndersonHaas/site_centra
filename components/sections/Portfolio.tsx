@@ -152,6 +152,11 @@ export function Portfolio({ projects: allProjects, showAttributionNote = false }
                     priority={index === 0}
                     className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                   />
+                  {project.status === "em_andamento" && (
+                    <span className="hud absolute left-3 top-3 rounded-full border border-white/15 bg-ink-950/40 px-3 py-1.5 text-white/80 backdrop-blur-sm">
+                      {t("statusEmAndamento")}
+                    </span>
+                  )}
                 </div>
                 <div className="flex items-start justify-between gap-3 pt-3">
                   <div>
