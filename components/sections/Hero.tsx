@@ -34,7 +34,7 @@ export function Hero() {
     <section
       id="top"
       ref={ref}
-      className="grain relative flex min-h-[42rem] items-center overflow-hidden bg-ink-950 md:min-h-[100svh]"
+      className="grain relative flex min-h-[54rem] items-start overflow-hidden bg-ink-950 md:min-h-[100svh]"
     >
       {/* Fundo: foto real com Ken Burns + parallax */}
       <motion.div
@@ -49,16 +49,18 @@ export function Hero() {
             priority
             placeholder="blur"
             sizes="100vw"
-            className="object-cover object-[35%_58%]"
+            className="object-cover object-[63%_55%]"
           />
         </div>
       </motion.div>
 
-      {/* Gradientes de leitura. Faixa esquerda mais forte e mais estreita:
-          a foto tem o totem à direita do centro, então o texto precisa
-          ficar contido à esquerda dele em vez de cobrir a largura toda. */}
-      <div className="absolute inset-0 -z-0 bg-gradient-to-r from-ink-950 via-ink-950/80 from-0% via-[32%] to-transparent to-[58%]" />
-      <div className="absolute inset-0 -z-0 bg-gradient-to-t from-ink-950 via-ink-950/10 to-ink-950/65" />
+      {/* Gradientes de leitura. O texto agora fica ancorado no topo (ver
+          items-start abaixo) e o totem sobra livre na parte de baixo da
+          foto — essa separação vertical funciona em qualquer largura de
+          tela, ao contrário de tentar "desviar" do totem na horizontal
+          (que só dá certo em alguns tamanhos de viewport). */}
+      <div className="absolute inset-0 -z-0 bg-gradient-to-r from-ink-950 via-ink-950/70 to-ink-950/10" />
+      <div className="absolute inset-0 -z-0 bg-gradient-to-b from-ink-950/80 via-ink-950/15 to-ink-950/55" />
 
       {/* Molduras de canto (HUD de câmera) */}
 
@@ -71,7 +73,7 @@ export function Hero() {
             tem margin-inline:auto para centralizar até 1280px, então um
             max-w menor ali vira uma caixa estreita CENTRALIZADA no viewport
             em vez de continuar alinhada à esquerda com o header. */}
-        <div className="max-w-[23rem]">
+        <div className="max-w-[30rem]">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -106,7 +108,7 @@ export function Hero() {
             </span>
           </motion.div>
 
-          <h1 className="display mt-6 text-[clamp(2.125rem,9vw,2.5rem)] leading-[1.08] text-white md:text-4xl md:leading-[1.05] lg:text-[2.75rem]">
+          <h1 className="display mt-6 text-[clamp(2.125rem,9vw,2.5rem)] leading-[1.08] text-white md:text-5xl md:leading-[1] lg:text-[3.25rem]">
             <span>{t("headline.line1")} </span>
             <span className="text-gradient-brand">{t("headline.line2")} </span>
             <span>{t("headline.line3")}</span>
