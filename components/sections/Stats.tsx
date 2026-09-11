@@ -57,7 +57,7 @@ export function Stats() {
           className="object-cover object-center"
         />
       </motion.div>
-      <div className="absolute inset-0 bg-ink-950/85" />
+      <div className="absolute inset-0 bg-ink-950/55" />
       <div
         className="pointer-events-none absolute inset-0"
         style={{

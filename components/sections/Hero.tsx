@@ -54,7 +54,9 @@ export function Hero() {
         </div>
       </motion.div>
 
-      {/* Gradientes de leitura — removidos temporariamente para teste visual. */}
+      {/* Gradientes de leitura, bem mais sutis do que a primeira versão. */}
+      <div className="absolute inset-0 -z-0 bg-gradient-to-r from-ink-950/55 via-ink-950/35 to-transparent" />
+      <div className="absolute inset-0 -z-0 bg-gradient-to-b from-ink-950/50 via-transparent to-ink-950/35" />
 
       {/* Molduras de canto (HUD de câmera) */}
 
