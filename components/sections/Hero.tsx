@@ -49,7 +49,7 @@ export function Hero() {
             priority
             placeholder="blur"
             sizes="100vw"
-            className="object-cover object-[center_58%]"
+            className="object-cover object-[35%_58%]"
           />
         </div>
       </motion.div>
@@ -57,7 +57,7 @@ export function Hero() {
       {/* Gradientes de leitura. Faixa esquerda mais forte e mais estreita:
           a foto tem o totem à direita do centro, então o texto precisa
           ficar contido à esquerda dele em vez de cobrir a largura toda. */}
-      <div className="absolute inset-0 -z-0 bg-gradient-to-r from-ink-950 via-ink-950/80 from-0% via-[38%] to-transparent to-[68%]" />
+      <div className="absolute inset-0 -z-0 bg-gradient-to-r from-ink-950 via-ink-950/80 from-0% via-[32%] to-transparent to-[58%]" />
       <div className="absolute inset-0 -z-0 bg-gradient-to-t from-ink-950 via-ink-950/10 to-ink-950/65" />
 
       {/* Molduras de canto (HUD de câmera) */}
@@ -65,75 +65,81 @@ export function Hero() {
       {/* Conteúdo */}
       <motion.div
         style={{ y: reduce ? 0 : yContent, opacity: reduce ? 1 : opacity }}
-        className="container-x relative z-10 w-full max-w-[26rem] pt-24 pb-20 md:pt-28 md:pb-28"
+        className="container-x relative z-10 w-full pt-24 pb-20 md:pt-28 md:pb-28"
       >
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: EASE, delay: 0.05 }}
-          className="flex flex-wrap items-center gap-x-3 gap-y-3"
-        >
-          {/* Ponto e eyebrow num grupo só: com o flex-wrap da linha, soltos,
-              o ponto virava órfão numa linha própria no mobile. */}
-          <span className="flex items-center gap-3">
-            <span className="relative flex h-2 w-2 shrink-0">
-              <span className="market-indicator absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-400 opacity-60" />
-              <span className="market-indicator relative inline-flex h-2 w-2 rounded-full bg-brand-400" />
-            </span>
-            <span className="eyebrow text-white/70">{t("eyebrow")}</span>
-          </span>
-
-          {/* Selo binacional — a atuação nos dois países dita na primeira tela,
-              e não só na faixa de atuação lá embaixo. É o primeiro elemento do
-              caminho de leitura, então quem abre o site já sai sabendo. Para
-              remover, basta apagar deste divisor até o fim do bloco. */}
-          <span aria-hidden className="hidden h-3.5 w-px bg-white/20 sm:block" />
-          <span className="flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.07] px-3 py-1.5 backdrop-blur-sm">
-            <Flag
-              market="br"
-              className="h-3 w-[1.125rem] shrink-0 rounded-[2px] ring-1 ring-white/20"
-            />
-            <Flag
-              market="py"
-              className="h-3 w-[1.125rem] shrink-0 rounded-[2px] ring-1 ring-white/20"
-            />
-            <span className="hud text-white/80">{t("binational")}</span>
-          </span>
-        </motion.div>
-
-        <h1 className="display mt-6 text-[clamp(2.125rem,9vw,2.5rem)] leading-[1.08] text-white md:text-4xl md:leading-[1.05] lg:text-[2.75rem]">
-          <span>{t("headline.line1")} </span>
-          <span className="text-gradient-brand">{t("headline.line2")} </span>
-          <span>{t("headline.line3")}</span>
-        </h1>
-
-        {/* Posicionamento em uma frase. É o que diz ao visitante do Paraguai
-            o que a Centra faz NO PAÍS DELE — sem ela, o hero é só uma
-            manchete e uma foto de obra brasileira. */}
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, ease: EASE, delay: 0.15 }}
-          className="mt-6 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg"
-        >
-          {t("lead")}
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.45, ease: EASE, delay: 0.22 }}
-          className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-white/10 pt-5"
-        >
-          <span className="eyebrow text-white/55">{t("sectorsLabel")}</span>
-          <div className="flex flex-wrap gap-x-6 gap-y-2">
-            {SECTORS.map((sector) => (
-              <span key={sector} className="text-sm font-medium text-white/75">
-                {tSectors(sector)}
+        {/* max-w vive aqui dentro, não na div com container-x: container-x já
+            tem margin-inline:auto para centralizar até 1280px, então um
+            max-w menor ali vira uma caixa estreita CENTRALIZADA no viewport
+            em vez de continuar alinhada à esquerda com o header. */}
+        <div className="max-w-[23rem]">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: EASE, delay: 0.05 }}
+            className="flex flex-wrap items-center gap-x-3 gap-y-3"
+          >
+            {/* Ponto e eyebrow num grupo só: com o flex-wrap da linha, soltos,
+                o ponto virava órfão numa linha própria no mobile. */}
+            <span className="flex items-center gap-3">
+              <span className="relative flex h-2 w-2 shrink-0">
+                <span className="market-indicator absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-400 opacity-60" />
+                <span className="market-indicator relative inline-flex h-2 w-2 rounded-full bg-brand-400" />
               </span>
-            ))}
-          </div>
-        </motion.div>
+              <span className="eyebrow text-white/70">{t("eyebrow")}</span>
+            </span>
+
+            {/* Selo binacional — a atuação nos dois países dita na primeira tela,
+                e não só na faixa de atuação lá embaixo. É o primeiro elemento do
+                caminho de leitura, então quem abre o site já sai sabendo. Para
+                remover, basta apagar deste divisor até o fim do bloco. */}
+            <span aria-hidden className="hidden h-3.5 w-px bg-white/20 sm:block" />
+            <span className="flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.07] px-3 py-1.5 backdrop-blur-sm">
+              <Flag
+                market="br"
+                className="h-3 w-[1.125rem] shrink-0 rounded-[2px] ring-1 ring-white/20"
+              />
+              <Flag
+                market="py"
+                className="h-3 w-[1.125rem] shrink-0 rounded-[2px] ring-1 ring-white/20"
+              />
+              <span className="hud text-white/80">{t("binational")}</span>
+            </span>
+          </motion.div>
+
+          <h1 className="display mt-6 text-[clamp(2.125rem,9vw,2.5rem)] leading-[1.08] text-white md:text-4xl md:leading-[1.05] lg:text-[2.75rem]">
+            <span>{t("headline.line1")} </span>
+            <span className="text-gradient-brand">{t("headline.line2")} </span>
+            <span>{t("headline.line3")}</span>
+          </h1>
+
+          {/* Posicionamento em uma frase. É o que diz ao visitante do Paraguai
+              o que a Centra faz NO PAÍS DELE — sem ela, o hero é só uma
+              manchete e uma foto de obra brasileira. */}
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, ease: EASE, delay: 0.15 }}
+            className="mt-6 text-base leading-relaxed text-white/80 sm:text-lg"
+          >
+            {t("lead")}
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.45, ease: EASE, delay: 0.22 }}
+            className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-white/10 pt-5"
+          >
+            <span className="eyebrow text-white/55">{t("sectorsLabel")}</span>
+            <div className="flex flex-wrap gap-x-6 gap-y-2">
+              {SECTORS.map((sector) => (
+                <span key={sector} className="text-sm font-medium text-white/75">
+                  {tSectors(sector)}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        </div>
       </motion.div>
 
       {/* Faixa HUD inferior */}
