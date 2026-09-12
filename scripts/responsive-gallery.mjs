@@ -39,6 +39,12 @@ try {
     await cards.first().click();
     const dialog = page.getByRole('dialog');
     await dialog.waitFor();
+    await page.waitForFunction(() =>
+      [...document.querySelectorAll('[role="dialog"] img')].length === 3 &&
+      [...document.querySelectorAll('[role="dialog"] img')].every((image) =>
+        image.complete && image.naturalWidth > 0,
+      ),
+    );
     await page.keyboard.press('ArrowRight');
     assert((await dialog.innerText()).includes('02 / 03'));
     await page.keyboard.press('ArrowLeft');

@@ -26,6 +26,16 @@ export function Lightbox({
   const dialogRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
   const canNavigate = images.length > 1;
+  /* Baixa as duas imagens adjacentes pelo mesmo otimizador do Next. Assim,
+     a troca por toque, seta ou teclado não espera a próxima foto. */
+  const neighboringIndexes = canNavigate
+    ? Array.from(
+        new Set([
+          (index - 1 + images.length) % images.length,
+          (index + 1) % images.length,
+        ]),
+      )
+    : [];
 
   const goPrev = () =>
     onIndexChange((index - 1 + images.length) % images.length);
@@ -106,6 +116,18 @@ export function Lightbox({
       </div>
 
       <div className="relative min-h-0 flex-1">
+        {neighboringIndexes.map((neighborIndex) => (
+          <Image
+            key={images[neighborIndex]}
+            src={images[neighborIndex]}
+            alt=""
+            aria-hidden="true"
+            fill
+            sizes="100vw"
+            loading="eager"
+            className="pointer-events-none absolute inset-0 opacity-0"
+          />
+        ))}
         {/* onClick aqui (não no container): a Image com `fill` cobre toda
             a área, inclusive o letterboxing, então é ela quem recebe o
             tap tanto "na foto" quanto "fora" dela. */}
@@ -115,6 +137,7 @@ export function Lightbox({
           alt={t("imageAlt", { title, index: index + 1 })}
           fill
           sizes="100vw"
+          loading="eager"
           className="object-contain"
           onClick={onClose}
         />
