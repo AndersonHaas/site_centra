@@ -15,6 +15,7 @@ import {
 import { useTranslations } from "next-intl";
 import { Reveal } from "@/components/ui/Reveal";
 import { SplitText } from "@/components/ui/SplitText";
+import { InstagramIcon } from "@/components/ui/InstagramIcon";
 import { MARKETS } from "@/lib/group/markets";
 import type { Market } from "@/lib/group/market";
 
@@ -77,6 +78,12 @@ export function Contato({ market }: { market: Market }) {
       label: t("whatsAppLabel"),
       value: contact.phone,
       href: toWhatsAppHref(contact.phone, t("whatsAppMessage")),
+    },
+    {
+      icon: InstagramIcon,
+      label: t("instagramLabel"),
+      value: "@centraempreendimentos",
+      href: "https://www.instagram.com/centraempreendimentos/",
     },
     { icon: MapPin, label: t("baseLabel"), value: t("baseValue") },
   ];

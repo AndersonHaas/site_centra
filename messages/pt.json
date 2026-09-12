@@ -215,6 +215,7 @@
     "personLabel": "Contato",
     "emailLabel": "E-mail",
     "whatsAppLabel": "WhatsApp",
+    "instagramLabel": "Instagram",
     "whatsAppMessage": "Olá, José! Estou entrando em contato pelo site da Centra Engenharia e gostaria de falar sobre um projeto.",
     "baseLabel": "Base",
     "baseValue": "Cafelândia · PR · Brasil",
@@ -309,6 +310,7 @@
     "navTitle": "Navegação",
     "sectorsTitle": "Setores",
     "cta": "Fale com a Centra →",
+    "instagramLabel": "Instagram da Centra",
     "tagline": "Grupo Centra — Brasil e Paraguai",
     "rightsReserved": "Todos os direitos reservados."
   },

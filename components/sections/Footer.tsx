@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Logo } from "@/components/ui/Logo";
+import { InstagramIcon } from "@/components/ui/InstagramIcon";
 import { Link } from "@/i18n/navigation";
 import { SECTORS } from "@/lib/content";
 import { getContactHref, getFooterLinks } from "@/lib/group/nav";
@@ -26,6 +27,16 @@ export function Footer({ market }: { market: Market }) {
             >
               {t("footer.cta")}
             </Link>
+            <a
+              href="https://www.instagram.com/centraempreendimentos/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label={t("footer.instagramLabel")}
+              className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-white/65 transition-colors hover:text-brand-300"
+            >
+              <InstagramIcon />
+              @centraempreendimentos
+            </a>
           </div>
 
           <div>

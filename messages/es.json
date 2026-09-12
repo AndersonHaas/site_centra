@@ -215,6 +215,7 @@
     "personLabel": "Contacto",
     "emailLabel": "Correo electrónico",
     "whatsAppLabel": "WhatsApp",
+    "instagramLabel": "Instagram",
     "whatsAppMessage": "Hola, José. Estoy contactando desde el sitio web de Centra Engenharia y me gustaría hablar sobre un proyecto.",
     "baseLabel": "Sede del grupo",
     "baseValue": "Cafelândia · PR · Brasil",
@@ -309,6 +310,7 @@
     "navTitle": "Navegación",
     "sectorsTitle": "Sectores",
     "cta": "Hable con Centra →",
+    "instagramLabel": "Instagram de Centra",
     "tagline": "Grupo Centra — Brasil y Paraguay",
     "rightsReserved": "Todos los derechos reservados."
   },
