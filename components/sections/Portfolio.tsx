@@ -158,6 +158,11 @@ export function Portfolio({ projects: allProjects, showAttributionNote = false }
                   <div>
                     <p className="hud text-brand-600">{project.client} · {countryBadge[project.country]}</p>
                     <h3 className="mt-2 text-lg font-semibold leading-tight text-ink">{project.title}</h3>
+                    {/* `detalhes` do cadastro no DashboardCentra (ex.: "Área: 16.000,00m²").
+                        Pode ter várias linhas — pre-line respeita as quebras digitadas lá. */}
+                    {project.detalhes?.trim() && (
+                      <p className="mt-1.5 whitespace-pre-line text-sm leading-snug text-ink-soft">{project.detalhes.trim()}</p>
+                    )}
                   </div>
                   {project.images.length > 1 && <span className="hud mt-1 flex shrink-0 items-center gap-1 text-ink-soft"><ImageIcon className="h-3 w-3" />{project.images.length}</span>}
                 </div>
