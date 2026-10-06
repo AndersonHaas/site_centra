@@ -23,7 +23,7 @@ export type PortfolioObra = {
   country: PortfolioCountry;
   cidade: string;
   uf: string;
-  detalhes: string;
+  detalhes: string | null;
   status: PortfolioStatus;
 };
 
@@ -34,7 +34,7 @@ type ObraApi = {
   cidade: string;
   uf: string;
   pais: PortfolioCountry;
-  detalhes: string;
+  detalhes: string | null;
   situacao: PortfolioStatus;
   ordem: number;
   fotos: string[];
