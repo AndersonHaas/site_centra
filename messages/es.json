@@ -272,8 +272,13 @@
 
 
   "portfolio": {
+    "categoryFilterLabel": "Filtrar por categoría",
     "clientFilterLabel": "Filtrar por cliente",
     "countryFilterLabel": "Filtrar por país",
+    "categoryLabel": "Categoría",
+    "clientLabel": "Cliente",
+    "countryLabel": "País",
+    "allCategories": "Todas",
     "empty": "No hay obras disponibles para estos filtros.",
     "gallery": {
       "close": "Cerrar galería",
@@ -283,9 +288,10 @@
     },
     "eyebrow": "Portafolio",
     "title": "Obras que muestran <accent>nuestra escala</accent>.",
-    "description": "Proyectos entregados por el Grupo Centra — cada uno con su registro fotográfico.",
+    "description": "Estas son solo algunas de nuestras obras — una selección de proyectos del Grupo Centra, cada uno con su registro fotográfico.",
+    "otherCategory": "Otras obras",
     "allClients": "Todas",
-    "allCountries": "Todos los países",
+    "allCountries": "Todos",
     "brazil": "Brasil",
     "paraguay": "Paraguay",
     "attributionNote": "Obras ejecutadas por el Grupo Centra en Brasil.",

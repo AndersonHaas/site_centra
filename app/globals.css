@@ -325,11 +325,6 @@ html[data-market="py"] .market-number {
   color: var(--color-signal);
 }
 
-html[data-market="py"] .market-filter-active {
-  border-color: var(--color-signal);
-  background-color: var(--color-signal);
-}
-
 @layer utilities {
   .mask-fade-x {
     -webkit-mask-image: linear-gradient(

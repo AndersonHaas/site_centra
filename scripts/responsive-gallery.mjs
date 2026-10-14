@@ -28,14 +28,14 @@ try {
     await page.goto(`http://127.0.0.1:3000/${market}/responsive-qa`, { waitUntil: 'networkidle' });
     const cards = page.locator('main button.group');
     assert.equal(await cards.count(), 2);
-    const country = page.locator('[data-portfolio-filters] [role=group]').nth(1);
+    const country = page.locator('[data-portfolio-filters] [role=group]').nth(2);
     await country.locator('button').nth(1).click();
     assert.equal(await cards.count(), 1);
     assert.equal(await country.locator('button').nth(1).getAttribute('aria-pressed'), 'true');
-    await page.locator('[data-portfolio-filters] [role=group]').first().locator('button').nth(2).click();
+    await page.locator('[data-portfolio-filters] [role=group]').nth(1).locator('button').nth(2).click();
     assert.equal(await cards.count(), 0);
     await page.locator('main [role=status]').waitFor();
-    await page.locator('[data-portfolio-filters] [role=group]').first().locator('button').first().click();
+    await page.locator('[data-portfolio-filters] [role=group]').nth(1).locator('button').first().click();
     await cards.first().click();
     const dialog = page.getByRole('dialog');
     await dialog.waitFor();

@@ -28,7 +28,7 @@ export default async function PortfolioPage({ params }: Props) {
   // Obras vêm do DashboardCentra (Supabase) — só as publicadas de lá, ver
   // lib/portfolio.ts. Busca no servidor porque Portfolio.tsx é Client
   // Component (filtros/lightbox são interativos).
-  const projects = await getPortfolio();
+  const projects = await getPortfolio(locale);
 
   return (
     <>

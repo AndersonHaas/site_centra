@@ -1,4 +1,5 @@
 import "server-only";
+import type { Market } from "@/lib/group/market";
 
 /* Portfólio lido do Supabase do DashboardCentra — Rodada 3 do módulo Marketing
    de lá. `mkt_portfolio_publico()` é uma função pública (RPC, SECURITY DEFINER)
@@ -15,6 +16,12 @@ const BUCKET = "mkt-portfolio";
 export type PortfolioCountry = "BR" | "PY";
 export type PortfolioStatus = "finalizado" | "em_andamento";
 
+export type PortfolioCategoria = {
+  slug: string;
+  ordem: number;
+  nome: string;
+};
+
 export type PortfolioObra = {
   slug: string;
   client: string;
@@ -25,6 +32,14 @@ export type PortfolioObra = {
   uf: string;
   detalhes: string | null;
   status: PortfolioStatus;
+  categoria: PortfolioCategoria | null;
+};
+
+type CategoriaApi = {
+  slug: string;
+  ordem: number;
+  nome_pt: string;
+  nome_es: string;
 };
 
 type ObraApi = {
@@ -38,9 +53,12 @@ type ObraApi = {
   situacao: PortfolioStatus;
   ordem: number;
   fotos: string[];
+  categoria: CategoriaApi | null;
 };
 
-export async function getPortfolio(): Promise<PortfolioObra[]> {
+/* `locale` escolhe o nome da categoria: no Paraguai usa `nome_es`, caindo no
+   `nome_pt` enquanto a tradução não for preenchida no dashboard. */
+export async function getPortfolio(locale: Market): Promise<PortfolioObra[]> {
   if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
     console.error("[portfolio] NEXT_PUBLIC_SUPABASE_URL/ANON_KEY ausentes em .env.local");
     return [];
@@ -79,5 +97,12 @@ export async function getPortfolio(): Promise<PortfolioObra[]> {
     uf: o.uf,
     detalhes: o.detalhes,
     status: o.situacao,
+    categoria: o.categoria
+      ? {
+          slug: o.categoria.slug,
+          ordem: o.categoria.ordem,
+          nome: (locale === "py" && o.categoria.nome_es?.trim()) || o.categoria.nome_pt,
+        }
+      : null,
   }));
 }
