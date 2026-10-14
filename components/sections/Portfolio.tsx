@@ -2,9 +2,8 @@
 
 import { useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import { ImageIcon } from "lucide-react";
+import { ChevronDown, ImageIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal, RevealStagger, RevealItem } from "@/components/ui/Reveal";
 import { Lightbox } from "@/components/ui/Lightbox";
 import type { PortfolioCountry, PortfolioObra } from "@/lib/portfolio";
@@ -41,45 +40,70 @@ function groupByCategoria(projects: PortfolioObra[], otherName: string) {
     .map((g) => ({ ...g, items: g.items.sort((a, b) => statusRank(a) - statusRank(b)) }));
 }
 
-/* Filtros discretos: texto simples com sublinhado no ativo, sem caixa nem
-   preenchimento — um rótulo HUD à esquerda diz o que a linha filtra. A altura
-   mínima de 44px no mobile mantém a área de toque; no desktop encolhe para a
-   barra fixa não roubar espaço das fotos. */
-function FilterRow<T extends string>({
-  label,
+/* Filtros discretos e numa linha só, para as fotos aparecerem logo: categoria
+   em abas de texto (sublinhado no ativo; no mobile rola na horizontal em vez
+   de quebrar em várias linhas) e cliente/país em selects compactos à direita.
+   Altura mínima de 44px no mobile mantém a área de toque. */
+function CategoryTabs({
   ariaLabel,
   options,
   value,
   onChange,
 }: {
-  label: string;
   ariaLabel: string;
+  options: Array<{ value: string; label: string }>;
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  return (
+    <div role="group" aria-label={ariaLabel} className="-mx-2 flex min-w-0 overflow-x-auto [scrollbar-width:none]">
+      {options.map((option) => (
+        <button
+          key={option.value}
+          type="button"
+          onClick={() => onChange(option.value)}
+          aria-pressed={value === option.value}
+          className={cn(
+            "min-h-11 shrink-0 whitespace-nowrap px-2 text-sm underline-offset-[6px] transition-colors lg:min-h-9",
+            value === option.value
+              ? "font-medium text-ink underline decoration-brand-500 decoration-2"
+              : "text-ink-soft hover:text-ink",
+          )}
+        >
+          {option.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function FilterSelect<T extends string>({
+  label,
+  options,
+  value,
+  onChange,
+}: {
+  label: string;
   options: Array<{ value: T; label: string }>;
   value: T;
   onChange: (value: T) => void;
 }) {
   return (
-    <div role="group" aria-label={ariaLabel} className="flex flex-col sm:flex-row sm:items-baseline sm:gap-4">
-      <span aria-hidden className="hud shrink-0 pt-2 text-ink-soft sm:w-24 sm:pt-0">{label}</span>
-      <div className="-mx-2 flex flex-wrap">
+    <label className="relative flex min-h-11 items-center gap-2 lg:min-h-9">
+      <span className="hud text-ink-soft">{label}</span>
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value as T)}
+        className="cursor-pointer appearance-none rounded-sm bg-transparent py-1 pr-5 text-sm font-medium text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-300"
+      >
         {options.map((option) => (
-          <button
-            key={option.value}
-            type="button"
-            onClick={() => onChange(option.value)}
-            aria-pressed={value === option.value}
-            className={cn(
-              "min-h-11 max-w-full px-2 text-left text-sm underline-offset-[6px] transition-colors lg:min-h-9",
-              value === option.value
-                ? "font-medium text-ink underline decoration-brand-500 decoration-2"
-                : "text-ink-soft hover:text-ink",
-            )}
-          >
+          <option key={option.value} value={option.value}>
             {option.label}
-          </button>
+          </option>
         ))}
-      </div>
-    </div>
+      </select>
+      <ChevronDown aria-hidden className="pointer-events-none absolute right-0 h-3.5 w-3.5 text-ink-soft" />
+    </label>
   );
 }
 
@@ -117,10 +141,6 @@ export function Portfolio({ projects: allProjects, showAttributionNote = false }
     BR: t("brazil"),
     PY: t("paraguay"),
   };
-  const countryBadge: Record<PortfolioCountry, string> = {
-    BR: t("badgeBR"),
-    PY: t("badgePY"),
-  };
 
   const projects = allProjects.filter(
     (p) =>
@@ -134,23 +154,29 @@ export function Portfolio({ projects: allProjects, showAttributionNote = false }
   const activeProject = allProjects.find((p) => p.slug === activeSlug) ?? null;
 
   return (
-    <section className="relative bg-paper py-16 md:py-24">
+    <section className="relative bg-paper pb-16 pt-10 md:pb-24 md:pt-14">
       {/* Sem link de "voltar" aqui: a volta para a home é o item "Início" do
           menu do topo (lib/group/nav.ts), que serve todas as páginas em vez de
           só esta. */}
       <div className="container-x">
-        <SectionHeader
-          as="h1"
-          index="01"
-          eyebrow={t("eyebrow")}
-          title={t.rich("title", {
-            accent: (chunks) => <span className="text-brand-600">{chunks}</span>,
-          })}
-          description={t("description")}
-        />
+        {/* Cabeçalho enxuto (título e texto lado a lado no desktop) para a
+            primeira fileira de fotos já aparecer sem rolar. */}
+        <Reveal>
+          <div className="grid gap-3 lg:grid-cols-[1fr_minmax(0,26rem)] lg:items-end lg:gap-12">
+            <div>
+              <p className="eyebrow text-ink-soft">{t("eyebrow")}</p>
+              <h1 className="display mt-3 text-balance text-3xl text-ink sm:text-4xl">
+                {t.rich("title", {
+                  accent: (chunks) => <span className="text-brand-600">{chunks}</span>,
+                })}
+              </h1>
+            </div>
+            <p className="text-sm leading-relaxed text-ink-soft sm:text-base">{t("description")}</p>
+          </div>
+        </Reveal>
 
         {showAttributionNote && projects.some((p) => p.country === "BR") && (
-          <Reveal className="mt-6">
+          <Reveal className="mt-5">
             <p className="rounded-xl border border-hair bg-paper-2 px-4 py-3 text-sm text-ink-soft">
               {t("attributionNote")}
             </p>
@@ -161,43 +187,42 @@ export function Portfolio({ projects: allProjects, showAttributionNote = false }
             framer-motion leaves an inline transform on its element after
             animating (even translateY(0)), which creates a new containing
             block and silently breaks `position: sticky` on descendants. */}
-        <div data-portfolio-filters className="mt-8 flex flex-col gap-1 border-b border-hair bg-paper py-3 lg:sticky lg:top-[70px] lg:z-20 lg:gap-0">
-          <FilterRow
-            label={t("categoryLabel")}
+        <div data-portfolio-filters className="mt-6 flex flex-col gap-1 border-b border-hair bg-paper py-2 lg:sticky lg:top-[70px] lg:z-20 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
+          <CategoryTabs
             ariaLabel={t("categoryFilterLabel")}
             options={[{ value: "Todas", label: t("allCategories") }, ...categoryOptions]}
             value={categoryFilter}
             onChange={setCategoryFilter}
           />
-          <FilterRow
-            label={t("clientLabel")}
-            ariaLabel={t("clientFilterLabel")}
-            options={clientValues.map((value) => ({ value, label: value === "Todas" ? t("allClients") : value }))}
-            value={clientFilter}
-            onChange={setClientFilter}
-          />
-          <FilterRow
-            label={t("countryLabel")}
-            ariaLabel={t("countryFilterLabel")}
-            options={COUNTRY_VALUES.map((value) => ({ value, label: countryLabel[value] }))}
-            value={countryFilter}
-            onChange={setCountryFilter}
-          />
+          <div className="flex shrink-0 items-center gap-5">
+            <FilterSelect
+              label={t("clientLabel")}
+              options={clientValues.map((value) => ({ value, label: value === "Todas" ? t("allClients") : value }))}
+              value={clientFilter}
+              onChange={setClientFilter}
+            />
+            <FilterSelect
+              label={t("countryLabel")}
+              options={COUNTRY_VALUES.map((value) => ({ value, label: countryLabel[value] }))}
+              value={countryFilter}
+              onChange={setCountryFilter}
+            />
+          </div>
         </div>
 
         {projects.length === 0 && <p role="status" className="mt-8 rounded-xl border border-hair p-5 text-ink-soft">{t("empty")}</p>}
 
         {groups.map((group, groupIndex) => (
-          <section key={`${group.key}-${categoryFilter}-${clientFilter}-${countryFilter}`} aria-labelledby={`categoria-${group.key}`} className={groupIndex === 0 ? "mt-8" : "mt-14 md:mt-20"}>
+          <section key={`${group.key}-${categoryFilter}-${clientFilter}-${countryFilter}`} aria-labelledby={`categoria-${group.key}`} className={groupIndex === 0 ? "mt-6" : "mt-12 md:mt-16"}>
             {/* Separação sutil: rótulo HUD + fio + contagem, sem cartão nem
                 cor — a foto continua sendo o que chama atenção. */}
-            <div className="mb-5 flex items-center gap-4">
+            <div className="mb-4 flex items-center gap-4">
               <h2 id={`categoria-${group.key}`} className="hud text-ink-soft">{group.name}</h2>
               <span aria-hidden className="h-px flex-1 bg-hair" />
               <span aria-hidden className="hud text-ink-soft">{String(group.items.length).padStart(2, "0")}</span>
             </div>
             <RevealStagger
-              className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+              className="grid grid-cols-1 gap-x-5 gap-y-7 md:grid-cols-2 lg:grid-cols-3"
               gap={0.05}
             >
               {group.items.map((project, index) => (
@@ -211,34 +236,40 @@ export function Portfolio({ projects: allProjects, showAttributionNote = false }
                     }}
                     className="group block w-full text-left"
                   >
-                    {/* Sem placeholder="blur": imagens vêm de public/ por caminho de string (não import estático) — ver docs/superpowers/specs/2026-07-28-portfolio-obras-design.md */}
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-hair bg-paper-2">
+                    {/* Foto em primeiro plano: cliente e título vão sobre a imagem
+                        (com degradê para leitura), e embaixo fica só o detalhe.
+                        Sem placeholder="blur": as fotos vêm por URL do Supabase. */}
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-paper-2">
                       <Image
                         src={project.images[0]}
                         alt={`${project.client} — ${project.title}`}
                         fill
                         sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
                         preload={groupIndex === 0 && index === 0}
-                        className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                        className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                       />
+                      <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-ink-950/10 via-45% to-transparent" />
                       {project.status === "em_andamento" && (
-                        <span className="hud absolute left-3 top-3 rounded-full border border-white/15 bg-ink-950/40 px-3 py-1.5 text-white/80 backdrop-blur-sm">
+                        <span className="hud absolute left-3 top-3 rounded-full border border-white/15 bg-ink-950/40 px-3 py-1.5 text-white/85 backdrop-blur-sm">
                           {t("statusEmAndamento")}
                         </span>
                       )}
-                    </div>
-                    <div className="flex items-start justify-between gap-3 pt-3">
-                      <div>
-                        <p className="hud text-brand-600">{project.client} · {countryBadge[project.country]}</p>
-                        <h3 className="mt-2 text-lg font-semibold leading-tight text-ink">{project.title}</h3>
-                        {/* `detalhes` do cadastro no DashboardCentra (ex.: "Área: 16.000,00m²").
-                            Pode ter várias linhas — pre-line respeita as quebras digitadas lá. */}
-                        {project.detalhes?.trim() && (
-                          <p className="mt-1.5 whitespace-pre-line text-sm leading-snug text-ink-soft">{project.detalhes.trim()}</p>
-                        )}
+                      {project.images.length > 1 && (
+                        <span className="hud absolute right-3 top-3 flex items-center gap-1 rounded-full bg-ink-950/40 px-2.5 py-1.5 text-white/85 backdrop-blur-sm">
+                          <ImageIcon className="h-3 w-3" />
+                          {project.images.length}
+                        </span>
+                      )}
+                      <div className="absolute inset-x-0 bottom-0 p-4 md:p-5">
+                        <p className="hud text-white/70">{project.client}</p>
+                        <h3 className="mt-1.5 text-balance text-lg font-semibold leading-tight text-white">{project.title}</h3>
                       </div>
-                      {project.images.length > 1 && <span className="hud mt-1 flex shrink-0 items-center gap-1 text-ink-soft"><ImageIcon className="h-3 w-3" />{project.images.length}</span>}
                     </div>
+                    {/* `detalhes` do cadastro no DashboardCentra (ex.: "Área: 16.000,00m²").
+                        Pode ter várias linhas — pre-line respeita as quebras digitadas lá. */}
+                    {project.detalhes?.trim() && (
+                      <p className="mt-2.5 whitespace-pre-line text-sm leading-snug text-ink-soft">{project.detalhes.trim()}</p>
+                    )}
                   </button>
                 </RevealItem>
               ))}
