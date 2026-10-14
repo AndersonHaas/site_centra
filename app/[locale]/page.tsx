@@ -4,6 +4,7 @@ import { setRequestLocale } from "next-intl/server";
 import { ConstrucaoContent } from "@/components/pages/ConstrucaoContent";
 import type { Market } from "@/lib/group/market";
 import { buildAlternates } from "@/lib/seo";
+import { getPortfolio, portfolioClients } from "@/lib/portfolio";
 
 type Props = {
   params: Promise<{ locale: Market }>;
@@ -31,5 +32,10 @@ export default async function MarketHomePage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  return <ConstrucaoContent market={locale} />;
+  // A faixa "A confiança de quem constrói…" lista os clientes cadastrados no
+  // portfólio do DashboardCentra — mesma busca (e cache/tag) da página
+  // /portfolio, então publicar uma obra de cliente novo atualiza as duas.
+  const clients = portfolioClients(await getPortfolio(locale));
+
+  return <ConstrucaoContent market={locale} clients={clients} />;
 }

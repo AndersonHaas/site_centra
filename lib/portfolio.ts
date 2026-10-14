@@ -106,3 +106,15 @@ export async function getPortfolio(locale: Market): Promise<PortfolioObra[]> {
       : null,
   }));
 }
+
+/* Clientes distintos das obras publicadas, os com mais obras primeiro (empate
+   mantém a ordem do dashboard — sort é estável). Nomes vêm limpos de espaços
+   para "C.Vale " e "C.Vale" não virarem dois clientes. */
+export function portfolioClients(obras: PortfolioObra[]): string[] {
+  const count = new Map<string, number>();
+  for (const o of obras) {
+    const name = o.client.trim();
+    if (name) count.set(name, (count.get(name) ?? 0) + 1);
+  }
+  return Array.from(count.keys()).sort((a, b) => count.get(b)! - count.get(a)!);
+}

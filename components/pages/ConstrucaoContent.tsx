@@ -21,7 +21,7 @@ const DIFERENCIAIS = ["terraplanagem", "gestao"] as const;
    A construção é o que efetivamente vende, então ocupa a home em vez de ficar
    atrás de um hub de unidades; as outras três aparecem aqui pela seção
    Unidades e mantêm páginas próprias (ver ROOT_UNIT em lib/group/routes.ts). */
-export function ConstrucaoContent({ market }: { market: Market }) {
+export function ConstrucaoContent({ market, clients }: { market: Market; clients: string[] }) {
   const t = useTranslations("diferenciais");
 
   return (
@@ -29,7 +29,7 @@ export function ConstrucaoContent({ market }: { market: Market }) {
       <Navbar market={market} />
       <main>
         <Hero />
-        <TrustBar />
+        <TrustBar clients={clients} />
         <Obras />
         <Credenciais />
         <section className="relative bg-surface py-16 md:py-24">
